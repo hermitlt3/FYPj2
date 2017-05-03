@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceBehavior : MonoBehaviour {
-
+public class CollectibleBehavior : MonoBehaviour
+{
     // Get player of the game
-    GameObject player;
+    GameObject playerGO;
     
     // Collider of this game object
     BoxCollider2D thisCollider;
@@ -15,25 +15,23 @@ public class ExperienceBehavior : MonoBehaviour {
     // Rigidbody of this game object
     Rigidbody2D myRigidBody;
 
+    // To-do, create the game logic for player - his exp, skills, health, dead etc
+
     // Speed multiplier
     [SerializeField]
     float speedMultiplier = 1;
 
-    // Time before going to player
-    [SerializeField]
-    float myTimer = 1f;
-
     // Maximum speed for the gameobject
     [SerializeField]
-    float maxSpeed = 20f;
+    float maxSpeed = 16f;
 
 	// Use this for initialization
 	void Start () {
         // Can juz pass it in but for prefab sake
-        player = GameObject.FindGameObjectWithTag("Player");
+        playerGO = GameObject.FindGameObjectWithTag("Player");
 
         thisCollider = GetComponent<BoxCollider2D>();
-        playerCollider = player.GetComponent<BoxCollider2D>();
+        playerCollider = playerGO.GetComponent<BoxCollider2D>();
 
         myRigidBody = GetComponent<Rigidbody2D>();
 	}
@@ -53,7 +51,7 @@ public class ExperienceBehavior : MonoBehaviour {
     void FixedUpdate()
     {
         if (myRigidBody.velocity.magnitude < maxSpeed)
-            myRigidBody.velocity += new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y).normalized * speedMultiplier;
+            myRigidBody.velocity += new Vector2(playerGO.transform.position.x - transform.position.x, playerGO.transform.position.y - transform.position.y).normalized * speedMultiplier;
         else
             Vector2.ClampMagnitude(myRigidBody.velocity, maxSpeed);
     }
