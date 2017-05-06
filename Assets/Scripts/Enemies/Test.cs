@@ -10,6 +10,8 @@ public class Test : MonoBehaviour {
     GameObject experience;
     float timer = 0f;
     float spawntime = 1f;
+
+    public Animator animator;
 	// Use this for initialization
 	void Start () {
         timer = spawntime;
@@ -26,11 +28,15 @@ public class Test : MonoBehaviour {
                 {
                     GameObject test = GameObject.Instantiate(experience);
                     timer = spawntime;
+                    test.transform.position = transform.position;
                     test.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-8f, 8f), 5);
                 }
             }
+            animator.SetTrigger("Attack");
         }
         else
+        {
             timer = spawntime;
+        }
 	}
 }

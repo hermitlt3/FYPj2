@@ -21,7 +21,6 @@ public class Player : MonoBehaviour {
 	Controller2D controller;
 
 	Vector2 directionalInput;
-	int wallDirX;
 
 	void Start() {
 		controller = GetComponent<Controller2D> ();
