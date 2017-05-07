@@ -4,30 +4,50 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-
     GameObject mainPlayer;
+    Light checkPointLight;
 
     // Check if the player first time to this checkpoint
     bool hasBeenActivated;
+    // Check if the light has been lit
+    bool lightIsLit;
+
 
     [SerializeField]
     float yOffset = 5f;
+    [SerializeField]
+    float lightIntensity = 5f;
+    [SerializeField]
+    float timeToLit = 2f;
 
     // Use this for initialization
     void Awake()
     {
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
+        checkPointLight = transform.GetChild(0).GetComponent<Light>();
     }
 
     void Start()
     {
         hasBeenActivated = false;
+        lightIsLit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (hasBeenActivated && !lightIsLit)
+        {
+            if (checkPointLight.intensity < lightIntensity)
+            {
+                checkPointLight.intensity += Time.deltaTime * timeToLit;
+            }
+            else
+            {
+                checkPointLight.intensity = lightIntensity;
+                lightIsLit = true;
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -36,6 +56,7 @@ public class Checkpoint : MonoBehaviour
         {
             if (other.transform.gameObject.tag == "Player")
             {
+                print("Hi");
                 hasBeenActivated = true;
                 mainPlayer.SendMessage("SetSpawnLocation", new Vector2(transform.position.x, transform.position.y + yOffset));
             }
