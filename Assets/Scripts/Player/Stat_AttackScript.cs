@@ -1,15 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Stat_AttackScript : MonoBehaviour {
 
     [SerializeField]
-    private int BaseAttack = 10;
+    private int Base_Attack = 10;
 
-    public int TotalAttack(int WeaponAttack)
+    [SerializeField]
+    private Weapon_Stat WeaponStat_Attack;
+
+    void Start()
     {
-        BaseAttack  += WeaponAttack;
-        return BaseAttack;
     }
+
+    public int TotalAttack()
+    {
+        Base_Attack += WeaponStat_Attack.Attack_Stat;
+        return Base_Attack;
+    }
+
 }
