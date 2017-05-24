@@ -13,4 +13,7 @@ public class Stat_AttackSpeedScript : MonoBehaviour {
         return BaseAttackSpd;
     }
 
+	public float GetBaseAttackSpeed() {
+		return BaseAttackSpd;
+	}
 }

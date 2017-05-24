@@ -5,11 +5,15 @@ using UnityEngine;
 public class Stat_AttackScript : MonoBehaviour {
 
     [SerializeField]
-    private int BaseAttack = 10;
+    private int baseAttack = 10;
 
     public int TotalAttack(int WeaponAttack)
     {
-        BaseAttack  += WeaponAttack;
-        return BaseAttack;
+		baseAttack  += WeaponAttack;
+		return baseAttack;
     }
+
+	public int GetBaseAttackDamage() {
+		return baseAttack;
+	}
 }

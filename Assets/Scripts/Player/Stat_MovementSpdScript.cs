@@ -12,4 +12,8 @@ public class Stat_MovementSpdScript : MonoBehaviour {
         BaseMovementSpd += MvSpd;
         return BaseMovementSpd;
     }
+
+	public float GetBaseMS() {
+		return BaseMovementSpd;
+	}
 }
