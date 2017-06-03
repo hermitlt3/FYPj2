@@ -5,11 +5,10 @@ using UnityEngine;
 public class Stat_MovementSpdScript : MonoBehaviour {
 
     [SerializeField]
-    private float BaseMovementSpd = 1.0f;
+    private float BaseMovementSpd = 100.0f;
 
-    public float TotalMovementSpd(float MvSpd)
+    public float TotalMovementSpd()
     {
-        BaseMovementSpd += MvSpd;
         return BaseMovementSpd;
     }
 }
