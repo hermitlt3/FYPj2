@@ -17,5 +17,9 @@ public class PlayerInput : MonoBehaviour {
 		if (Input.GetKey (KeyCode.Space)) {
 			player.OnJumpInputDown ();
 		}
+		if (Input.GetButton ("Fire1")) {
+			player.OnInteraction ();
+		}
+
 	}
 }

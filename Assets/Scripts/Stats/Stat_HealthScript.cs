@@ -26,4 +26,9 @@ public class Stat_HealthScript : MonoBehaviour {
 	{
 		return (currHealth > 0);
 	}
+
+	public float GetCurrentHealth() 
+	{
+		return currHealth;
+	}
 }

@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI_Move : MonoBehaviour {
+[RequireComponent (typeof (EnemyAI_DetectPlayer))]
+public class EnemyAI_Move : EnemyAI_DetectPlayer {
 
-	private Rigidbody2D myRigidbody;
 	private Stat_MovementSpdScript movementSpeedScript;
-	private Stat_AttackRangeScript attackRangeScript;
 
 	// The area where the enemy is allowed to be
 	[SerializeField]
 	protected Transform areaOfAllowedMovement;
 	private BoxCollider2D areaBounds;
-	private SpriteRenderer sprite;
-
+	private float movementSpeed;
 	private bool moving;
-	private float attackRange;
-	private LayerMask playerMask;
 
 	// How enemies react towards player
 	[SerializeField]
@@ -28,41 +24,36 @@ public class EnemyAI_Move : MonoBehaviour {
 	protected AGGRESSION_TYPE aggressionType;
 
 
-	void Awake () {
-		myRigidbody = GetComponent<Rigidbody2D> ();
-		movementSpeedScript = GetComponent<Stat_MovementSpdScript> ();
-		attackRangeScript = GetComponent<Stat_AttackRangeScript> ();
+	protected override void Awake () {
+		base.Awake ();
 		areaBounds = areaOfAllowedMovement.gameObject.GetComponent<BoxCollider2D> ();
-		sprite = GetComponent<SpriteRenderer> ();
-		playerMask = LayerMask.GetMask ("Player");
+		movementSpeed = GetComponent<Stat_MovementSpdScript> ().GetBaseMS();
 	}
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+		base.Start ();
 		moving = true;
-		attackRange = attackRangeScript.GetAttackRange ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (!sprite.flipX) {
-			myRigidbody.velocity = new Vector2 (-movementSpeedScript.GetBaseMS (), myRigidbody.velocity.y);
+			myRigidbody.velocity = new Vector2 (-movementSpeed, myRigidbody.velocity.y);
 			if (transform.position.x < areaBounds.bounds.min.x) {
 				sprite.flipX = true;
 			}
 		} else {
-			myRigidbody.velocity = new Vector2 (movementSpeedScript.GetBaseMS (), myRigidbody.velocity.y);
+			myRigidbody.velocity = new Vector2 (movementSpeed, myRigidbody.velocity.y);
 			if (transform.position.x + transform.lossyScale.x > areaBounds.bounds.max.x) {
 				sprite.flipX = false;
 			}
 		}
 
 		if (aggressionType == AGGRESSION_TYPE.AGGRESSIVE) {
-			RaycastHit2D hit;
-			hit = Physics2D.Raycast (transform.position, new Vector2(Mathf.Clamp(myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
-			if (hit.collider != null) {
+			if (RayDetectedPlayer ()) {
 				moving = false;
-			} 
+			}
 		}
 	}
 
@@ -72,5 +63,9 @@ public class EnemyAI_Move : MonoBehaviour {
 
 	public void SetIsMoving(bool value) {
 		moving = value;
+	}
+
+	public void Reset() {
+		moving = true;
 	}
 }

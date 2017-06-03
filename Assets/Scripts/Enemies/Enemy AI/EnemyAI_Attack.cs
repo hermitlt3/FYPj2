@@ -2,58 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI_Attack : MonoBehaviour {
-
-	private Stat_AttackScript attackDamageScript;
-	private Stat_AttackSpeedScript attackSpeedScript;
-	private Stat_AttackRangeScript attackRangeScript;
+[RequireComponent (typeof (EnemyAI_DetectPlayer))]
+public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 
 	private float attackDamage;
 	private float attackSpeed;
-	private float attackSpeedTimer;
-	private float attackRange; 
-
+	private float attackSpeedTimer; 
 
 	private bool attacking;
-	private GameObject target;
-
-	// Gets the main player in our game
-	protected LayerMask playerMask;
-	private SpriteRenderer sprite;
 
 	// The range which enemies will detect player
 
-	void Awake() {
-		attackDamageScript = GetComponent<Stat_AttackScript> ();
-		attackSpeedScript = GetComponent<Stat_AttackSpeedScript> ();
-		attackRangeScript = GetComponent<Stat_AttackRangeScript> ();
-		sprite = GetComponent<SpriteRenderer> ();
-		playerMask = LayerMask.GetMask ("Player");
+	protected override void Awake() {
+		base.Awake ();
 	}
 
 	// Use this for initialization
-	void Start () {
-		attackDamage = attackDamageScript.GetBaseAttackDamage ();
-		attackSpeed = attackSpeedScript.GetBaseAttackSpeed ();
-		attackRange = attackRangeScript.GetAttackRange ();
+	protected override void Start () {
+		base.Start ();
+		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
+		attackSpeed = GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
 
 		attackSpeedTimer = 1f;
-		attacking = false;
+		attacking = true;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		UpdateAttackSpeedTimer ();
 
-		Collider2D collider = Physics2D.OverlapCircle (transform.position, attackRange * 2, playerMask);
-		if (collider != null) {
-			target = collider.gameObject;
-		} else {
-			attacking = false;
-		}
-		print (attackSpeedTimer);
-		if (target) {
-			if (target.transform.position.x - transform.position.x < 0) {
+		if(BoxDetectedPlayer() != null) {
+			attacking = true;
+			if (BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x < 0) {
 				sprite.flipX = false;
 			} else {
 				sprite.flipX = true;
@@ -82,10 +62,8 @@ public class EnemyAI_Attack : MonoBehaviour {
 
 	bool Attack() {
 		bool results = false;
-		RaycastHit2D hitCollider;
-		hitCollider = Physics2D.Raycast (transform.position, target.transform.position - transform.position, attackRange, playerMask);
-		if (hitCollider.collider != null) {
-			DealDamage (hitCollider.collider.gameObject.GetComponent<Stat_HealthScript> ());
+		if (RayDetectedPlayer() != null) {
+			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
 			results = true;
 		} else {
 			return false;
@@ -114,5 +92,6 @@ public class EnemyAI_Attack : MonoBehaviour {
 
 	public void Reset() {
 		attackSpeedTimer = 1f;
+		attacking = true;
 	}
 }

@@ -38,17 +38,16 @@ public class EnemyAI_Logic : MonoBehaviour {
 		case AI_STATES.AI_MOVE: 
 			EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)currState]);
 			if (!AI_Move.isMoving ()) {
+				AI_Move.Reset ();
 				currState = AI_STATES.AI_ATTACK;
-				AI_Move.SetIsMoving (true);
 			}
 			break;
 		
 		case AI_STATES.AI_ATTACK:
 			EnemyAI_Attack AI_Attack = (EnemyAI_Attack)(states [(uint)currState]);
 			if (!AI_Attack.isAttacking ()) {
-				currState = AI_STATES.AI_MOVE;
 				AI_Attack.Reset ();
-				AI_Attack.SetIsAttacking (true);
+				currState = AI_STATES.AI_MOVE;
 			}
 			break;
 		}
@@ -58,7 +57,11 @@ public class EnemyAI_Logic : MonoBehaviour {
 		}
 	}
 
-	void GetsHit() {
-
+	void GetsHit(GameObject player) {
+		if (currState == AI_STATES.AI_ATTACK)
+			return;
+		EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)currState]);
+		AI_Move.Reset ();
+		currState = AI_STATES.AI_ATTACK;
 	}
 }
