@@ -4,8 +4,7 @@ using System.Collections;
 public class Stat_AttackScript : MonoBehaviour {
 
     [SerializeField]
-    private int Base_Attack = 10;
-
+    private int baseAttack = 10;
     [SerializeField]
     private Weapon_Stat WeaponStat_Attack;
 
@@ -15,8 +14,11 @@ public class Stat_AttackScript : MonoBehaviour {
 
     public int TotalAttack()
     {
-        Base_Attack += WeaponStat_Attack.Attack_Stat;
-        return Base_Attack;
+		baseAttack += WeaponStat_Attack.Attack_Stat;
+		return baseAttack;
     }
 
+	public int GetBaseAttackDamage() {
+		return baseAttack;
+	}
 }
