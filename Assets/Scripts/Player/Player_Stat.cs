@@ -10,6 +10,8 @@ public class Player_Stat : MonoBehaviour {
     private float Stat_AttackSpd;
     [SerializeField]
     private float Stat_Critical;
+    [SerializeField]
+    private float Stat_MovementSpd;
 
     [SerializeField]
     private Stat_AttackScript Attack;
@@ -17,12 +19,15 @@ public class Player_Stat : MonoBehaviour {
     private Stat_AttackSpdScript AttackSpd;
     [SerializeField]
     private Skill_CritStat Critical;
+    [SerializeField]
+    private Stat_MovementSpdScript MovementSpd;
 
     void Start()
     {
         Stat_Attack = Attack.TotalAttack();
         Stat_AttackSpd = AttackSpd.TotalAtkSpd();
         //Stat_Critical = Critical.TotalCrit();
+        Stat_MovementSpd = MovementSpd.TotalMovementSpd();
     }
 
 }
