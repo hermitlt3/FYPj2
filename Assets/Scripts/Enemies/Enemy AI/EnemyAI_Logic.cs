@@ -34,34 +34,35 @@ public class EnemyAI_Logic : MonoBehaviour {
 			}
 		}
 
+		EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)AI_STATES.AI_MOVE]);
+		EnemyAI_Attack AI_Attack = (EnemyAI_Attack)(states [(uint)AI_STATES.AI_ATTACK]);
+
 		switch (currState) {
 		case AI_STATES.AI_MOVE: 
-			EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)currState]);
 			if (!AI_Move.isMoving ()) {
-				AI_Move.Reset ();
 				currState = AI_STATES.AI_ATTACK;
+				AI_Attack.SetIsAttacking (true);
 			}
 			break;
 		
 		case AI_STATES.AI_ATTACK:
-			EnemyAI_Attack AI_Attack = (EnemyAI_Attack)(states [(uint)currState]);
 			if (!AI_Attack.isAttacking ()) {
-				AI_Attack.Reset ();
 				currState = AI_STATES.AI_MOVE;
+				AI_Move.SetIsMoving (true);
 			}
 			break;
 		}
-
+			
 		if (!gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
 			//currState = states[(uint)AI_STATES.AI_ATTACK];
 		}
 	}
 
 	void GetsHit(GameObject player) {
-		if (currState == AI_STATES.AI_ATTACK)
-			return;
-		EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)currState]);
-		AI_Move.Reset ();
-		currState = AI_STATES.AI_ATTACK;
+		if (currState == AI_STATES.AI_MOVE) {
+			EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)currState]);
+			AI_Move.SetIsMoving (true);
+			currState = AI_STATES.AI_ATTACK;
+		}
 	}
 }

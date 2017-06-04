@@ -10,7 +10,9 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	private float attackSpeedTimer; 
 
 	private bool attacking;
+	private Animator animator;
 
+	private bool animationEnd;
 	// The range which enemies will detect player
 
 	protected override void Awake() {
@@ -22,25 +24,34 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		base.Start ();
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		attackSpeed = GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
+		animator = GetComponent<Animator> ();
 
 		attackSpeedTimer = 1f;
-		attacking = true;
+		attacking = false;
+		animationEnd = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		UpdateAttackSpeedTimer ();
 
-		if(BoxDetectedPlayer() != null) {
+		if (BoxDetectedPlayer () != null) {
 			attacking = true;
-			if (BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x < 0) {
+
+			if (BoxDetectedPlayer ().gameObject.transform.position.x - transform.position.x < 0) {
 				sprite.flipX = false;
 			} else {
 				sprite.flipX = true;
 			}
+
 		} else {
-			attacking = false;
+			if (animationEnd) {
+				attacking = false;
+				animationEnd = false;
+			}
 		}
+
+		animationEnd = false;
 	}
 
 	void FixedUpdate() {
@@ -93,5 +104,9 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	public void Reset() {
 		attackSpeedTimer = 1f;
 		attacking = true;
+	}
+
+	void AnimationEnds() {
+		animationEnd = true;
 	}
 }

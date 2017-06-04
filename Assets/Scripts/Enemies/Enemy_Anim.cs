@@ -21,6 +21,7 @@ public class Enemy_Anim : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		healthScript = GetComponent<Stat_HealthScript> ();
 		aiAttack = GetComponent<EnemyAI_Attack> ();
+		aiMove = GetComponent<EnemyAI_Move> ();
 	}
 
 	// Use this for initialization
@@ -42,8 +43,9 @@ public class Enemy_Anim : MonoBehaviour {
 
 		if (aiAttack.isAttacking ()) {
 			animator.SetBool ("Attacking", true);
-		} else
+		} else if (aiMove.isMoving ()) {
 			animator.SetBool ("Attacking", false);
+		}
 	}
 
 	// Apply damage to the enemy

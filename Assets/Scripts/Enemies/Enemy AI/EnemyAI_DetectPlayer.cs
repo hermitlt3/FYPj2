@@ -48,4 +48,8 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 		else
 			sprite.flipX = true;
 	}
+
+	void OnDrawGizmos() {
+		
+	}
 }

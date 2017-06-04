@@ -65,7 +65,9 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 		moving = value;
 	}
 
-	public void Reset() {
-		moving = true;
+	void GetsHit(GameObject gameObject) {
+		if (aggressionType == AGGRESSION_TYPE.PASSIVE) {
+			aggressionType = AGGRESSION_TYPE.AGGRESSIVE;
+		}
 	}
 }
