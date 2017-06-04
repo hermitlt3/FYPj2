@@ -38,13 +38,13 @@ public class Enemy_Anim : MonoBehaviour {
 		animator.SetFloat ("Speed", velocity.magnitude);
 
 		if (!healthScript.isAlive ()) {
-			animator.SetTrigger ("Dead");
-		}
-
-		if (aiAttack.isAttacking ()) {
-			animator.SetBool ("Attacking", true);
-		} else if (aiMove.isMoving ()) {
-			animator.SetBool ("Attacking", false);
+			animator.SetBool ("Dead", true);
+		} else {
+			if (aiAttack.isAttacking ()) {
+				animator.SetBool ("Attacking", true);
+			} else if (aiMove.isMoving ()) {
+				animator.SetBool ("Attacking", false);
+			}
 		}
 	}
 

@@ -21,6 +21,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 		states = new MonoBehaviour[(uint)AI_STATES.NUM_AI_STATES];
 		states [(uint)AI_STATES.AI_MOVE] = gameObject.GetComponent<EnemyAI_Move> ();
 		states [(uint)AI_STATES.AI_ATTACK] = gameObject.GetComponent<EnemyAI_Attack> ();
+		states [(uint)AI_STATES.AI_DIE] = gameObject.GetComponent<EnemyAI_Die> ();
 	}
 
 	// Update is called once per frame
@@ -51,10 +52,16 @@ public class EnemyAI_Logic : MonoBehaviour {
 				AI_Move.SetIsMoving (true);
 			}
 			break;
+
+		case AI_STATES.AI_DIE:
+			
+			break;
 		}
 			
 		if (!gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
-			//currState = states[(uint)AI_STATES.AI_ATTACK];
+			AI_Attack.SetIsAttacking (false);
+			AI_Move.SetIsMoving (false);
+			currState = AI_STATES.AI_DIE;
 		}
 	}
 
