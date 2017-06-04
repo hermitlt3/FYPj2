@@ -22,12 +22,13 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 	} 
 	[SerializeField]
 	protected AGGRESSION_TYPE aggressionType;
-
+	private AGGRESSION_TYPE originalAggression;
 
 	protected override void Awake () {
 		base.Awake ();
 		areaBounds = areaOfAllowedMovement.gameObject.GetComponent<BoxCollider2D> ();
 		movementSpeed = GetComponent<Stat_MovementSpdScript> ().GetBaseMS();
+		originalAggression = aggressionType;
 	}
 
 	// Use this for initialization
@@ -63,6 +64,10 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 
 	public void SetIsMoving(bool value) {
 		moving = value;
+	}
+
+	public void Reset() {
+		aggressionType = originalAggression;
 	}
 
 	void GetsHit(GameObject gameObject) {

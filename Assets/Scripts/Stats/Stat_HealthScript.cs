@@ -34,4 +34,9 @@ public class Stat_HealthScript : MonoBehaviour {
 	{
 		return currHealth;
 	}
+
+	public float GetMaxHealth()
+	{
+		return maxHealth;
+	}
 }

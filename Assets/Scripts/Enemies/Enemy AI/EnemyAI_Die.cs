@@ -15,6 +15,7 @@ public class EnemyAI_Die : MonoBehaviour {
 	}
 
 	void Deactivate() {
+		ReloadCheckpointSystem.AddEnemyToReloadList (this.gameObject);
 		this.gameObject.SetActive (false);
 	}
 }

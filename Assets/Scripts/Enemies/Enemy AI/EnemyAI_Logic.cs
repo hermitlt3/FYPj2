@@ -72,4 +72,12 @@ public class EnemyAI_Logic : MonoBehaviour {
 			currState = AI_STATES.AI_ATTACK;
 		}
 	}
+
+	public void Reset() {
+		EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)AI_STATES.AI_MOVE]);
+		EnemyAI_Attack AI_Attack = (EnemyAI_Attack)(states [(uint)AI_STATES.AI_ATTACK]);
+		AI_Move.SetIsMoving (true);
+
+		currState = AI_STATES.AI_MOVE;
+	}
 }
