@@ -101,11 +101,6 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		return attackSpeed;
 	}
 
-	public void Reset() {
-		attackSpeedTimer = 1f;
-		attacking = true;
-	}
-
 	void AnimationEnds() {
 		animationEnd = true;
 	}

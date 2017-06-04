@@ -59,7 +59,6 @@ public class Player : MonoBehaviour {
 		animator.SetBool ("Dead" , !healthScript.isAlive ());
 
 		ImageRotate ();
-		ForDebugPurposes ();
 	}
 
 	public void SetDirectionalInput (Vector2 input) {
@@ -99,12 +98,11 @@ public class Player : MonoBehaviour {
 	void Attack() {
 		RaycastHit2D hit;
 		hit = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (controller.collisions.faceDir, -1, 1), 0), attackRange, enemies);
+
 		if(hit.collider != null) {
 			hit.collider.gameObject.SendMessage ("GetsHit", gameObject);
+			TextPopupManager.ShowTextPopup (hit.collider.transform.position, "Hit!", TextPopupManager.TEXT_TYPE.DAMAGE);
 		}
-	}
-
-	void ForDebugPurposes() {
 	}
 
 	void ImageRotate() {
