@@ -56,11 +56,8 @@ public class Player : MonoBehaviour {
 			}
 		}
 		animator.SetFloat ("Speed", Mathf.Abs(velocity.x));
+		animator.SetBool ("Dead" , !healthScript.isAlive ());
 
-		if (!healthScript.isAlive () && animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Dead")) {
-			//animator.SetTrigger ("Dead");
-		}
-			
 		ImageRotate ();
 		ForDebugPurposes ();
 	}

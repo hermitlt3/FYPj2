@@ -24,7 +24,10 @@ public class Stat_HealthScript : MonoBehaviour {
 
 	public bool isAlive() 
 	{
-		return (currHealth > 0);
+		if (currHealth > 0)
+			return true;
+		else
+			return false;
 	}
 
 	public float GetCurrentHealth() 
