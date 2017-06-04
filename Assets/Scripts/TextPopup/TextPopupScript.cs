@@ -7,20 +7,17 @@ public class TextPopupScript : MonoBehaviour {
 
 	private Text outputText;
 	private Outline textOutline;
-	private GameObject mainCanvas;
 
 	void Awake () {
 
 		outputText = GetComponent<Text> ();
 		textOutline = GetComponent<Outline> ();
-		mainCanvas = GameObject.Find ("Canvas");
 
 	}
 
 	// Use this for initialization
 	void Start () {
 
-		transform.SetParent(mainCanvas.transform);
 	}
 	
 	// Update is called once per frame

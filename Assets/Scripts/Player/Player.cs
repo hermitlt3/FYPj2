@@ -101,7 +101,7 @@ public class Player : MonoBehaviour {
 
 		if(hit.collider != null) {
 			hit.collider.gameObject.SendMessage ("GetsHit", gameObject);
-			TextPopupManager.ShowTextPopup (hit.collider.transform.position, "Hit!", TextPopupManager.TEXT_TYPE.DAMAGE);
+			TextPopupManager.ShowTextPopup (GameObject.Find("PlayerCanvas").GetComponent<Canvas>(), hit.collider.transform.position, "Hit!", TextPopupManager.TEXT_TYPE.DAMAGE);
 		}
 	}
 

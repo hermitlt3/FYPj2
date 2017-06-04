@@ -22,16 +22,20 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (myRigidbody.velocity.magnitude > 1) {
+			Debug.DrawLine(transform.position, transform.position + new Vector3 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1) * attackRange, 0));
+		} else {
+			Debug.DrawLine(transform.position, transform.position + new Vector3 (((sprite.flipX == false) ? -1 : 1) * attackRange, 0));
+		}
 	}
 
 	protected Collider2D RayDetectedPlayer() {
 		RaycastHit2D hit;
-		if (myRigidbody.velocity.magnitude != 0) {
+		if (myRigidbody.velocity.magnitude > 1) {
 			hit = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
 			return hit.collider;
 		} else {
-			hit = Physics2D.Raycast (transform.position, new Vector3(((sprite.flipX == false) ? -1 : 1), transform.position.y), attackRange, playerMask);
+			hit = Physics2D.Raycast (transform.position, new Vector2(((sprite.flipX == false) ? -1 : 1), 0), attackRange, playerMask);
 			return hit.collider;
 		}
 	}

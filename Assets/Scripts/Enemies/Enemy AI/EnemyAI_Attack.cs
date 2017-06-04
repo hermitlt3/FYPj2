@@ -23,7 +23,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	protected override void Start () {
 		base.Start ();
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
-		attackSpeed = GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
+		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
 		animator = GetComponent<Animator> ();
 
 		attackSpeedTimer = 1f;
@@ -33,7 +33,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 
 	// Update is called once per frame
 	void Update () {
-		UpdateAttackSpeedTimer ();
+		//UpdateAttackSpeedTimer ();
 
 		if (BoxDetectedPlayer () != null) {
 			attacking = true;
@@ -61,20 +61,22 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	}
 
 	void UpdateAttackSpeedTimer() {
-		if (attackSpeedTimer > 0f) {
+		/*if (attackSpeedTimer > 0f) {
 			attackSpeedTimer = Mathf.Max (0f, attackSpeedTimer - Time.deltaTime * attackSpeed);
 		}
 		if (attackSpeedTimer <= 0f) {
 			if (Attack ()) {
 				attackSpeedTimer = 1f;
 			}
-		}
+		}*/
 	}
 
 	bool Attack() {
 		bool results = false;
 		if (RayDetectedPlayer() != null) {
 			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
+			TextPopupManager.ShowTextPopup (GameObject.Find("PlayerCanvas").GetComponent<Canvas>(), RayDetectedPlayer().transform.position, "Hit!", TextPopupManager.TEXT_TYPE.DAMAGE);
+
 			results = true;
 		} else {
 			return false;
