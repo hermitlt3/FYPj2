@@ -47,9 +47,4 @@ public class Enemy_Anim : MonoBehaviour {
 			}
 		}
 	}
-
-	// Apply damage to the enemy
-	protected virtual void ApplyDamage(int damage) {
-		
-	}
 }
