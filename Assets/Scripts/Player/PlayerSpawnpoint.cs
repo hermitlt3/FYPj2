@@ -19,7 +19,7 @@ public class PlayerSpawnpoint : MonoBehaviour {
         }
 	}
 
-    void SetSpawnLocation(Vector2 spawnPoint)
+    public void SetSpawnLocation(Vector2 spawnPoint)
     {
         if(spawnLocation != spawnPoint)
             spawnLocation = spawnPoint;

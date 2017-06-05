@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
 	float moveSpeed;
 	float health;
 	float attackRange;
+	float attackDamage;
 
 	Stat_HealthScript healthScript;
 
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour {
 
 	Controller2D controller;
 	Vector2 directionalInput;
+	Canvas playerCanvas;
 
 	public LayerMask enemies;
 
@@ -35,8 +37,9 @@ public class Player : MonoBehaviour {
 		moveSpeed = GetComponent<Stat_MovementSpdScript> ().GetBaseMS ();
 		healthScript = GetComponent<Stat_HealthScript> ();
 		attackRange = GetComponent<Stat_AttackRangeScript> ().GetAttackRange ();
-
+		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		playerSpriteRenderer = GetComponent<SpriteRenderer> ();
+		playerCanvas = GameObject.Find ("PlayerCanvas").GetComponent<Canvas> ();
 
 		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -101,7 +104,8 @@ public class Player : MonoBehaviour {
 
 		if(hit.collider != null) {
 			hit.collider.gameObject.SendMessage ("GetsHit", gameObject);
-			TextPopupManager.ShowTextPopup (GameObject.Find("PlayerCanvas").GetComponent<Canvas>(), hit.collider.transform.position, "Hit!", TextPopupManager.TEXT_TYPE.DAMAGE);
+			hit.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
+			TextPopupManager.ShowTextPopup (playerCanvas, hit.collider.transform.position, "-"+attackDamage.ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
 		}
 	}
 

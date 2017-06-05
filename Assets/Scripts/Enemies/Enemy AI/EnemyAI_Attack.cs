@@ -13,6 +13,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	private Animator animator;
 
 	private bool animationEnd;
+	private Canvas playerCanvas;
 	// The range which enemies will detect player
 
 	protected override void Awake() {
@@ -25,6 +26,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
 		animator = GetComponent<Animator> ();
+		playerCanvas = GameObject.Find ("PlayerCanvas").GetComponent<Canvas> ();
 
 		attackSpeedTimer = 1f;
 		attacking = false;
@@ -75,7 +77,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		bool results = false;
 		if (RayDetectedPlayer() != null) {
 			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
-			TextPopupManager.ShowTextPopup (GameObject.Find("PlayerCanvas").GetComponent<Canvas>(), RayDetectedPlayer().transform.position, "Hit!", TextPopupManager.TEXT_TYPE.DAMAGE);
+			TextPopupManager.ShowTextPopup (playerCanvas, RayDetectedPlayer().transform.position, "-"+attackDamage.ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
 
 			results = true;
 		} else {

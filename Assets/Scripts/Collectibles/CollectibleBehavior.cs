@@ -19,14 +19,14 @@ public class CollectibleBehavior : MonoBehaviour
 
     // Speed multiplier
     [SerializeField]
-    float speedMultiplier = 1;
+    protected float speedMultiplier = 1;
 
     // Maximum speed for the gameobject
     [SerializeField]
-    float maxSpeed = 16f;
+	protected float maxSpeed = 10f;
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
         // Can juz pass it in but for prefab sake
         playerGO = GameObject.FindGameObjectWithTag("Player");
 
@@ -37,7 +37,7 @@ public class CollectibleBehavior : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-    void Update()
+	protected virtual void Update()
     {
         speedMultiplier += Time.deltaTime;
 
@@ -48,7 +48,7 @@ public class CollectibleBehavior : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+	void FixedUpdate()
     {
         if (myRigidBody.velocity.magnitude < maxSpeed)
             myRigidBody.velocity += new Vector2(playerGO.transform.position.x - transform.position.x, playerGO.transform.position.y - transform.position.y).normalized * speedMultiplier;

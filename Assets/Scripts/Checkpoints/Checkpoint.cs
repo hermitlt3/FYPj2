@@ -56,9 +56,8 @@ public class Checkpoint : MonoBehaviour
         {
             if (other.transform.gameObject.tag == "Player")
             {
-                print("Hi");
                 hasBeenActivated = true;
-                mainPlayer.SendMessage("SetSpawnLocation", new Vector2(transform.position.x, transform.position.y + yOffset));
+				mainPlayer.GetComponent<PlayerSpawnpoint>().SetSpawnLocation(new Vector2(transform.position.x, transform.position.y + yOffset));
             }
         }
     }

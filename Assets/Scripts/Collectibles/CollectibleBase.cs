@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleBase : MonoBehaviour {
-
-    // The visuals and the collectible itself
-    CollectibleBehavior theCollectible;
+public class CollectibleBase : CollectibleBehavior {
 
 	// Use this for initialization
-	void Start () {
-        // To get the collectible class for the player in it 
-        theCollectible = transform.GetComponent<CollectibleBehavior>();
+	protected override void Start () {
+		base.Start ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	protected virtual void Update () {
+		base.Update ();
 	}
 }
