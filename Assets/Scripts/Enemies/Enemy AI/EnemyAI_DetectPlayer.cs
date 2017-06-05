@@ -45,6 +45,17 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 		return collider;
 	}
 
+	protected Collider2D RayDetectLayer(LayerMask layer) {
+		RaycastHit2D hit;
+		if (myRigidbody.velocity.magnitude > 1) {
+			hit = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, layer);
+			return hit.collider;
+		} else {
+			hit = Physics2D.Raycast (transform.position, new Vector2(((sprite.flipX == false) ? -1 : 1), 0), attackRange, layer);
+			return hit.collider;
+		}
+	}
+
 	void GetsHit(GameObject player) {
 		float xDiff = player.transform.position.x - transform.position.x;
 		if (xDiff < 0)
