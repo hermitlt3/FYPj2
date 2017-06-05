@@ -13,7 +13,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 
 	private AI_STATES currState;
 	private MonoBehaviour[] states;
-
+	private bool fullHealthCheck;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +22,8 @@ public class EnemyAI_Logic : MonoBehaviour {
 		states [(uint)AI_STATES.AI_MOVE] = gameObject.GetComponent<EnemyAI_Move> ();
 		states [(uint)AI_STATES.AI_ATTACK] = gameObject.GetComponent<EnemyAI_Attack> ();
 		states [(uint)AI_STATES.AI_DIE] = gameObject.GetComponent<EnemyAI_Die> ();
+
+		fullHealthCheck = true;
 	}
 
 	// Update is called once per frame
@@ -63,6 +65,11 @@ public class EnemyAI_Logic : MonoBehaviour {
 			AI_Move.SetIsMoving (false);
 			currState = AI_STATES.AI_DIE;
 		}
+
+		if (fullHealthCheck && gameObject.GetComponent<Stat_HealthScript> ().GetCurrentHealth () >= gameObject.GetComponent<Stat_HealthScript> ().GetMaxHealth ()) {
+			fullHealthCheck = false;
+			ReloadCheckpointSystem.AddEnemyToReloadList (this.gameObject);
+		}
 	}
 
 	void GetsHit(GameObject player) {
@@ -75,9 +82,9 @@ public class EnemyAI_Logic : MonoBehaviour {
 
 	public void Reset() {
 		EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)AI_STATES.AI_MOVE]);
-		EnemyAI_Attack AI_Attack = (EnemyAI_Attack)(states [(uint)AI_STATES.AI_ATTACK]);
 		AI_Move.SetIsMoving (true);
 
+		fullHealthCheck = true;
 		currState = AI_STATES.AI_MOVE;
 	}
 }

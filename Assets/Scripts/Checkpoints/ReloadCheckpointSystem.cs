@@ -10,7 +10,15 @@ public class ReloadCheckpointSystem {
 		enemiesKilled.Add (enemy);
 	}
 
+	public static void RemoveEnemyToReloadList(GameObject enemy) {
+		enemiesKilled.Remove (enemy);
+	}
+
 	public static void ReloadAll() {
+		if (enemiesKilled.Count <= 0) {
+			return;
+		}
+
 		foreach (GameObject go in enemiesKilled) {
 			go.AddComponent<ResetEnemy> ();
 			go.SetActive (true);

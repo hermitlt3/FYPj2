@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyAI_Die : MonoBehaviour {
 
+	[SerializeField]
+	private bool youOnlyLiveOnce;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -15,7 +18,11 @@ public class EnemyAI_Die : MonoBehaviour {
 	}
 
 	void Deactivate() {
-		ReloadCheckpointSystem.AddEnemyToReloadList (this.gameObject);
-		this.gameObject.SetActive (false);
+		if (youOnlyLiveOnce) {
+			ReloadCheckpointSystem.RemoveEnemyToReloadList (this.gameObject);
+			Destroy (this.gameObject);
+		} else {
+			this.gameObject.SetActive (false);
+		}
 	}
 }
