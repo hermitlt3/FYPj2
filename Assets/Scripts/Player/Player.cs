@@ -109,6 +109,13 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	void Resurrect() {
+		healthScript.IncreaseHealth (healthScript.GetMaxHealth ());
+		animator.SetBool ("Dead", false);
+		ReloadCheckpointSystem.ReloadAll ();
+		transform.position = GetComponent<PlayerSpawnpoint> ().GetSpawnLocation ();
+	}
+
 	void ImageRotate() {
 		if (controller.collisions.faceDir == 1) {
 			playerSpriteRenderer.flipX = true;

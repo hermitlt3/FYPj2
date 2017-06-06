@@ -16,6 +16,8 @@ public class PlayerSpawnpoint : MonoBehaviour {
         if (transform.position.y < -50f)
         {
             transform.position = spawnLocation;
+			GetComponent<Stat_HealthScript> ().IncreaseHealth (GetComponent<Stat_HealthScript> ().GetMaxHealth ());
+			ReloadCheckpointSystem.ReloadAll ();
         }
 	}
 
@@ -24,4 +26,9 @@ public class PlayerSpawnpoint : MonoBehaviour {
         if(spawnLocation != spawnPoint)
             spawnLocation = spawnPoint;
     }
+
+	public Vector2 GetSpawnLocation()
+	{
+		return spawnLocation;
+	}
 }

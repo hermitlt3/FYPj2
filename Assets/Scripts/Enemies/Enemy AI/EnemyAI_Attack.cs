@@ -87,7 +87,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	}
 
 	void DealDamage(Stat_HealthScript health) {
-		if (health == null) {
+		if (health == null && !health.isAlive()) {
 			return;
 		}
 		health.DecreaseHealth (attackDamage);
