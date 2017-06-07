@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleBase : CollectibleBehavior {
+public class ExpCollectiblePoolScript : ObjectPoolScript {
+
+	protected override void Awake() {
+		instance = this;
+	}
 
 	// Use this for initialization
 	protected override void Start () {
@@ -10,7 +14,7 @@ public class CollectibleBase : CollectibleBehavior {
 	}
 	
 	// Update is called once per frame
-	protected virtual void Update () {
+	protected override void Update () {
 		base.Update ();
 	}
 }

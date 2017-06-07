@@ -8,7 +8,7 @@ public class BossArenaScript : MonoBehaviour {
 	BoxCollider2D areaCollide;
 	GameObject mainCamera;
 
-	public GameObject blockingGO;
+	public GameObject[] blockingGO;
 	public GameObject boss;
 	public GameObject checkPointUnlocked;
 
@@ -24,7 +24,10 @@ public class BossArenaScript : MonoBehaviour {
 	void Update () {
 
 		if (!boss.activeInHierarchy) {
-			blockingGO.SetActive (false);
+			foreach (GameObject go in blockingGO) {
+				go.SetActive (false);
+			}
+
 			mainCamera.GetComponent<CameraStationary> ().ResetToFollow ();
 			checkPointUnlocked.SetActive (true);
 			if(DestroyArea)
@@ -33,11 +36,17 @@ public class BossArenaScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collision) {
-		if (blockingGO.activeInHierarchy)
-			return;
+		foreach (GameObject go in blockingGO) {
+			if (go.activeInHierarchy)
+				return;
+		}
+
 		
 		if (collision.gameObject == player && boss.activeInHierarchy) {
-			blockingGO.SetActive (true);
+			foreach (GameObject go in blockingGO) {
+				go.SetActive (true);
+			}
+
 			mainCamera.GetComponent<Camera2DFollow> ().enabled = false;
 			mainCamera.GetComponent<CameraStationary> ().enabled = true;
 			mainCamera.GetComponent<CameraStationary> ().moveToPosition = transform.position;

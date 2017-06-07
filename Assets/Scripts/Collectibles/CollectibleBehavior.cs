@@ -5,15 +5,15 @@ using UnityEngine;
 public class CollectibleBehavior : MonoBehaviour
 {
     // Get player of the game
-    GameObject playerGO;
+	protected GameObject playerGO;
     
     // Collider of this game object
-    BoxCollider2D thisCollider;
+	protected BoxCollider2D thisCollider;
     // Collider of player
-    BoxCollider2D playerCollider;
+	protected BoxCollider2D playerCollider;
 
     // Rigidbody of this game object
-    Rigidbody2D myRigidBody;
+    protected Rigidbody2D myRigidBody;
 
     // To-do, create the game logic for player - his exp, skills, health, dead etc
 
@@ -44,7 +44,7 @@ public class CollectibleBehavior : MonoBehaviour
         if (playerCollider.bounds.Contains(thisCollider.bounds.min) &&
             playerCollider.bounds.Contains(thisCollider.bounds.max))
         {
-            GameObject.Destroy(gameObject);
+			gameObject.SetActive(false);
         }
     }
 
