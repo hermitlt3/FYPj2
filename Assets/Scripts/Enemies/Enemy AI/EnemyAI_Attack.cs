@@ -77,7 +77,9 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		bool results = false;
 		if (RayDetectedPlayer() != null) {
 			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
-			TextPopupManager.ShowTextPopup (playerCanvas, RayDetectedPlayer().transform.position, "-"+attackDamage.ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
+			if (RayDetectedPlayer ().gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
+				TextPopupManager.ShowTextPopup (playerCanvas, RayDetectedPlayer ().transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
+			}
 
 			results = true;
 		} else {
@@ -87,7 +89,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	}
 
 	void DealDamage(Stat_HealthScript health) {
-		if (health == null && !health.isAlive()) {
+		if (health == null) {
 			return;
 		}
 		health.DecreaseHealth (attackDamage);

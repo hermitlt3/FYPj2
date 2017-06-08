@@ -31,6 +31,10 @@ public class Player : MonoBehaviour {
 
 	SpriteRenderer playerSpriteRenderer;
 
+	void Awake() {
+		DontDestroyOnLoad (this.gameObject);
+	}
+
 	void Start() {
 		controller = GetComponent<Controller2D> ();
 		animator = GetComponent<Animator> ();
@@ -60,6 +64,10 @@ public class Player : MonoBehaviour {
 		}
 		animator.SetFloat ("Speed", Mathf.Abs(velocity.x));
 		animator.SetBool ("Dead" , !healthScript.isAlive ());
+
+		if (animator.GetBool ("Dead") == true) {
+			GetComponent<PlayerInput> ().enabled = false;
+		}
 
 		ImageRotate ();
 	}
@@ -109,11 +117,18 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	void StartFading() {
+		StartCoroutine(SceneTransitManager.instance.ReloadScene (SceneTransitManager.TRANSIT_TYPE.FADE));
+	}
+
 	void Resurrect() {
 		healthScript.IncreaseHealth (healthScript.GetMaxHealth ());
 		animator.SetBool ("Dead", false);
 		ReloadCheckpointSystem.ReloadAll ();
 		transform.position = GetComponent<PlayerSpawnpoint> ().GetSpawnLocation ();
+		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
+		SceneTransitManager.instance.fading.BeginFade (-1);
+		GetComponent<PlayerInput> ().enabled = true;
 	}
 
 	void ImageRotate() {

@@ -15,7 +15,9 @@ public class CollectibleBehavior : MonoBehaviour
     // Rigidbody of this game object
     protected Rigidbody2D myRigidBody;
 
-    // To-do, create the game logic for player - his exp, skills, health, dead etc
+	[SerializeField]
+	protected float timeToDestroy = 3f;
+	private float timeToDestroyReset;
 
     // Speed multiplier
     [SerializeField]
@@ -34,18 +36,20 @@ public class CollectibleBehavior : MonoBehaviour
         playerCollider = playerGO.GetComponent<BoxCollider2D>();
 
         myRigidBody = GetComponent<Rigidbody2D>();
+
+		timeToDestroyReset = timeToDestroy;
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update()
     {
-        speedMultiplier += Time.deltaTime;
+		speedMultiplier += Time.deltaTime;
 
-        if (playerCollider.bounds.Contains(thisCollider.bounds.min) &&
-            playerCollider.bounds.Contains(thisCollider.bounds.max))
-        {
-			gameObject.SetActive(false);
-        }
+		if (!GetComponent<SpriteRenderer> ().isVisible) {
+			timeToDestroy = Mathf.Max (0, timeToDestroy - Time.deltaTime);
+		} else {
+			timeToDestroy = timeToDestroyReset;
+		}
     }
 
 	void FixedUpdate()

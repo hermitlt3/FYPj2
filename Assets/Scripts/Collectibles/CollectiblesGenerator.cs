@@ -22,6 +22,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 	private GameObject player;
 
 	void Awake() {
+		DontDestroyOnLoad (this.gameObject);
 		instance = this;
 	}
 
