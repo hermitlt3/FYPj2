@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ReloadCheckpointSystem {
 
-	private static List<GameObject> enemiesKilled = new List<GameObject>();
+	public static List<GameObject> enemiesKilled = new List<GameObject>();
 
 	public static void AddEnemyToReloadList(GameObject enemy) {
 		enemiesKilled.Add (enemy);

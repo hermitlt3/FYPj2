@@ -7,6 +7,7 @@ public class CollectibleExp : CollectibleBehavior {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
+		timeToDie = false;
 	}
 	
 	// Update is called once per frame
@@ -20,9 +21,8 @@ public class CollectibleExp : CollectibleBehavior {
 			// Straight add exp
 		}
 
-		if (playerCollider.bounds.Contains(thisCollider.bounds.min) &&
-			playerCollider.bounds.Contains(thisCollider.bounds.max))
-		{
+		if ((playerCollider.bounds.Contains (thisCollider.bounds.min) &&
+		    playerCollider.bounds.Contains (thisCollider.bounds.max)) && timeToDie) {
 			gameObject.SetActive(false);
 		}
 	}

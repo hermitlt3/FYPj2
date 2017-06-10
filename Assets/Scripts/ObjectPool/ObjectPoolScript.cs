@@ -44,4 +44,12 @@ public class ObjectPoolScript : MonoBehaviour {
 		}
 		return null;
 	}
+
+	public void DeactivateAll() {
+		for (int i = 0; i < pooledObjects.Count; i++) {
+			if (pooledObjects [i].activeInHierarchy) {
+				pooledObjects [i].SetActive (false);
+			}
+		}
+	}
 }

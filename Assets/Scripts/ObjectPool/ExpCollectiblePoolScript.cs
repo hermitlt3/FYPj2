@@ -5,7 +5,6 @@ using UnityEngine;
 public class ExpCollectiblePoolScript : ObjectPoolScript {
 
 	protected override void Awake() {
-		DontDestroyOnLoad (this.gameObject);
 		instance = this;
 	}
 

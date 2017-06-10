@@ -14,7 +14,6 @@ public class SceneTransitManager : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
-		DontDestroyOnLoad (this.gameObject);
 	}
 
 	// Use this for initialization
@@ -57,8 +56,6 @@ public class SceneTransitManager : MonoBehaviour {
 
 	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
 	{
-		Debug.Log("Level Loaded");
-		Debug.Log(scene.name);
-		Debug.Log(mode);
+
 	}
 }

@@ -66,7 +66,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 			currState = AI_STATES.AI_DIE;
 		}
 
-		if (fullHealthCheck && gameObject.GetComponent<Stat_HealthScript> ().GetCurrentHealth () >= gameObject.GetComponent<Stat_HealthScript> ().GetMaxHealth ()) {
+		if (fullHealthCheck && gameObject.GetComponent<Stat_HealthScript> ().GetCurrentHealth () < gameObject.GetComponent<Stat_HealthScript> ().GetMaxHealth ()) {
 			fullHealthCheck = false;
 			ReloadCheckpointSystem.AddEnemyToReloadList (this.gameObject);
 		}

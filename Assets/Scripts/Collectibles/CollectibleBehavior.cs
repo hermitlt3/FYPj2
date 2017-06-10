@@ -27,6 +27,10 @@ public class CollectibleBehavior : MonoBehaviour
     [SerializeField]
 	protected float maxSpeed = 10f;
 
+	[SerializeField]
+	protected float invulerableTime = 1f;
+	protected bool timeToDie;
+
 	// Use this for initialization
 	protected virtual void Start () {
         // Can juz pass it in but for prefab sake
@@ -38,17 +42,23 @@ public class CollectibleBehavior : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
 
 		timeToDestroyReset = timeToDestroy;
+		timeToDie = false;
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update()
-    {
+	{
 		speedMultiplier += Time.deltaTime;
 
 		if (!GetComponent<SpriteRenderer> ().isVisible) {
 			timeToDestroy = Mathf.Max (0, timeToDestroy - Time.deltaTime);
 		} else {
 			timeToDestroy = timeToDestroyReset;
+		}
+
+		invulerableTime = Mathf.Max (0, invulerableTime - Time.deltaTime);
+		if (invulerableTime <= 0) {
+			timeToDie = true;
 		}
     }
 

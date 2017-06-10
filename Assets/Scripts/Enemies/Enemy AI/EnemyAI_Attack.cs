@@ -76,10 +76,10 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	bool Attack() {
 		bool results = false;
 		if (RayDetectedPlayer() != null) {
-			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
 			if (RayDetectedPlayer ().gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
 				TextPopupManager.ShowTextPopup (playerCanvas, RayDetectedPlayer ().transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
 			}
+			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
 
 			results = true;
 		} else {

@@ -24,4 +24,8 @@ public class TransitFade : MonoBehaviour {
 		fadeDir = direction;
 		return fadeSpeed;
 	}
+
+	public bool FadeExited() {
+		return (Mathf.Abs (alpha) < 0.25f);
+	}
 }

@@ -58,6 +58,7 @@ public class Checkpoint : MonoBehaviour
             {
                 hasBeenActivated = true;
 				mainPlayer.GetComponent<PlayerSpawnpoint>().SetSpawnLocation(new Vector2(transform.position.x, transform.position.y + yOffset));
+				TextPopupManager.ShowTextPopup(other.transform.gameObject.GetComponentInChildren<Canvas> (), transform.position, "Checkpoint!", Color.blue, Color.white);
             }
         }
     }

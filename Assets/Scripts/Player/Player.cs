@@ -62,8 +62,13 @@ public class Player : MonoBehaviour {
 				velocity.y = 0;
 			}
 		}
+
 		animator.SetFloat ("Speed", Mathf.Abs(velocity.x));
-		animator.SetBool ("Dead" , !healthScript.isAlive ());
+
+		if(!healthScript.isAlive ()) {
+			animator.SetBool ("Dead" , true);
+			velocity = Vector3.zero;
+		}
 
 		if (animator.GetBool ("Dead") == true) {
 			GetComponent<PlayerInput> ().enabled = false;
@@ -111,9 +116,11 @@ public class Player : MonoBehaviour {
 		hit = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (controller.collisions.faceDir, -1, 1), 0), attackRange, enemies);
 
 		if(hit.collider != null) {
-			hit.collider.gameObject.SendMessage ("GetsHit", gameObject);
+			hit.collider.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
 			hit.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
-			TextPopupManager.ShowTextPopup (playerCanvas, hit.collider.transform.position, "-"+attackDamage.ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
+			if (hit.collider.gameObject.GetComponent<EnemyAI_Logic> ()) {
+				TextPopupManager.ShowTextPopup (playerCanvas, hit.collider.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
+			}
 		}
 	}
 

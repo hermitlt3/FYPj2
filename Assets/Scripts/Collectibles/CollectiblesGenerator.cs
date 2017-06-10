@@ -22,7 +22,6 @@ public class CollectiblesGenerator : MonoBehaviour {
 	private GameObject player;
 
 	void Awake() {
-		DontDestroyOnLoad (this.gameObject);
 		instance = this;
 	}
 
@@ -54,5 +53,9 @@ public class CollectiblesGenerator : MonoBehaviour {
 			}
 
 		}
+	}
+
+	public void DeactivateAll() {
+		ExpCollectiblePoolScript.instance.DeactivateAll ();
 	}
 }
