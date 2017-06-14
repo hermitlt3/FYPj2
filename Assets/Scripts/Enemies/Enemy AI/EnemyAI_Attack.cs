@@ -6,10 +6,10 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 
 	private float attackDamage;
 	private float attackSpeed;
-	private float attackSpeedTimer; 
+	//private float attackSpeedTimer; 
 
 	private bool attacking;
-	private Animator animator;
+	//private Animator animator;
 
 	private bool animationEnd;
 	private Canvas playerCanvas;
@@ -24,10 +24,10 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		base.Start ();
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
-		animator = GetComponent<Animator> ();
+		//animator = GetComponent<Animator> ();
 		playerCanvas = GameObject.Find ("PlayerCanvas").GetComponent<Canvas> ();
 
-		attackSpeedTimer = 1f;
+		//attackSpeedTimer = 1f;
 		attacking = false;
 		animationEnd = false;
 	}
