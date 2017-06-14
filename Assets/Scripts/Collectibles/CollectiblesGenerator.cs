@@ -46,7 +46,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 
 
 			} else {
-				GameObject expCollectible = ExpCollectiblePoolScript.instance.GetPooledObject ();
+				GameObject expCollectible = CollectiblePoolScript.instance.GetPooledObject ();
 				expCollectible.SetActive (true);
 				expCollectible.transform.position = position;
 				expCollectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i/(float)totalSprites * velocityMagnitude.x, velocityMagnitude.y);
@@ -56,6 +56,6 @@ public class CollectiblesGenerator : MonoBehaviour {
 	}
 
 	public void DeactivateAll() {
-		ExpCollectiblePoolScript.instance.DeactivateAll ();
+		CollectiblePoolScript.instance.DeactivateAll ();
 	}
 }

@@ -8,7 +8,10 @@ public class PuzzleManager : MonoBehaviour {
 	private List<InteractiveObject> puzzleList = new List<InteractiveObject>();
 
 	void Awake () {
-		//puzzleList = new List<InteractiveObject>();
+		if (instance) {
+			Destroy (instance);
+			return;
+		}
 		instance = this;
 	}
 

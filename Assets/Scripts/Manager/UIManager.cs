@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour {
 	public GameObject[] UIList;
 
 	void Awake () {
+		if (instance) {
+			Destroy (instance);
+			return;
+		}
 		instance = this;
 	}
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (EnemyAI_DetectPlayer))]
 public class EnemyAI_Move : EnemyAI_DetectPlayer {
 
 	private Stat_MovementSpdScript movementSpeedScript;

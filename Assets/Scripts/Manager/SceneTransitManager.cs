@@ -13,6 +13,10 @@ public class SceneTransitManager : MonoBehaviour {
 	public TransitFade fading;
 
 	void Awake() {
+		if (instance) {
+			Destroy (instance);
+			return;
+		}
 		instance = this;
 	}
 

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class HazardBehaviour : MonoBehaviour {
 
-	void OnCollisionEnter2D(Collision2D other) {
-		print ("HI");
+	void OnTriggerEnter2D(Collider2D coll) {
+		if (coll.gameObject.tag == "Player") {
+			float damage = coll.GetComponent<Stat_HealthScript> ().GetMaxHealth ();
+			coll.GetComponent<Stat_HealthScript> ().DecreaseHealth (damage);
+		}
 	}
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (EnemyAI_DetectPlayer))]
 public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 
 	private float attackDamage;
