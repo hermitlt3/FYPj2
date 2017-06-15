@@ -39,6 +39,11 @@ public class Aufseer_Pool : MonoBehaviour {
 				return pooledObjects [index][i];
 			}
 		}
+		if (willIncrease) {
+			GameObject obj = (GameObject)Instantiate (prefabs[index]);
+			pooledObjects[index].Add (obj);
+			return obj;
+		}
 		return null;
 	}
 }
