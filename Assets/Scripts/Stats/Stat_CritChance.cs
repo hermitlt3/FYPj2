@@ -9,6 +9,10 @@ public class Stat_CritChance : MonoBehaviour {
 
     private float MaxCritChance = 100.0f;
 
+	void Start() {
+
+	}
+
     public void BuffCritChance(float Value)
     {
         BaseCritChance += Value;

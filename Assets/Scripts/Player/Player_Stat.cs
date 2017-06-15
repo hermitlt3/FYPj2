@@ -17,8 +17,8 @@ public class Player_Stat : MonoBehaviour {
     private Stat_AttackScript Attack;
     [SerializeField]
     private Stat_AttackSpdScript AttackSpd;
-    [SerializeField]
-    private Skill_CritStat Critical;
+    //[SerializeField]
+    //private Skill_CritStat Critical;
     [SerializeField]
     private Stat_MovementSpdScript MovementSpd;
 
