@@ -20,7 +20,7 @@ public class Stat_CritChance : MonoBehaviour {
             BaseCritChance = MaxCritChance;
     }
 
-
-
-
+	public float GetCriticalChance() {
+		return BaseCritChance;
+	}
 }

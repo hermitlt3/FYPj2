@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ResetEnemy : ResetObject {
 
-	private Color oldColor;
-
 	// Use this for initialization
 	protected override void Start () {
 		GetComponent<EnemyAI_Logic> ().Reset ();
@@ -15,7 +13,6 @@ public class ResetEnemy : ResetObject {
 
 		this.gameObject.SetActive (true);
 
-		oldColor =	GetComponent<SpriteRenderer> ().color;
 		GetComponent<SpriteRenderer> ().color += new Color (0, 0, 0, 255);
 
 		Destroy (this);

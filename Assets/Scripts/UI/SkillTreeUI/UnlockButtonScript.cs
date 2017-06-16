@@ -10,6 +10,8 @@ public class UnlockButtonScript : MonoBehaviour {
 	private Base_SkillScript skillScript;			// The script of the skill that the player has selected
 	private Button disButton;						// The button of this
 
+	public SkillsInfo_Script skillsInfo;
+
 	// DEBUG PURPOSES
 	public int expTest = 100;
 
@@ -50,5 +52,9 @@ public class UnlockButtonScript : MonoBehaviour {
 		expTest -= skillScript.GetComponent<Stat_ExperienceScript> ().GetExperience ();
 		// Call the function in the skill script to unlock skill
 		skillScript.GetsUnlocked ();
+		// Since it is upgraded already, upgrade button OFF
+		disButton.interactable = false;
+		// Update the skills info
+		skillsInfo.UpdateSkillsInfo();
 	}
 }
