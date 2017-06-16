@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
 		attackRange = GetComponent<Stat_AttackRangeScript> ().GetAttackRange ();
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		playerSpriteRenderer = GetComponent<SpriteRenderer> ();
-		playerCanvas = GameObject.Find ("PlayerCanvas").GetComponent<Canvas> ();
+		playerCanvas = GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> ();
 
 		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;

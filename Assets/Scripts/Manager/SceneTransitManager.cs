@@ -22,7 +22,7 @@ public class SceneTransitManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		fading = GameObject.Find ("Fader").GetComponent<TransitFade>();	
+		fading = transform.GetComponentInChildren<TransitFade>();	
 	}
 	
 	// Update is called once per frame

@@ -25,7 +25,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
 		//animator = GetComponent<Animator> ();
-		playerCanvas = GameObject.Find ("PlayerCanvas").GetComponent<Canvas> ();
+		playerCanvas = GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> ();
 
 		//attackSpeedTimer = 1f;
 		attacking = false;
