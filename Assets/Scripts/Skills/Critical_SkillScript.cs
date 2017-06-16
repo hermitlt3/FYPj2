@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Critical_SkillScript : Base_SkillScript {
 
-	void Start() {
-
+	protected override void Start() {
+		base.Start ();
 	}
 
-	void Update() {
-
+	protected override void  Update() {
+		base.Update ();
 	}
 }

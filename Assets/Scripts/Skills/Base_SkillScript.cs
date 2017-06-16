@@ -3,21 +3,31 @@ using System.Collections;
 
 public class Base_SkillScript : MonoBehaviour {
 
-	public bool isUnlockable = false;
-	public bool isUnlocked = false;
+	public bool isUnlockable = false;						// If skill can be unlocked
+	public bool isUnlocked = false;							// If skill has been unlocked
 
-	public GameObject UIToBeDisabled;
+	public GameObject UIToBeDisabledWhenUnlockable;			// As the name suggests. Can use getChild(index) since its fixed but meh
+	public GameObject UIToBeDisabledWhenUnlocked;			// As the name suggests. Can use getChild(index) since its fixed but meh
 
-	protected Base_SkillScript previous = null;
-	protected Base_SkillScript next = null;
+	protected Base_SkillScript previous = null;				// The previous level
+	protected Base_SkillScript next = null;					// The next level
 
-	[SerializeField]
-	protected float incrementValue = 0.5f;
+	// JUST A DEBUG
+	public bool getsUnlocked = false;
 
-	void Start() {
-		previous = GetComponentInParent<Base_SkillScript> ();
-		next = GetComponentInChildren<Base_SkillScript> ();
 
+	protected virtual void Start() {
+
+		// If its not the first level
+		if (transform.GetSiblingIndex () > 0) {
+			// Get the reference of the previous level from sibling hierachy
+			previous = transform.parent.GetChild (transform.GetSiblingIndex () - 1).GetComponent<Base_SkillScript> ();
+		}
+		// If its not the last level
+		if (transform.GetSiblingIndex () < transform.parent.childCount - 1) {
+			// Get the reference of the next level from sibling hierachy
+			next = transform.parent.GetChild (transform.GetSiblingIndex () + 1).GetComponent<Base_SkillScript> ();
+		}
 		// If it is the first level
 		if (previous == null) {
 			// Can be unlocked
@@ -25,4 +35,39 @@ public class Base_SkillScript : MonoBehaviour {
 		}
 	}
 
+	protected virtual void Update() {
+
+		// FOR DEBUG PURPOSES
+		if (getsUnlocked) {
+			GetsUnlocked ();
+		}
+		// UI things to make image disappear when its unlockable
+		if (isUnlockable) {
+			UIToBeDisabledWhenUnlockable.SetActive (false);
+		}
+	}
+
+	// Function called by the Unlock button
+	public void GetsUnlocked() {
+		// THE DEBUG
+		getsUnlocked = false;
+
+		// Not unlockable anymore since its already unlocked
+		isUnlockable = false;
+		// Like I said, its already unlocked
+		isUnlocked = true;
+
+		// Bring it to the top of the hierachy for the logic whereby some other script 
+		// gets the crit script from the top of hierachy and pass it to the player
+		transform.SetAsFirstSibling ();
+
+		// Same UI things to make image disappear when its unlocked
+		UIToBeDisabledWhenUnlocked.SetActive (false);
+
+		// If there is a next level
+		if (next) {
+			// It can be unlocked now. Simple!
+			next.isUnlockable = true;
+		}
+	}
 }
