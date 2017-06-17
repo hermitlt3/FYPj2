@@ -6,12 +6,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
-	private GameObject player;
+//	private GameObject player;
 
 	void Awake() {
 		DontDestroyOnLoad (this.gameObject);
 
-		if (instance) {
+		if (instance && instance != this) {
 			Destroy (instance);
 			return;
 		}
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
+//		player = GameObject.FindGameObjectWithTag ("Player");
 
 	}
 	

@@ -22,12 +22,13 @@ public class CollectibleExp : CollectibleBehavior {
 
 			gameObject.SetActive (false);
 			// Straight add exp
+			playerGO.GetComponent<Player_Experience>().IncreaseExperience(expScript.GetExperience());
 		}
 
 		if ((playerCollider.bounds.Contains (thisCollider.bounds.min) &&
 		    playerCollider.bounds.Contains (thisCollider.bounds.max)) && timeToDie) {
 
-			playerCollider.gameObject.GetComponent<Player_Experience> ().IncreaseExperience (expScript.GetExperience ());
+			playerGO.GetComponent<Player_Experience> ().IncreaseExperience (expScript.GetExperience ());
 			gameObject.SetActive(false);
 		}
 	}

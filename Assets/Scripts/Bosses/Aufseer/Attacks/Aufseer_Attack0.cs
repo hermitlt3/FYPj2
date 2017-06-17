@@ -24,7 +24,7 @@ public class Aufseer_Attack0 : Boss_Attack {
 		
 	}
 
-	public IEnumerator doAction() {
+	public new IEnumerator doAction() {
 		yield return new WaitForSeconds(0.5f);
 		for (int i = 0; i < 5; ++i) {
 			GameObject temp = pool.GetPooledObject (attackPatternIndex);

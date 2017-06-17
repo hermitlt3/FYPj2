@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollectiblePoolScript : ObjectPoolScript {
 
 	void Awake() {
-		if (instance) {
+		if (instance && instance != this) {
 			Destroy (instance);
 			return;
 		}

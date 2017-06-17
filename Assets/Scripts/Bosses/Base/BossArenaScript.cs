@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossArenaScript : MonoBehaviour {
 
 	GameObject player;
-	BoxCollider2D areaCollide;
+	//BoxCollider2D areaCollide;
 	GameObject mainCamera;
 
 	public GameObject[] blockingGO;
@@ -17,7 +17,7 @@ public class BossArenaScript : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
-		areaCollide = GetComponent<BoxCollider2D> ();
+		//areaCollide = GetComponent<BoxCollider2D> ();
 	}
 	
 	// Update is called once per frame

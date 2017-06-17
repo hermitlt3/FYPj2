@@ -110,6 +110,7 @@ public class Player : MonoBehaviour {
 			return;
 		if (EventSystem.current.IsPointerOverGameObject())
 			return;
+		
 		animator.SetBool ("Attacking", true);
 	}
 
@@ -119,7 +120,9 @@ public class Player : MonoBehaviour {
 
 		if(hit.collider != null) {
 			hit.collider.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
+		
 			hit.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
+
 			if (hit.collider.gameObject.GetComponent<EnemyAI_Logic> ()) {
 				TextPopupManager.ShowTextPopup (playerCanvas, hit.collider.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
 			}

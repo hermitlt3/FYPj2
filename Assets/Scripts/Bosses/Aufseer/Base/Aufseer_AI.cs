@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Aufseer_AI : Boss_AI {
 
-	private int numberOfAttackPatterns = 3;
+	private int numberOfAttackPatterns;
 
-	private float selfTimer = 0f;
+	private float selfTimer;
 
 	private GameObject target;
 

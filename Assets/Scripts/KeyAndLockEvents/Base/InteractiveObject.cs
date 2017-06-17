@@ -10,12 +10,9 @@ public class InteractiveObject : MonoBehaviour {
 	[SerializeField]
 	private InteractiveLock theResults;
 
-	private bool happensOnce;
-
 	// Use this for initialization
 	void Start () {
 		PuzzleManager.instance.AddToPuzzleList (this);
-		happensOnce = theTrigger.DoesItHappenOnce ();
 	}
 	
 	// Update is called once per frame

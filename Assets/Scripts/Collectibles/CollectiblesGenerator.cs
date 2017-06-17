@@ -6,8 +6,8 @@ public class CollectiblesGenerator : MonoBehaviour {
 
 	public static CollectiblesGenerator instance;
 
-	[SerializeField]
-	private float healthChance = 0.2f;
+//	[SerializeField]
+//	private float healthChance = 0.2f;
 
 	// The number of game objects instantiated = exact value / divider
 	[SerializeField]
@@ -19,10 +19,10 @@ public class CollectiblesGenerator : MonoBehaviour {
 
 	// In case we want do a stat that increases the drop rate of the collectibles
 	// Therefore a reference a player here
-	private GameObject player;
+//	private GameObject player;
 
 	void Awake() {
-		if (instance) {
+		if (instance && instance != this) {
 			Destroy (instance);
 			return;
 		}
@@ -32,7 +32,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
+//		player = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
 	// Update is called once per frame

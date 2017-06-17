@@ -13,7 +13,7 @@ public class SceneTransitManager : MonoBehaviour {
 	public TransitFade fading;
 
 	void Awake() {
-		if (instance) {
+		if (instance && instance != this) {
 			Destroy (instance);
 			return;
 		}
