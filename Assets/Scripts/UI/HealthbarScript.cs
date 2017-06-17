@@ -10,7 +10,7 @@ public class HealthbarScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		healthBarImage = GetComponent<Image> ();
-		healthScript = GetComponentInParent<Stat_HealthScript> ();
+		healthScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Stat_HealthScript> ();
 	}
 	
 	// Update is called once per frame

@@ -30,8 +30,12 @@ public class CollectiblePoolScript : ObjectPoolScript {
 	}
 
 	public override GameObject GetPooledObject() {
-		base.GetPooledObject ();
 
+		for (int i = 0; i < pooledObjects.Count; i++) {
+			if (!pooledObjects [i].activeInHierarchy) {
+				return pooledObjects[i];
+			}
+		}
 		if (willIncrease) {
 			GameObject obj = (GameObject)Instantiate (pooledObject);
 			pooledObjects.Add (obj);

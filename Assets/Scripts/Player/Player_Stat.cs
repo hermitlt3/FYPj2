@@ -16,7 +16,7 @@ public class Player_Stat : MonoBehaviour {
     [SerializeField]
     private Stat_AttackScript Attack;
     [SerializeField]
-    private Stat_AttackSpdScript AttackSpd;
+	private Stat_AttackSpeedScript AttackSpd;
     //[SerializeField]
     //private Skill_CritStat Critical;
     [SerializeField]
@@ -25,7 +25,7 @@ public class Player_Stat : MonoBehaviour {
     void Start()
     {
         Stat_Attack = Attack.TotalAttack();
-        Stat_AttackSpd = AttackSpd.TotalAtkSpd();
+        Stat_AttackSpd = AttackSpd.GetAttackSpeed();
         //Stat_Critical = Critical.TotalCrit();
         Stat_MovementSpd = MovementSpd.TotalMovementSpd();
     }

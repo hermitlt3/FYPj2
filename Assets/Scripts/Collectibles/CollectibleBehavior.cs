@@ -69,4 +69,10 @@ public class CollectibleBehavior : MonoBehaviour
         else
             Vector2.ClampMagnitude(myRigidBody.velocity, maxSpeed);
     }
+
+	public void Reset() 
+	{
+		invulerableTime = 1f;
+		timeToDie = false;
+	}
 }

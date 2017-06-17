@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
@@ -71,7 +72,7 @@ public class Player : MonoBehaviour {
 		}
 
 		if (animator.GetBool ("Dead") == true) {
-			GetComponent<PlayerInput> ().enabled = false;
+			GetComponent<Player_Input> ().enabled = false;
 		}
 
 		ImageRotate ();
@@ -107,7 +108,8 @@ public class Player : MonoBehaviour {
 	public void OnInteraction() {
 		if (animator.GetBool ("Attacking"))
 			return;
-		
+		if (EventSystem.current.IsPointerOverGameObject())
+			return;
 		animator.SetBool ("Attacking", true);
 	}
 
@@ -132,10 +134,10 @@ public class Player : MonoBehaviour {
 		healthScript.IncreaseHealth (healthScript.GetMaxHealth ());
 		animator.SetBool ("Dead", false);
 		ReloadCheckpointSystem.ReloadAll ();
-		transform.position = GetComponent<PlayerSpawnpoint> ().GetSpawnLocation ();
+		transform.position = GetComponent<Player_Spawnpoint> ().GetSpawnLocation ();
 		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
 		SceneTransitManager.instance.fading.BeginFade (-1);
-		GetComponent<PlayerInput> ().enabled = true;
+		GetComponent<Player_Input> ().enabled = true;
 	}
 
 	void ImageRotate() {

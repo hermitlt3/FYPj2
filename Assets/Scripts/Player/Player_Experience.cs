@@ -4,31 +4,44 @@ using System.Collections;
 public class Player_Experience : MonoBehaviour {
 
     [SerializeField]
-    private int Experience = 0;
+    private float experience = 0;
     [SerializeField]
-    private int MaxExperience = 100;
+    private float maxExperience = 100;
     [SerializeField]
-    private int Level = 1;
-    [SerializeField]
-    public int AbilityPoints = 0;
+    private int level = 1;
+	[SerializeField]
+	private float expIncrement = 1.6f;
 
-    [SerializeField]
-    private Mob_Exp MobExperience;
+	private Stat_AbilityPoint abilityPoint;
 
     void Start()
-    {
-        GainExperience();
-    }
+	{
+		abilityPoint = GetComponent<Stat_AbilityPoint> ();
+	}
 
-    public void GainExperience()
-    {
-        Experience = Experience + MobExperience.GiveExperience;
-        if (Experience >= MaxExperience)
-        {
-            MaxExperience  = MaxExperience * 2;
-            Level += 1;
-            AbilityPoints += 1;
-        }
-    }
+	void Update()
+	{
+		if (experience >= maxExperience) {
+			LevelUp ();
+		}
+	}
 
+	public void LevelUp() {
+		experience = Mathf.Max (0, experience - maxExperience);
+		level += 1;
+		maxExperience  = maxExperience * expIncrement;
+		abilityPoint.IncreaseAbilityPoint (1);
+	}
+
+	public void IncreaseExperience(float value) {
+		experience = Mathf.Max(0, experience + value);
+	}
+
+	public void DecreaseExperience(float value) {
+		experience = Mathf.Max(0, experience - value);
+	}
+
+	public float GetExperience() {
+		return experience;
+	}
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CollectibleExp : CollectibleBehavior {
 
+	private Stat_ExperienceScript expScript;			// The exp it should have
+
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
+		expScript = GetComponent<Stat_ExperienceScript> ();
 		timeToDie = false;
 	}
 	
@@ -23,6 +26,8 @@ public class CollectibleExp : CollectibleBehavior {
 
 		if ((playerCollider.bounds.Contains (thisCollider.bounds.min) &&
 		    playerCollider.bounds.Contains (thisCollider.bounds.max)) && timeToDie) {
+
+			playerCollider.gameObject.GetComponent<Player_Experience> ().IncreaseExperience (expScript.GetExperience ());
 			gameObject.SetActive(false);
 		}
 	}

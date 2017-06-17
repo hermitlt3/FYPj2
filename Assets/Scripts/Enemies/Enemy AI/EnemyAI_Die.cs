@@ -6,10 +6,10 @@ public class EnemyAI_Die : MonoBehaviour {
 
 	[SerializeField]
 	private bool youOnlyLiveOnce = false;
-
+	private Stat_ExperienceScript expOutputScript;
 	// Use this for initialization
 	void Start () {
-		
+		expOutputScript = GetComponent<Stat_ExperienceScript> ();
 	}
 	
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class EnemyAI_Die : MonoBehaviour {
 	}
 
 	void Deactivate() {
-		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, 10);
+		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expOutputScript.GetExperience());
 		if (youOnlyLiveOnce) {
 			ReloadCheckpointSystem.RemoveEnemyToReloadList (this.gameObject);
 

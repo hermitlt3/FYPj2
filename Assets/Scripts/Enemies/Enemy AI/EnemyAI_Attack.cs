@@ -23,7 +23,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 	protected override void Start () {
 		base.Start ();
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
-		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetBaseAttackSpeed ();
+		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetAttackSpeed ();
 		//animator = GetComponent<Animator> ();
 		playerCanvas = GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> ();
 

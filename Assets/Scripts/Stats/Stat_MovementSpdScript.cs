@@ -7,6 +7,10 @@ public class Stat_MovementSpdScript : MonoBehaviour {
     [SerializeField]
     private float BaseMovementSpd = 100.0f;
 
+	void Start() {
+
+	}
+
     public float TotalMovementSpd()
     {
         return BaseMovementSpd;

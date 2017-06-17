@@ -7,6 +7,7 @@ public class SkillsInfo_Script : MonoBehaviour {
 	private Critical_SkillScript critSkill;				// Critical strike chance
 	private AttackDamage_SkillScript damageSkill;		// Increased damage
 	private Health_SkillScript healthSkill;				// Increased health
+	private AttackSpeed_SkillScript attSpdSkill;		// Increased attack speed
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +15,7 @@ public class SkillsInfo_Script : MonoBehaviour {
 		critSkill = transform.parent.GetComponentInChildren<Critical_SkillScript> ();
 		damageSkill = transform.parent.GetComponentInChildren<AttackDamage_SkillScript> ();
 		healthSkill = transform.parent.GetComponentInChildren<Health_SkillScript> ();
+		attSpdSkill = transform.parent.GetComponentInChildren<AttackSpeed_SkillScript> ();
 	}
 	
 	// Update is called once per frame
@@ -27,6 +29,9 @@ public class SkillsInfo_Script : MonoBehaviour {
 		if (healthSkill.isUnlocked) {
 			print ("Health % up: " + healthSkill.GetComponent<Stat_HealthScript> ().GetCurrentHealth ());
 		}
+		if (attSpdSkill.isUnlocked) {
+			print ("AttSpd % up: " + attSpdSkill.GetComponent<Stat_AttackSpeedScript> ().GetAttackSpeed ());
+		}
 	}
 
 	public void UpdateSkillsInfo() {
@@ -37,5 +42,6 @@ public class SkillsInfo_Script : MonoBehaviour {
 		critSkill = transform.parent.GetComponentInChildren<Critical_SkillScript> ();
 		damageSkill = transform.parent.GetComponentInChildren<AttackDamage_SkillScript> ();
 		healthSkill = transform.parent.GetComponentInChildren<Health_SkillScript> ();
+		attSpdSkill = transform.parent.GetComponentInChildren<AttackSpeed_SkillScript> ();
 	}
 }

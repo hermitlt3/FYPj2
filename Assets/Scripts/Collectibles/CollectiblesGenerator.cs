@@ -22,6 +22,11 @@ public class CollectiblesGenerator : MonoBehaviour {
 	private GameObject player;
 
 	void Awake() {
+		if (instance) {
+			Destroy (instance);
+			return;
+		}
+
 		instance = this;
 	}
 
@@ -36,7 +41,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 	}
 
 	public void GenerateCollectibles(Vector3 position, float expValue) {
-		int healthAmount = (healthChance <= Random.Range (0f, 1f)) ? 5:0;
+		int healthAmount = 0;//(healthChance <= Random.Range (0f, 1f)) ? 5:0;
 		int numOfExp = Mathf.CeilToInt (expValue / numberOfExpDivider);
 		int totalSprites = healthAmount + numOfExp;
 			
@@ -46,10 +51,12 @@ public class CollectiblesGenerator : MonoBehaviour {
 
 
 			} else {
-				GameObject expCollectible = CollectiblePoolScript.instance.GetPooledObject ();
-				expCollectible.SetActive (true);
-				expCollectible.transform.position = position;
-				expCollectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i/(float)totalSprites * velocityMagnitude.x, velocityMagnitude.y);
+				GameObject collectible = CollectiblePoolScript.instance.GetPooledObject ();
+				collectible.SetActive (true);
+				collectible.transform.position = position;
+				collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i/(float)totalSprites * velocityMagnitude.x, velocityMagnitude.y);
+				collectible.GetComponent<CollectibleBehavior> ().Reset ();
+				collectible.GetComponent<Stat_ExperienceScript> ().SetExperience (expValue / numOfExp);
 			}
 
 		}
