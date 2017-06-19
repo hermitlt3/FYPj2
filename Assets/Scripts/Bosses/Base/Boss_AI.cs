@@ -26,4 +26,8 @@ public class Boss_AI : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public virtual void Reset() {
+
+	}
 }

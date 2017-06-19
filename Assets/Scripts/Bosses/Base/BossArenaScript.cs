@@ -23,13 +23,14 @@ public class BossArenaScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!boss.activeInHierarchy) {
+		if (!boss.GetComponent<Stat_HealthScript>().isAlive()) {
 			foreach (GameObject go in blockingGO) {
 				go.SetActive (false);
 			}
 
 			mainCamera.GetComponent<CameraStationary> ().ResetToFollow ();
 			checkPointUnlocked.SetActive (true);
+
 			if(DestroyArea)
 				Destroy (this.gameObject);
 		}
@@ -42,14 +43,26 @@ public class BossArenaScript : MonoBehaviour {
 		}
 
 		
-		if (collision.gameObject == player && boss.activeInHierarchy) {
+		if (collision.gameObject == player && boss.GetComponent<Stat_HealthScript>().isAlive()) {
 			foreach (GameObject go in blockingGO) {
 				go.SetActive (true);
 			}
+			boss.SetActive (true);
 
 			mainCamera.GetComponent<Camera2DFollow> ().enabled = false;
 			mainCamera.GetComponent<CameraStationary> ().enabled = true;
 			mainCamera.GetComponent<CameraStationary> ().moveToPosition = transform.position;
 		}
+	}
+
+	public void Reset() {
+		foreach (GameObject go in blockingGO) {
+			go.SetActive (false);
+		} 
+		foreach (Boss_AI ai in boss.GetComponents<Boss_AI>()) {
+			ai.Reset ();
+		}
+
+		boss.SetActive (false);
 	}
 }

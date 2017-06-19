@@ -47,4 +47,9 @@ public class Enemy_Anim : MonoBehaviour {
 			}
 		}
 	}
+
+	public void Reset() {
+		animator.SetBool ("Dead", false);
+		animator.SetTrigger ("Reset");
+	}
 }

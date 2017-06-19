@@ -46,4 +46,12 @@ public class Aufseer_Pool : MonoBehaviour {
 		}
 		return null;
 	}
+
+	public void DeactivateAll() {
+		for (int i = 0; i < pooledObjects.Length; i++) {
+			for (int j = 0; j < poolAmount; j++) {
+				pooledObjects[j][i].SetActive (false);
+			}
+		}
+	}
 }

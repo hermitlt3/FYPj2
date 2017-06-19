@@ -26,6 +26,9 @@ public class Camera2DFollow : MonoBehaviour
         // Update is called once per frame
     void Update()
 	{
+		if (GetComponent<CameraStationary> ().enabled) {
+			GetComponent<CameraStationary> ().enabled = false;
+		}
 		// only update lookahead pos if accelerating or changed direction
 		float xMoveDelta = (target.position - m_LastTargetPosition).x;
 
@@ -45,5 +48,9 @@ public class Camera2DFollow : MonoBehaviour
 		transform.position = newPos;
 
 		m_LastTargetPosition = target.position;
+	}
+
+	public void Reset() {
+		GetComponent<Camera> ().orthographicSize = orthoSize;
 	}
 }

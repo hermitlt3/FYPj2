@@ -56,4 +56,10 @@ public class Aufseer_AI : Boss_AI {
 	void TimerUpdate() {
 		selfTimer = Mathf.Min(selfTimer + Time.deltaTime, timeBetweenIntervals);
 	}
+
+	public override void Reset() {
+		for (int i = 0; i < transform.childCount; ++i) {
+			transform.GetChild(i).gameObject.SetActive(false);
+		}
+	}
 }

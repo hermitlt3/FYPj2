@@ -10,17 +10,20 @@ public class Aufseer_Attack0Behavior : MonoBehaviour {
 	[SerializeField]
 	private float projectileSpeed = 10f;
 	[SerializeField]
-	private float tracePeriod = 1f;			// For how long it will go in the direction of player
+	private float tracePeriod = 1.2f;			// For how long it will go in the direction of player
 	[SerializeField]
-	private float invulerablePeriod = 0.3f;	// When first spawn will it immediately hit player
+	private float invulerablePeriod = 0.5f;	// When first spawn will it immediately hit player
 
 	private Vector2 direction;
 
 	private GameObject target;
 
+	private Stat_AttackScript attackDamage;
+
 	// Use this for initialization
 	void Start () {
 		myRigidbody = GetComponent<Rigidbody2D> ();
+		attackDamage = GetComponent<Stat_AttackScript> ();
 		//target = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
@@ -48,18 +51,23 @@ public class Aufseer_Attack0Behavior : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		print (other.collider.tag);
-		if (other.collider.gameObject.layer == LayerMask.NameToLayer ("Terrain")) {
-			this.gameObject.SetActive (false);
-			Destroy (this);
 
-		} else if (other.collider.tag == "Player") {
+		if (other.collider.gameObject.tag == "Player") {
 			if (invulerablePeriod > 0f) {
 				return;
 			}
+			other.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage.GetBaseAttackDamage ());
+			TextPopupManager.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), transform.position, attackDamage.GetBaseAttackDamage ().ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
+
+			this.gameObject.SetActive (false);
+			Destroy (this);
+		}
+
+		else if (other.collider.gameObject.layer == LayerMask.NameToLayer ("Terrain")) {
 			this.gameObject.SetActive (false);
 			Destroy (this);
 
-		}
+		} 
 	}
 }
+

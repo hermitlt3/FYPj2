@@ -8,6 +8,8 @@ public class ResetEnemy : ResetObject {
 	protected override void Start () {
 		GetComponent<EnemyAI_Logic> ().Reset ();
 		GetComponent<EnemyAI_Move> ().Reset ();
+		GetComponent<Enemy_Anim> ().Reset ();
+		GetComponent<EnemyAI_Die> ().Reset ();
 
 		GetComponent<Stat_HealthScript> ().IncreaseHealth (GetComponent<Stat_HealthScript> ().GetMaxHealth ());
 

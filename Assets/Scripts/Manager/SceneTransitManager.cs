@@ -41,9 +41,9 @@ public class SceneTransitManager : MonoBehaviour {
 	public IEnumerator TransitScene(TRANSIT_TYPE type) {
 		switch (type) {
 		case TRANSIT_TYPE.FADE:
+			yield return new WaitForSeconds (fading.BeginFade (-1));
 			break;
 		}
-		yield return new  WaitForSeconds(0.4f);
 	}
 
 	void OnEnable()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
-//	private GameObject player;
+	private GameObject player;
 
 	void Awake() {
 		DontDestroyOnLoad (this.gameObject);
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		player = GameObject.FindGameObjectWithTag ("Player");
+		player = GameObject.FindGameObjectWithTag ("Player");
 
 	}
 	
@@ -31,5 +31,31 @@ public class GameManager : MonoBehaviour {
 
 	public void OnPlayerDead() {
 
+		// Fade. On.
+		SceneTransitManager.instance.fading.BeginFade (1);
+
+		// Managers. On.
+		ReloadCheckpointSystem.ReloadAll ();
+		CollectiblesGenerator.instance.DeactivateAll ();
+
+		// Camera. On.
+		Camera.main.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, Camera.main.transform.position.z);
+		Camera.main.GetComponent<Camera2DFollow> ().enabled = true;
+
+		// Player. On.
+		player.GetComponent<Stat_HealthScript>().IncreaseHealth (player.GetComponent<Stat_HealthScript>().GetMaxHealth ());
+		player.GetComponent<Animator>().SetBool ("Dead", false);
+		player.transform.position = player.GetComponent<Player_Spawnpoint> ().GetSpawnLocation ();
+		player.GetComponent<Player_Input> ().enabled = true;
+	
+		// Boss. On.
+		GameObject.FindGameObjectWithTag("Boss Arenas").GetComponent<BossArenaScript>().Reset();
+
+		// Trace. On.
+		SceneTransitManager.instance.fading.BeginFade (-1);
+	}
+
+	public bool LoadScene() {
+		return false;
 	}
 }

@@ -6,6 +6,9 @@ public class EnemyAI_Die : MonoBehaviour {
 
 	[SerializeField]
 	private bool youOnlyLiveOnce = false;
+
+	private bool shouldDie = true;
+
 	private Stat_ExperienceScript expOutputScript;
 	// Use this for initialization
 	void Start () {
@@ -18,6 +21,10 @@ public class EnemyAI_Die : MonoBehaviour {
 	}
 
 	void Deactivate() {
+		if (!shouldDie) {
+			return;
+		}
+
 		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expOutputScript.GetExperience());
 		if (youOnlyLiveOnce) {
 			ReloadCheckpointSystem.RemoveEnemyToReloadList (this.gameObject);
@@ -25,5 +32,15 @@ public class EnemyAI_Die : MonoBehaviour {
 		} else {
 			this.gameObject.SetActive (false);
 		}
+	}
+
+	void ShouldDie() {
+		if (!GameObject.FindGameObjectWithTag ("Player").GetComponent<Stat_HealthScript> ().isAlive ()) {
+			shouldDie = false;
+		}
+	}
+
+	public void Reset() {
+		shouldDie = true;
 	}
 }

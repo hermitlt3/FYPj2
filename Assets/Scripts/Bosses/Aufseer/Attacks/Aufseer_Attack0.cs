@@ -8,7 +8,7 @@ public class Aufseer_Attack0 : Boss_Attack {
 	private Aufseer_Pool pool;
 
 	[SerializeField]
-	private Vector2 velocitySet = new Vector2(2f, 20f);
+	private Vector2 velocitySet = new Vector2(2f, 15f);
 	// Use this for initialization
 	void Start () {
 		// In case the target isnt set properly, then we manually do tis

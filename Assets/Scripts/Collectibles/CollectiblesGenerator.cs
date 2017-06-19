@@ -45,8 +45,8 @@ public class CollectiblesGenerator : MonoBehaviour {
 		int numOfExp = Mathf.CeilToInt (expValue / numberOfExpDivider);
 		int totalSprites = healthAmount + numOfExp;
 			
-		for (int i = -Mathf.FloorToInt (totalSprites / 2); i < Mathf.FloorToInt (totalSprites / 2); ++i) {
-
+		for (int i = Mathf.FloorToInt (-totalSprites / 2); i <= Mathf.FloorToInt (totalSprites / 2); ++i) {
+			print (i);
 			if (healthAmount > 0 && i % (totalSprites / healthAmount) == 0) {
 
 
@@ -54,8 +54,9 @@ public class CollectiblesGenerator : MonoBehaviour {
 				GameObject collectible = CollectiblePoolScript.instance.GetPooledObject ();
 				collectible.SetActive (true);
 				collectible.transform.position = position;
-				collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i/(float)totalSprites * velocityMagnitude.x, velocityMagnitude.y);
 				collectible.GetComponent<CollectibleBehavior> ().Reset ();
+
+				collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i/(float)totalSprites * velocityMagnitude.x, velocityMagnitude.y);
 				collectible.GetComponent<Stat_ExperienceScript> ().SetExperience (expValue / numOfExp);
 			}
 

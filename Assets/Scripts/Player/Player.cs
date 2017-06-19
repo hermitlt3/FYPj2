@@ -31,6 +31,7 @@ public class Player : MonoBehaviour {
 	public LayerMask enemies;
 
 	SpriteRenderer playerSpriteRenderer;
+	GameManager gM;
 
 	void Awake() {
 		DontDestroyOnLoad (this.gameObject);
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour {
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		playerSpriteRenderer = GetComponent<SpriteRenderer> ();
 		playerCanvas = GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> ();
+		gM = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager>();
 
 		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -123,7 +125,7 @@ public class Player : MonoBehaviour {
 		
 			hit.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
 
-			if (hit.collider.gameObject.GetComponent<EnemyAI_Logic> ()) {
+			if (hit.collider.gameObject.GetComponent<EnemyAI_Logic> () || hit.collider.gameObject.GetComponent<Boss_AI>()) {
 				TextPopupManager.ShowTextPopup (playerCanvas, hit.collider.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
 			}
 		}
@@ -134,13 +136,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void Resurrect() {
-		healthScript.IncreaseHealth (healthScript.GetMaxHealth ());
-		animator.SetBool ("Dead", false);
-		ReloadCheckpointSystem.ReloadAll ();
-		transform.position = GetComponent<Player_Spawnpoint> ().GetSpawnLocation ();
-		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
-		SceneTransitManager.instance.fading.BeginFade (-1);
-		GetComponent<Player_Input> ().enabled = true;
+		gM.OnPlayerDead ();
 	}
 
 	void ImageRotate() {
