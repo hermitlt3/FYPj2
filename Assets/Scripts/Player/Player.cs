@@ -131,11 +131,12 @@ public class Player : MonoBehaviour {
 	}
 
 	void StartFading() {
-		StartCoroutine(SceneTransitManager.instance.ReloadScene (SceneTransitManager.TRANSIT_TYPE.FADE));
+		StartCoroutine(SceneTransitManager.instance.ReloadSceneWithFade (1));
 	}
 
 	void Resurrect() {
 		gM.OnPlayerDead ();
+		StartCoroutine(SceneTransitManager.instance.ReloadSceneWithFade (-1));
 	}
 
 	void ImageRotate() {

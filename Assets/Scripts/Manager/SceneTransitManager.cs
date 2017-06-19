@@ -6,10 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneTransitManager : MonoBehaviour {
 
 	public static SceneTransitManager instance;
-	public enum TRANSIT_TYPE
-	{
-		FADE
-	}
+
 	public TransitFade fading;
 
 	void Awake() {
@@ -18,6 +15,8 @@ public class SceneTransitManager : MonoBehaviour {
 			return;
 		}
 		instance = this;
+		print ("FFF");
+		DontDestroyOnLoad (this.gameObject);
 	}
 
 	// Use this for initialization
@@ -30,21 +29,6 @@ public class SceneTransitManager : MonoBehaviour {
 		
 	}
 
-	public IEnumerator ReloadScene(TRANSIT_TYPE type) {
-		switch (type) {
-		case TRANSIT_TYPE.FADE:
-			yield return new WaitForSeconds (fading.BeginFade (1));
-			break;
-		}
-	}
-
-	public IEnumerator TransitScene(TRANSIT_TYPE type) {
-		switch (type) {
-		case TRANSIT_TYPE.FADE:
-			yield return new WaitForSeconds (fading.BeginFade (-1));
-			break;
-		}
-	}
 
 	void OnEnable()
 	{
@@ -60,6 +44,25 @@ public class SceneTransitManager : MonoBehaviour {
 
 	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
 	{
+		fading.BeginFade (-1);
+	}
 
+	public IEnumerator ReloadSceneWithFade(int dir ) {
+		if (Mathf.Clamp (dir, -1, 1) == 1) {
+			float fadeTime = fading.BeginFade (1);
+			yield return new WaitForSeconds (fadeTime);
+		} else {
+			float fadeTime = fading.BeginFade (-1);
+			yield return new WaitForSeconds (fadeTime);
+		}
+	}
+
+	public IEnumerator ChangeScene(string sceneName) 
+	{
+		float fadeTime = fading.BeginFade (1);
+		yield return new WaitForSeconds (fadeTime);
+
+		AsyncOperation async = SceneManager.LoadSceneAsync (sceneName);
+		yield return async;
 	}
 }

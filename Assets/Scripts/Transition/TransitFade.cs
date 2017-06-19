@@ -25,7 +25,7 @@ public class TransitFade : MonoBehaviour {
 		return fadeSpeed;
 	}
 
-	public bool FadeExited() {
-		return (Mathf.Abs (alpha) < 0.25f);
+	public float GetAlpha() {
+		return alpha;
 	}
 }
