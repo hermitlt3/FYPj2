@@ -117,7 +117,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void Attack() {
-		Collider2D hit = Physics2D.OverlapBox(new Vector2(transform.position.x * Mathf.Clamp (controller.collisions.faceDir, -1, 1) + attackRange / 2, transform.position.y), new Vector2(attackRange, GetComponent<SpriteRenderer>().size.y), 0, enemies);
+		Collider2D hit = Physics2D.OverlapBox(new Vector2(transform.position.x + Mathf.Clamp (controller.collisions.faceDir, -1, 1) * attackRange / 2, transform.position.y), new Vector2(attackRange, GetComponent<SpriteRenderer>().size.y), 0, enemies);
 
 		if(hit && hit.gameObject != null) {
 			hit.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
