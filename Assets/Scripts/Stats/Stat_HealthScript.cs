@@ -7,6 +7,7 @@ public class Stat_HealthScript : MonoBehaviour {
     private float maxHealth = 100.0f;
     [SerializeField]
     private float currHealth;
+	public float bonusHealth = 0f;
 
 	void Start () {
 		currHealth = maxHealth;
@@ -38,5 +39,15 @@ public class Stat_HealthScript : MonoBehaviour {
 	public float GetMaxHealth()
 	{
 		return maxHealth;
+	}
+
+	public void IncreaseMaxHealth(float value) 
+	{
+		maxHealth = Mathf.Max (0, value);
+	}
+
+	public void SetCurrentHealth(float value)
+	{
+		currHealth = Mathf.Max (0, value);
 	}
 }

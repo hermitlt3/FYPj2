@@ -5,22 +5,26 @@ using UnityEngine;
 public class Stat_CritChance : MonoBehaviour {
 
     [SerializeField]
-    private float BaseCritChance = 10.0f;
+    private float baseCritChance = 0f;
 
-    private float MaxCritChance = 100.0f;
+    private float maxCritChance = 100.0f;
 
 	void Start() {
 
 	}
 
-    public void BuffCritChance(float Value)
+    public void BuffCritChance(float value)
     {
-        BaseCritChance += Value;
-        if (BaseCritChance >= MaxCritChance)
-            BaseCritChance = MaxCritChance;
+		baseCritChance = Mathf.Max(0, baseCritChance + value);
+		baseCritChance = Mathf.Min(baseCritChance, maxCritChance);
     }
 
 	public float GetCriticalChance() {
-		return BaseCritChance;
+		return baseCritChance;
+	}
+
+	public void SetCriticalChance(float value) {
+		baseCritChance = Mathf.Min(value, maxCritChance);
+		baseCritChance = Mathf.Max (0, baseCritChance);
 	}
 }

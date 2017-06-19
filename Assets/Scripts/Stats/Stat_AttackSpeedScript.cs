@@ -6,6 +6,7 @@ public class Stat_AttackSpeedScript : MonoBehaviour {
 
     [SerializeField]
     private float attackSpeed = 1.0f;
+	public float bonusAttackSpeed = 0f;
 
 	void Start() 
 	{
@@ -14,5 +15,9 @@ public class Stat_AttackSpeedScript : MonoBehaviour {
 
 	public float GetAttackSpeed() {
 		return attackSpeed;
+	}
+
+	public void SetAttackSpeed(float value) {
+		attackSpeed = Mathf.Max (0, value);
 	}
 }
