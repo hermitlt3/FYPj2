@@ -74,5 +74,6 @@ public class CollectibleBehavior : MonoBehaviour
 	{
 		invulerableTime = 1f;
 		timeToDie = false;
+		speedMultiplier = 1;
 	}
 }

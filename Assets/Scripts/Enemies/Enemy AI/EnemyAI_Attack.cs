@@ -40,9 +40,9 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 			attacking = true;
 
 			if (BoxDetectedPlayer ().gameObject.transform.position.x - transform.position.x < 0) {
-				sprite.flipX = false;
-			} else {
 				sprite.flipX = true;
+			} else {
+				sprite.flipX = false;
 			}
 
 		} else {

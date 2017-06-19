@@ -117,16 +117,15 @@ public class Player : MonoBehaviour {
 	}
 
 	void Attack() {
-		RaycastHit2D hit;
-		hit = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (controller.collisions.faceDir, -1, 1), 0), attackRange, enemies);
+		Collider2D hit = Physics2D.OverlapBox(new Vector2(transform.position.x * Mathf.Clamp (controller.collisions.faceDir, -1, 1) + attackRange / 2, transform.position.y), new Vector2(attackRange, GetComponent<SpriteRenderer>().size.y), 0, enemies);
 
-		if(hit.collider != null) {
-			hit.collider.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
+		if(hit && hit.gameObject != null) {
+			hit.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
 		
-			hit.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
+			hit.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
 
-			if (hit.collider.gameObject.GetComponent<EnemyAI_Logic> () || hit.collider.gameObject.GetComponent<Boss_AI>()) {
-				TextPopupManager.ShowTextPopup (playerCanvas, hit.collider.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
+			if (hit.gameObject.GetComponent<EnemyAI_Logic> () || hit.gameObject.GetComponent<Boss_AI>()) {
+				TextPopupManager.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
 			}
 		}
 	}

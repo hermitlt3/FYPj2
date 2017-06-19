@@ -38,15 +38,15 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 
 	// Update is called once per frame
 	void Update () {
-		if (!sprite.flipX) {
+		if (sprite.flipX) {
 			myRigidbody.velocity = new Vector2 (-movementSpeed, myRigidbody.velocity.y);
 			if (transform.position.x < areaBounds.bounds.min.x) {
-				sprite.flipX = true;
+				sprite.flipX = false;
 			}
 		} else {
 			myRigidbody.velocity = new Vector2 (movementSpeed, myRigidbody.velocity.y);
-			if (transform.position.x + transform.lossyScale.x > areaBounds.bounds.max.x) {
-				sprite.flipX = false;
+			if (transform.position.x > areaBounds.bounds.max.x - GetComponent<SpriteRenderer>().size.x) {
+				sprite.flipX = true;
 			}
 		}
 

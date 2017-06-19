@@ -15,7 +15,9 @@ public class ResetEnemy : ResetObject {
 
 		this.gameObject.SetActive (true);
 
+		print(GetComponent<SpriteRenderer>().color.a);
 		GetComponent<SpriteRenderer> ().color += new Color (0, 0, 0, 255);
+			print(GetComponent<SpriteRenderer>().color.a);
 
 		Destroy (this);
 	}
