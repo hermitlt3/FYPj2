@@ -5,12 +5,12 @@ using UnityEngine;
 public class ObjectPoolScript : MonoBehaviour {
 
 	public static ObjectPoolScript instance;
-	public GameObject pooledObject;
+	public GameObject[] prefabs;
 
 	public bool willIncrease = true;
 	public int poolAmount = 20;
 
-	protected List<GameObject> pooledObjects;
+	protected List<GameObject>[] pooledObjects;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -22,19 +22,25 @@ public class ObjectPoolScript : MonoBehaviour {
 		
 	}
 
-	public virtual GameObject GetPooledObject() {
-		for (int i = 0; i < pooledObjects.Count; i++) {
-			if (!pooledObjects [i].activeInHierarchy) {
-				return pooledObjects[i];
+	public virtual GameObject GetPooledObject(int index) {
+
+		for (int i = 0; i < pooledObjects [index].Count; i++) {
+			if (!pooledObjects [index][i] .activeInHierarchy) {
+				return pooledObjects [index][i];
 			}
+		}
+		if (willIncrease) {
+			GameObject obj = (GameObject)Instantiate (prefabs[index]);
+			pooledObjects[index].Add (obj);
+			return obj;
 		}
 		return null;
 	}
 
 	public void DeactivateAll() {
-		for (int i = 0; i < pooledObjects.Count; i++) {
-			if (pooledObjects [i].activeInHierarchy) {
-				pooledObjects [i].SetActive (false);
+		for (int i = 0; i < pooledObjects.Length; i++) {
+			for (int j = 0; j < poolAmount; j++) {
+				pooledObjects[j][i].SetActive (false);
 			}
 		}
 	}

@@ -15,32 +15,44 @@ public class CollectiblePoolScript : ObjectPoolScript {
 
 	// Use this for initialization
 	protected override void Start () {
-		pooledObjects = new List<GameObject> ();
-		for (int i = 0; i < poolAmount; i++) {
-			GameObject obj = (GameObject)Instantiate (pooledObject);
-			obj.transform.parent = this.transform;
-			obj.SetActive (false);
-			pooledObjects.Add (obj);
+		pooledObjects = new List<GameObject>[prefabs.Length];
+
+		for (int i = 0; i < pooledObjects.Length; i++) {
+			pooledObjects[i] = new List<GameObject>();
+
+			for (int j = 0; j < poolAmount; j++) {
+				GameObject obj = (GameObject)Instantiate (prefabs[i]);
+				obj.transform.parent = this.transform;
+				obj.SetActive (false);
+				pooledObjects [i].Add (obj);
+			}
 		}
 	}
-	
-	// Update is called once per frame
+
 	protected override void Update () {
-		base.Update ();
+
 	}
 
-	public override GameObject GetPooledObject() {
+	public override GameObject GetPooledObject(int index) {
 
-		for (int i = 0; i < pooledObjects.Count; i++) {
-			if (!pooledObjects [i].activeInHierarchy) {
-				return pooledObjects[i];
+		for (int i = 0; i < pooledObjects [index].Count; i++) {
+			if (!pooledObjects [index][i] .activeInHierarchy) {
+				return pooledObjects [index][i];
 			}
 		}
 		if (willIncrease) {
-			GameObject obj = (GameObject)Instantiate (pooledObject);
-			pooledObjects.Add (obj);
+			GameObject obj = (GameObject)Instantiate (prefabs[index]);
+			pooledObjects[index].Add (obj);
 			return obj;
 		}
 		return null;
+	}
+
+	public void DeactivateAll() {
+		for (int i = 0; i < pooledObjects.Length; i++) {
+			for (int j = 0; j < poolAmount; j++) {
+				pooledObjects[j][i].SetActive (false);
+			}
+		}
 	}
 }

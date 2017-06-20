@@ -5,9 +5,8 @@ using UnityEngine;
 public class CollectiblesGenerator : MonoBehaviour {
 
 	public static CollectiblesGenerator instance;
-
 //	[SerializeField]
-//	private float healthChance = 0.2f;
+	private float healthChance = 1f;
 
 	// The number of game objects instantiated = exact value / divider
 	[SerializeField]
@@ -40,30 +39,43 @@ public class CollectiblesGenerator : MonoBehaviour {
 		
 	}
 
-	public void GenerateCollectibles(Vector3 position, float expValue) {
-		int healthAmount = 0;//(healthChance <= Random.Range (0f, 1f)) ? 5:0;
-		int numOfExp = Mathf.CeilToInt (expValue / numberOfExpDivider);
-		int totalSprites = healthAmount + numOfExp;
-			
-		for (int i = Mathf.FloorToInt (-totalSprites / 2); i <= Mathf.FloorToInt (totalSprites / 2); ++i) {
-			print (i);
-			if (healthAmount > 0 && i % (totalSprites / healthAmount) == 0) {
-
-
-			} else {
-				GameObject collectible = CollectiblePoolScript.instance.GetPooledObject ();
-				collectible.SetActive (true);
-				collectible.transform.position = position;
-				collectible.GetComponent<CollectibleBehavior> ().Reset ();
-
-				collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i/(float)totalSprites * velocityMagnitude.x, velocityMagnitude.y);
-				collectible.GetComponent<Stat_ExperienceScript> ().SetExperience (expValue / numOfExp);
-			}
-
-		}
+	public void GenerateCollectibles(Vector3 position, float expValue, float hpValue = 5f) {
+		GenerateEXP (position, expValue);
+		GenerateHealth (position, hpValue);
 	}
 
 	public void DeactivateAll() {
 		CollectiblePoolScript.instance.DeactivateAll ();
+	}
+
+	public bool GenerateEXP(Vector3 position, float value) {
+		int numOfExp = Mathf.CeilToInt (value / numberOfExpDivider);
+
+		for (int i = Mathf.FloorToInt (-numOfExp / 2); i <= Mathf.FloorToInt (numOfExp / 2); ++i) {
+			GameObject collectible = CollectiblePoolScript.instance.GetPooledObject (0);
+			collectible.SetActive (true);
+			collectible.transform.position = position;
+			collectible.GetComponent<CollectibleBehavior> ().Reset ();
+
+			collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i / (float)numOfExp * velocityMagnitude.x, velocityMagnitude.y);
+			collectible.GetComponent<Stat_ExperienceScript> ().SetExperience (value / numOfExp);
+		}
+		return true;
+	}
+
+	public bool GenerateHealth(Vector3 position, float value) {
+		int numOfHealth = (healthChance >= Random.Range (0f, 1f)) ? Random.Range (1, 5) : 0;
+
+		for (int i = Mathf.FloorToInt (-numOfHealth / 2); i <= Mathf.FloorToInt (numOfHealth / 2); ++i) {
+			GameObject collectible = CollectiblePoolScript.instance.GetPooledObject (1);
+			collectible.SetActive (true);
+			collectible.transform.position = position;
+			collectible.transform.position -= new Vector3 (0, 0, 0.5f);
+			collectible.GetComponent<CollectibleBehavior> ().Reset ();
+
+			collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i / (float)numOfHealth * velocityMagnitude.x, velocityMagnitude.y);
+			collectible.GetComponent<Stat_HealthScript> ().IncreaseMaxHealth (value / numOfHealth);
+		}
+		return true;
 	}
 }

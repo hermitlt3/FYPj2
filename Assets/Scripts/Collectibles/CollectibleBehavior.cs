@@ -21,7 +21,7 @@ public class CollectibleBehavior : MonoBehaviour
 
     // Speed multiplier
     [SerializeField]
-    protected float speedMultiplier = 1;
+    protected float speedMultiplier = 0.0001f;
 
     // Maximum speed for the gameobject
     [SerializeField]
