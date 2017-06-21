@@ -4,21 +4,21 @@ using System.Collections;
 public class Stat_HealthScript : MonoBehaviour {
 
     [SerializeField]
-    private float maxHealth = 100.0f;
+    private int maxHealth = 100;
     [SerializeField]
-    private float currHealth;
-	public float bonusHealth = 0f;
+    private int currHealth;
+	public int bonusHealth = 0;
 
 	void Start () {
 		currHealth = maxHealth;
 	}
 
-	public void DecreaseHealth(float damage)
+	public void DecreaseHealth(int damage)
     {
 		currHealth = Mathf.Max (0, currHealth - damage);
     }
 
-	public void IncreaseHealth(float heal)
+	public void IncreaseHealth(int heal)
     {
 		currHealth = Mathf.Min (maxHealth, currHealth + heal);
     }
@@ -31,22 +31,22 @@ public class Stat_HealthScript : MonoBehaviour {
 			return false;
 	}
 
-	public float GetCurrentHealth() 
+	public int GetCurrentHealth() 
 	{
 		return currHealth;
 	}
 
-	public float GetMaxHealth()
+	public int GetMaxHealth()
 	{
 		return maxHealth;
 	}
 
-	public void IncreaseMaxHealth(float value) 
+	public void IncreaseMaxHealth(int value) 
 	{
 		maxHealth = Mathf.Max (0, value);
 	}
 
-	public void SetCurrentHealth(float value)
+	public void SetCurrentHealth(int value)
 	{
 		currHealth = Mathf.Max (0, value);
 	}

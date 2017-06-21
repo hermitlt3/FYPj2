@@ -8,6 +8,6 @@ public class SceneTransit : MonoBehaviour {
     public void OnClicked(string MapName)
     {
         //Application.LoadLevel(MapName);
-        SceneManager.LoadScene(MapName);
+		StartCoroutine(SceneTransitManager.instance.ChangeScene(MapName));
     }
 }

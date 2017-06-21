@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 
-	private float attackDamage;
+	private int attackDamage;
 	private float attackSpeed;
 	//private float attackSpeedTimer; 
 
@@ -76,7 +76,7 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		bool results = false;
 		if (RayDetectedPlayer() != null) {
 			if (RayDetectedPlayer ().gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
-				TextPopupManager.ShowTextPopup (playerCanvas, RayDetectedPlayer ().transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
+				TextPopupManager.instance.ShowTextPopup (playerCanvas, RayDetectedPlayer ().transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
 			}
 			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
 

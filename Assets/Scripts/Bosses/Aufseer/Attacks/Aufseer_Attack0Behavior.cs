@@ -57,7 +57,7 @@ public class Aufseer_Attack0Behavior : MonoBehaviour {
 				return;
 			}
 			other.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage.GetBaseAttackDamage ());
-			TextPopupManager.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), transform.position, attackDamage.GetBaseAttackDamage ().ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
+			TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), transform.position, attackDamage.GetBaseAttackDamage ().ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
 
 			this.gameObject.SetActive (false);
 			Destroy (this);

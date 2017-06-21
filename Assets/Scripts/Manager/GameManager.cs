@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour {
 	public void OnPlayerDead() {
 
 		// Fade. On.
-		SceneTransitManager.instance.fading.BeginFade (1);
-
 		// Managers. On.
 		ReloadCheckpointSystem.ReloadAll ();
 		CollectiblesGenerator.instance.DeactivateAll ();
@@ -52,7 +50,6 @@ public class GameManager : MonoBehaviour {
 		GameObject.FindGameObjectWithTag("Boss Arenas").GetComponent<BossArenaScript>().Reset();
 
 		// Trace. On.
-		SceneTransitManager.instance.fading.BeginFade (-1);
 	}
 
 	public bool LoadScene() {
