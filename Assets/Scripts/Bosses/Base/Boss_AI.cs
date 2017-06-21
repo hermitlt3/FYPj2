@@ -7,7 +7,7 @@ public class Boss_AI : MonoBehaviour {
 	[HideInInspector]
 	public float maxTimeBetweenIntervals = 5f;
 	[HideInInspector]
-	public float timeBetweenIntervals = 5f;
+	public float timeBetweenIntervals	 = 5f;
 	[HideInInspector]
 	public bool incrementDifficulty = true;
 	[HideInInspector]

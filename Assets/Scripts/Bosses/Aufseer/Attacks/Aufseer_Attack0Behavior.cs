@@ -12,12 +12,10 @@ public class Aufseer_Attack0Behavior : MonoBehaviour {
 	[SerializeField]
 	private float tracePeriod = 1.2f;			// For how long it will go in the direction of player
 	[SerializeField]
-	private float invulerablePeriod = 0.5f;	// When first spawn will it immediately hit player
+	private float invulerablePeriod = 0.5f;		// When first spawn will it immediately hit player
 
 	private Vector2 direction;
-
 	private GameObject target;
-
 	private Stat_AttackScript attackDamage;
 
 	// Use this for initialization

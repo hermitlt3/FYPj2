@@ -16,7 +16,7 @@ public class Aufseer_Attack0 : Boss_Attack {
 			target = GameObject.FindGameObjectWithTag ("Player");
 		}
 		pool = GetComponent<Aufseer_Pool> ();
-		StartCoroutine("doAction");
+		doAction ();
 	}
 
 	// Update is called once per frame
@@ -24,8 +24,7 @@ public class Aufseer_Attack0 : Boss_Attack {
 		
 	}
 
-	public new IEnumerator doAction() {
-		yield return new WaitForSeconds(0.5f);
+	public override void doAction() {
 		for (int i = 0; i < 5; ++i) {
 			GameObject temp = pool.GetPooledObject (attackPatternIndex);
 			temp.transform.parent = transform;
