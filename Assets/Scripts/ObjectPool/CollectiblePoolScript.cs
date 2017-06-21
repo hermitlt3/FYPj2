@@ -47,4 +47,13 @@ public class CollectiblePoolScript : ObjectPoolScript {
 		}
 		return null;
 	}
+
+	public override void DeactivateAll ()
+	{
+		for (int i = 0; i < pooledObjects.Length; i++) {
+			for (int j = 0; j < poolAmount; j++) {
+				pooledObjects[i][j].SetActive (false);
+			}
+		}
+	}
 }

@@ -2,15 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI_Attack : EnemyAI_DetectPlayer {
+public class MageAI_Attack : EnemyAI_Attack {
 
-	protected int attackDamage;
-	protected float attackSpeed;
-
-	protected bool attacking;
-
-	protected bool animationEnd;
-	protected Canvas playerCanvas;
 
 	protected override void Awake() {
 		base.Awake ();
@@ -21,14 +14,17 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		base.Start ();
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetAttackSpeed ();
+		//animator = GetComponent<Animator> ();
 		playerCanvas = GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> ();
 
+		//attackSpeedTimer = 1f;
 		attacking = false;
 		animationEnd = false;
 	}
 
 	// Update is called once per frame
-	protected virtual void Update () {
+	protected override void Update () {
+		//UpdateAttackSpeedTimer ();
 
 		if (BoxDetectedPlayer () != null) {
 			attacking = true;
@@ -55,7 +51,18 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 		}
 	}
 
-	protected virtual bool Attack() {
+	void UpdateAttackSpeedTimer() {
+		/*if (attackSpeedTimer > 0f) {
+			attackSpeedTimer = Mathf.Max (0f, attackSpeedTimer - Time.deltaTime * attackSpeed);
+		}
+		if (attackSpeedTimer <= 0f) {
+			if (Attack ()) {
+				attackSpeedTimer = 1f;
+			}
+		}*/
+	}
+
+	protected override bool Attack() {
 		bool results = false;
 		if (RayDetectedPlayer() != null) {
 			if (RayDetectedPlayer ().gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
@@ -75,18 +82,6 @@ public class EnemyAI_Attack : EnemyAI_DetectPlayer {
 			return;
 		}
 		health.DecreaseHealth (attackDamage);
-	}
-
-	public bool isAttacking() {
-		return attacking;
-	}
-
-	public void SetIsAttacking(bool value) {
-		attacking = value;
-	}
-
-	public float GetAttackSpeed() {
-		return attackSpeed;
 	}
 
 	void AnimationEnds() {

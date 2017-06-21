@@ -48,13 +48,15 @@ public class PlatformController : RaycastController {
 		float a = easeAmount + 1;
 		return Mathf.Pow(x,a) / (Mathf.Pow(x,a) + Mathf.Pow(1-x,a));
 	}
-	
+
 	Vector3 CalculatePlatformMovement() {
 
 		if (Time.time < nextMoveTime) {
 			return Vector3.zero;
 		}
-
+		if (globalWaypoints.Length <= 0) {
+			return Vector3.zero;
+		}
 		fromWaypointIndex %= globalWaypoints.Length;
 		int toWaypointIndex = (fromWaypointIndex + 1) % globalWaypoints.Length;
 		float distanceBetweenWaypoints = Vector3.Distance (globalWaypoints [fromWaypointIndex], globalWaypoints [toWaypointIndex]);

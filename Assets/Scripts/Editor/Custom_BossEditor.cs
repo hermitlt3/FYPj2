@@ -29,6 +29,7 @@ public class Custom_BossEditor: Editor {
 		GUILayout.Label ("Difficulty curve");
 		difficulty = EditorGUILayout.Toggle (difficulty);
 		bossAI.incrementDifficulty = difficulty;
+
 		GUILayout.EndHorizontal ();
 
 		if (bossAI.incrementDifficulty) {

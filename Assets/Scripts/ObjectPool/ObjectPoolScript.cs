@@ -37,10 +37,10 @@ public class ObjectPoolScript : MonoBehaviour {
 		return null;
 	}
 
-	public void DeactivateAll() {
+	public virtual void DeactivateAll() {
 		for (int i = 0; i < pooledObjects.Length; i++) {
 			for (int j = 0; j < poolAmount; j++) {
-				pooledObjects[j][i].SetActive (false);
+				pooledObjects[i][j].SetActive (false);
 			}
 		}
 	}

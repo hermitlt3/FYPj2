@@ -12,7 +12,7 @@ public class TextPopupScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 		
 	// Called when the animation for the popup ends

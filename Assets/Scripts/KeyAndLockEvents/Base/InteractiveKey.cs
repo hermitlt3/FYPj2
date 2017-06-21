@@ -9,7 +9,6 @@ public class InteractiveKey : MonoBehaviour {
 
 	// Logic is this. We are going to assume the thing to interact has a fake "health" of 1. 
 	// If player attacks it and kills it, it triggers the lock it is attached to
-	[SerializeField]
 	protected Stat_HealthScript healthScript;
 
 	[SerializeField]

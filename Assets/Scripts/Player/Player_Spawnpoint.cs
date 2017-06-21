@@ -5,20 +5,16 @@ using UnityEngine;
 public class Player_Spawnpoint : MonoBehaviour {
 
     Vector2 spawnLocation;
+	Collider2D gameArea;
 
 	// Use this for initialization
 	void Start () {
-
+		gameArea = GameObject.FindGameObjectWithTag ("Game Area").GetComponent<Collider2D> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.position.y < -50f)
-        {
-            transform.position = spawnLocation;
-			GetComponent<Stat_HealthScript> ().IncreaseHealth (GetComponent<Stat_HealthScript> ().GetMaxHealth ());
-			ReloadCheckpointSystem.ReloadAll ();
-        }
+
 	}
 
     public void SetSpawnLocation(Vector2 spawnPoint)

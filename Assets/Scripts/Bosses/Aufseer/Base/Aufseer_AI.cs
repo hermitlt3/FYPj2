@@ -5,23 +5,30 @@ using UnityEngine;
 public class Aufseer_AI : Boss_AI {
 
 	private int numberOfAttackPatterns;
-
+	[SerializeField]
+	private float[] skillsChance;
 	private float selfTimer;
 
 	private GameObject target;
-
 	private Animator animator;
+
+	public float maxTimeBetweenIntervalsDerived = 5f;
+	public float timeBetweenIntervalsDerived 	= 5f;
 
 	// Use this for initialization
 	void Start () {
 		numberOfAttackPatterns = 3;
 		currentAttackPattern = -1;
 
+		if (skillsChance.Length != numberOfAttackPatterns) {
+			print ("Wrong number of skills");
+		} 
 		selfTimer = 0f;
-
 		target = GameObject.FindGameObjectWithTag ("Player");
-
 		animator = GetComponent<Animator> ();
+
+		maxTimeBetweenIntervals = maxTimeBetweenIntervalsDerived;
+		timeBetweenIntervals = timeBetweenIntervalsDerived;
 	}
 	
 	// Update is called once per frame
@@ -31,13 +38,22 @@ public class Aufseer_AI : Boss_AI {
 		} else {
 			TimerUpdate ();
 			AnimationUpdate ();
-			AttackUpdate ();
 		}
 	}
 
 	void AnimationUpdate() {
 		if (selfTimer >= timeBetweenIntervals) {
-			currentAttackPattern = Random.Range (0, 0);
+			float randomSkill = Random.Range (0f, 1f);
+			float chosenSkill = 0f;
+			float minValue = 0f;
+			for (int i = 0; i < numberOfAttackPatterns; ++i) {
+				chosenSkill += skillsChance [i];
+				if (randomSkill >= minValue && randomSkill < chosenSkill) {
+					currentAttackPattern = i;
+				}
+				minValue += chosenSkill;
+			}
+
 			animator.SetInteger ("AttackStyle", currentAttackPattern);
 			selfTimer = 0f;
 		}
@@ -51,6 +67,10 @@ public class Aufseer_AI : Boss_AI {
 			case 0:
 				Aufseer_Attack0 attackOne = this.gameObject.AddComponent<Aufseer_Attack0> ();
 				attackOne.SetTarget (target);
+				break;
+			case 1:
+				Aufseer_Attack1 attackTwo = this.gameObject.AddComponent<Aufseer_Attack1> ();
+				attackTwo.SetTarget (target);
 				break;
 			}
 			currentAttackPattern = -1;
