@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyAI_Move : EnemyAI_DetectPlayer {
 
-	private Stat_MovementSpdScript movementSpeedScript;
+	protected Stat_MovementSpdScript movementSpeedScript;
 
 	// The area where the enemy is allowed to be
 	[SerializeField]
 	protected Transform areaOfAllowedMovement;
-	private BoxCollider2D areaBounds;
-	private float movementSpeed;
-	private bool moving;
+	protected BoxCollider2D areaBounds;
+	protected float movementSpeed;
+	protected bool moving;
 
 	// How enemies react towards player
 	[SerializeField]
@@ -21,7 +21,7 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 	} 
 	[SerializeField]
 	protected AGGRESSION_TYPE aggressionType;
-	private AGGRESSION_TYPE originalAggression;
+	protected AGGRESSION_TYPE originalAggression;
 
 	protected override void Awake () {
 		base.Awake ();
