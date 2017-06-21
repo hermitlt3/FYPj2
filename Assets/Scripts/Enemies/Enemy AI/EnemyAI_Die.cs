@@ -25,7 +25,7 @@ public class EnemyAI_Die : MonoBehaviour {
 			return;
 		}
 
-		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expOutputScript.GetExperience());
+		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expOutputScript.GetExperience(), Random.Range(5, 20));
 		if (youOnlyLiveOnce) {
 			ReloadCheckpointSystem.RemoveEnemyToReloadList (this.gameObject);
 

@@ -15,7 +15,6 @@ public class SceneTransitManager : MonoBehaviour {
 			return;
 		}
 		instance = this;
-		print ("FFF");
 		DontDestroyOnLoad (this.gameObject);
 	}
 

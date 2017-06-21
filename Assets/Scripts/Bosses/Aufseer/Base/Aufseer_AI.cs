@@ -26,9 +26,13 @@ public class Aufseer_AI : Boss_AI {
 	
 	// Update is called once per frame
 	void Update () {
-		TimerUpdate ();
-		AnimationUpdate ();
-		AttackUpdate ();
+		if (!GetComponent<Stat_HealthScript> ().isAlive ()) {
+			animator.SetBool ("Dead", true);
+		} else {
+			TimerUpdate ();
+			AnimationUpdate ();
+			AttackUpdate ();
+		}
 	}
 
 	void AnimationUpdate() {
@@ -61,5 +65,9 @@ public class Aufseer_AI : Boss_AI {
 		for (int i = 0; i < transform.childCount; ++i) {
 			transform.GetChild(i).gameObject.SetActive(false);
 		}
+	}
+
+	void DestroyItself () {
+		Destroy (this.gameObject);
 	}
 }

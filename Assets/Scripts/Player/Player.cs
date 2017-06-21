@@ -13,8 +13,6 @@ public class Player : MonoBehaviour {
 
 	float moveSpeed;
 	float health;
-	float attackRange;
-	float attackDamage;
 
 	Stat_HealthScript healthScript;
 
@@ -26,9 +24,6 @@ public class Player : MonoBehaviour {
 
 	Controller2D controller;
 	Vector2 directionalInput;
-	Canvas playerCanvas;
-
-	public LayerMask enemies;
 
 	SpriteRenderer playerSpriteRenderer;
 	GameManager gM;
@@ -42,10 +37,8 @@ public class Player : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		moveSpeed = GetComponent<Stat_MovementSpdScript> ().GetBaseMS ();
 		healthScript = GetComponent<Stat_HealthScript> ();
-		attackRange = GetComponent<Stat_AttackRangeScript> ().GetAttackRange ();
-		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
+
 		playerSpriteRenderer = GetComponent<SpriteRenderer> ();
-		playerCanvas = GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> ();
 		gM = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager>();
 
 		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
@@ -114,20 +107,6 @@ public class Player : MonoBehaviour {
 			return;
 		
 		animator.SetBool ("Attacking", true);
-	}
-
-	void Attack() {
-		Collider2D hit = Physics2D.OverlapBox(new Vector2(transform.position.x + Mathf.Clamp (controller.collisions.faceDir, -1, 1) * attackRange / 2, transform.position.y), new Vector2(attackRange, GetComponent<SpriteRenderer>().size.y), 0, enemies);
-
-		if(hit && hit.gameObject != null) {
-			hit.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
-		
-			hit.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
-
-			if (hit.gameObject.GetComponent<EnemyAI_Logic> () || hit.gameObject.GetComponent<Boss_AI>()) {
-				TextPopupManager.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
-			}
-		}
 	}
 
 	void StartFading() {

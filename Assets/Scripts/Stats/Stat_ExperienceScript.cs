@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stat_ExperienceScript : MonoBehaviour {
 
 	[SerializeField]
-	private float experiencePoints = 0;
+	private int experiencePoints = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,19 +16,19 @@ public class Stat_ExperienceScript : MonoBehaviour {
 		
 	}
 		
-	public void IncreaseExperience(float value) {
+	public void IncreaseExperience(int value) {
 		experiencePoints = Mathf.Max(0, experiencePoints + value);
 	}
 
-	public void DecreaseExperience(float value) {
+	public void DecreaseExperience(int value) {
 		experiencePoints = Mathf.Max(0, experiencePoints - value);
 	}
 
-	public float GetExperience() {
+	public int GetExperience() {
 		return experiencePoints;
 	}
 
-	public void SetExperience(float value) {
+	public void SetExperience(int value) {
 		experiencePoints = Mathf.Max(0, value);
 	}
 }

@@ -28,6 +28,7 @@ public class CollectibleHealth : CollectibleBehavior {
 		if ((playerCollider.bounds.Contains (new Vector2(thisCollider.bounds.min.x, thisCollider.bounds.min.y)) &&
 			playerCollider.bounds.Contains (new Vector2(thisCollider.bounds.max.x, thisCollider.bounds.max.y))) && timeToDie) {
 
+			TextPopupManager.instance.ShowTextPopup (playerGO.GetComponentInChildren<Canvas> (), playerGO.transform.position, "+"+healthScript.GetCurrentHealth (), TextPopupManager.TEXT_TYPE.HEAL);
 			playerGO.GetComponent<Stat_HealthScript>().IncreaseHealth(healthScript.GetCurrentHealth());
 			gameObject.SetActive(false);
 		}
