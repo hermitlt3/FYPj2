@@ -11,12 +11,12 @@ public class EnemyAI_Logic : MonoBehaviour {
 		NUM_AI_STATES,
 	}
 
-	private AI_STATES currState;
-	private MonoBehaviour[] states;
-	private bool fullHealthCheck;
+	protected AI_STATES currState;
+	protected MonoBehaviour[] states;
+	protected bool fullHealthCheck;
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		currState = AI_STATES.AI_MOVE;
 		states = new MonoBehaviour[(uint)AI_STATES.NUM_AI_STATES];
 		states [(uint)AI_STATES.AI_MOVE] = gameObject.GetComponent<EnemyAI_Move> ();
@@ -27,7 +27,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		if (states [(uint)currState].enabled == false) {
 			states [(uint)currState].enabled = true;
 		}
@@ -72,7 +72,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 		}
 	}
 
-	void GetsHit(GameObject player) {
+	protected virtual void GetsHit(GameObject player) {
 		if (currState == AI_STATES.AI_MOVE) {
 			EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)currState]);
 			AI_Move.SetIsMoving (true);
@@ -80,7 +80,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 		}
 	}
 
-	public void Reset() {
+	public virtual void Reset() {
 		EnemyAI_Move AI_Move = (EnemyAI_Move)(states [(uint)AI_STATES.AI_MOVE]);
 		EnemyAI_Attack AI_Attack = (EnemyAI_Attack)(states [(uint)AI_STATES.AI_ATTACK]);
 		AI_Move.SetIsMoving (true);

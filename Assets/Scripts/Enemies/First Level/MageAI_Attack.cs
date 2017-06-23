@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MageAI_Attack : EnemyAI_Attack {
 
+	public GameObject prefab;
 
 	protected override void Awake() {
 		base.Awake ();
@@ -14,10 +15,7 @@ public class MageAI_Attack : EnemyAI_Attack {
 		base.Start ();
 		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetAttackSpeed ();
-		//animator = GetComponent<Animator> ();
-		playerCanvas = GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> ();
 
-		//attackSpeedTimer = 1f;
 		attacking = false;
 		animationEnd = false;
 	}
@@ -51,40 +49,27 @@ public class MageAI_Attack : EnemyAI_Attack {
 		}
 	}
 
-	void UpdateAttackSpeedTimer() {
-		/*if (attackSpeedTimer > 0f) {
-			attackSpeedTimer = Mathf.Max (0f, attackSpeedTimer - Time.deltaTime * attackSpeed);
-		}
-		if (attackSpeedTimer <= 0f) {
-			if (Attack ()) {
-				attackSpeedTimer = 1f;
-			}
-		}*/
-	}
-
 	protected override bool Attack() {
-		bool results = false;
+
+		GameObject temp = ObjectPoolScript.instance.GetPooledObject (2);
+		temp.transform.position = transform.position;
+		temp.SetActive (true);
+
+		MageAI_AttackBehaviour behav = temp.AddComponent<MageAI_AttackBehaviour> ();
 		if (RayDetectedPlayer() != null) {
-			if (RayDetectedPlayer ().gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
-				TextPopupManager.instance.ShowTextPopup (playerCanvas, RayDetectedPlayer ().transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
-			}
-			DealDamage (RayDetectedPlayer().gameObject.GetComponent<Stat_HealthScript> ());
-
-			results = true;
+			behav.SetTarget (RayDetectedPlayer ().gameObject);
 		} else {
-			return false;
+			behav.SetDirection (new Vector2 ((sprite.flipX) ? -1 : 1, 0));
 		}
-		return results;
+		return true;
 	}
-
-	void DealDamage(Stat_HealthScript health) {
-		if (health == null) {
-			return;
-		}
-		health.DecreaseHealth (attackDamage);
-	}
-
+		
 	void AnimationEnds() {
 		animationEnd = true;
+	}
+
+	public override void Reset ()
+	{
+
 	}
 }

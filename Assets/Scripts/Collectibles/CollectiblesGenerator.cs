@@ -45,14 +45,14 @@ public class CollectiblesGenerator : MonoBehaviour {
 	}
 
 	public void DeactivateAll() {
-		CollectiblePoolScript.instance.DeactivateAll ();
+		ObjectPoolScript.instance.DeactivateAll ();
 	}
 
 	public bool GenerateEXP(Vector3 position, int value) {
 		int numOfExp = Mathf.CeilToInt (value / numberOfExpDivider);
 
 		for (int i = Mathf.FloorToInt (-numOfExp / 2); i <= Mathf.FloorToInt (numOfExp / 2); ++i) {
-			GameObject collectible = CollectiblePoolScript.instance.GetPooledObject (0);
+			GameObject collectible = ObjectPoolScript.instance.GetPooledObject (0);
 			collectible.SetActive (true);
 			collectible.transform.position = position;
 			collectible.GetComponent<CollectibleBehavior> ().Reset ();
@@ -74,7 +74,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 		}
 
 		for (int i = Mathf.FloorToInt (-numOfHealth / 2); i <= Mathf.FloorToInt (numOfHealth / 2); ++i) {
-			GameObject collectible = CollectiblePoolScript.instance.GetPooledObject (1);
+			GameObject collectible = ObjectPoolScript.instance.GetPooledObject (1);
 			collectible.SetActive (true);
 			collectible.transform.position = position;
 			collectible.transform.position -= new Vector3 (0, 0, 0.5f);

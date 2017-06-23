@@ -8,13 +8,32 @@ public class ObjectPoolScript : MonoBehaviour {
 	public GameObject[] prefabs;
 
 	public bool willIncrease = true;
-	public int poolAmount = 20;
+	public int poolAmount = 5;
 
 	protected List<GameObject>[] pooledObjects;
 
+	void Awake() {
+		if (instance && instance != this) {
+			Destroy (instance);
+			return;
+		}
+		instance = this;
+	}
+
 	// Use this for initialization
 	protected virtual void Start () {
-		
+		pooledObjects = new List<GameObject>[prefabs.Length];
+
+		for (int i = 0; i < pooledObjects.Length; i++) {
+			pooledObjects[i] = new List<GameObject>();
+
+			for (int j = 0; j < poolAmount; j++) {
+				GameObject obj = (GameObject)Instantiate (prefabs[i]);
+				obj.transform.parent = this.transform;
+				obj.SetActive (false);
+				pooledObjects [i].Add (obj);
+			}
+		}
 	}
 	
 	// Update is called once per frame

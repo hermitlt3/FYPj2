@@ -39,8 +39,9 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 		for (int i = -1; i <= 1; i += 2) {
 			if (myRigidbody.velocity.magnitude > 1) {
 				hit = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y - i * size.y), new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
-				if(hit) print (hit.collider.name);
+
 				hitCollider [Mathf.Clamp(i, 0, 1)] = hit.collider;
+
 			} else {
 				hit = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y - i * size.y), new Vector2 (((sprite.flipX == false) ? 1 : -1), 0), attackRange, playerMask);
 				hitCollider [Mathf.Clamp(i, 0, 1)] = hit.collider;
