@@ -117,10 +117,14 @@ public class Controller2D : RaycastController {
 					if (directionY == 1 || hit.distance == 0) {
 						continue;
 					}
+					if (directionY == -1 && !collisions.fallingThroughPlatform) {
+						hit.collider.gameObject.GetComponent<ThroughTerrainScript> ().MoveSpriteToFront ();
+					}
 					if (collisions.fallingThroughPlatform) {
 						continue;
 					}
 					if (playerInput.y == -1) {
+						hit.collider.gameObject.GetComponent<ThroughTerrainScript> ().MoveSpriteToBack ();
 						collisions.fallingThroughPlatform = true;
 						Invoke("ResetFallingThroughPlatform",.5f);
 						continue;

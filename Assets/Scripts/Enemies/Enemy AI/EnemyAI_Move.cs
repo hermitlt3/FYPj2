@@ -40,7 +40,6 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 	void Update () {
 		if (sprite.flipX) {
 			myRigidbody.velocity = new Vector2 (-movementSpeed, myRigidbody.velocity.y);
-			print (areaBounds.bounds.min.x+","+areaBounds.bounds.max.x);
 			if (transform.position.x < areaBounds.bounds.min.x) {
 				sprite.flipX = false;
 			}

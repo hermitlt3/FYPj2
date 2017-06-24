@@ -6,12 +6,14 @@ using UnityEditor;
 public class TerrainMaker : EditorWindow {
 
 	static int count = 0;
+	int customCount = -1;
 	int xSize;
 	int ySize;
 
 	bool doShit;
 	bool createCollider;
 	bool isThrough;
+	bool addKineticRigidbody;
 
 	float scale = 1f;
 	const float spriteSize = 5f;
@@ -75,6 +77,10 @@ public class TerrainMaker : EditorWindow {
 
 	//Monster
 	void OnGUITerrainSettings() {
+		customCount = EditorGUILayout.IntField("Count name", customCount, GUILayout.Width(300));
+		if (customCount != -1)
+			count = customCount;
+		
 		GUILayout.Label("Terrain Size", EditorStyles.boldLabel);
 
 		GUILayout.Label("X Size", GUILayout.Width(50));
@@ -93,11 +99,13 @@ public class TerrainMaker : EditorWindow {
 		resourceType = (GETRESOURCESTYPE)EditorGUILayout.EnumPopup (resourceType, GUILayout.Width(300));
 		SpriteSorter ();
 
-			createCollider = EditorGUILayout.Toggle ("Create collider", createCollider, GUILayout.Width (300));
+		createCollider = EditorGUILayout.Toggle ("Create collider", createCollider, GUILayout.Width (300));
 		if (createCollider) {
 			offset = EditorGUILayout.Vector2Field ("Offset", offset, GUILayout.Width (300));
 		}
 		isThrough = EditorGUILayout.Toggle ("Is through", isThrough, GUILayout.Width (300));
+		addKineticRigidbody = EditorGUILayout.Toggle ("Add kinematic body", addKineticRigidbody, GUILayout.Width (300));
+
 		doShit = GUILayout.Button ("Make Terrain", GUILayout.Width(300));
 	}
 
@@ -108,22 +116,32 @@ public class TerrainMaker : EditorWindow {
 		GameObject parent = new GameObject ("TerrainNo"+ count++);
 		parent.transform.position = lePosition;
 		parent.transform.gameObject.layer = LayerMask.NameToLayer ("Terrain");
-		if (isThrough) {
-			parent.transform.gameObject.tag = "Through";
-		}
+
 		for (int i = 0; i <= xSize + 1; ++i) {
 			for (int j = 0; j <= ySize + 1; ++j) {
 				GameObject go = new GameObject ("Terrain" + i + j);
 				go.transform.SetParent(parent.transform);
 				SpriteArranger (go, i, j);
 				SpritePositioner (go, i, j);
+				if (isThrough) {
+					go.GetComponent<SpriteRenderer> ().sortingOrder = -1;
+					go.GetComponent<SpriteRenderer> ().sortingLayerName = "Behind player";
+				} 
+
 			}
 		}
 		if (createCollider) {
 			PolygonCollider2D collider = parent.AddComponent<PolygonCollider2D> ();
+			parent.GetComponent<PolygonCollider2D> ().isTrigger = true;
 			collider.SetPath(0, CreateCollider (parent, offset.x, offset.y));
 		}
-
+		if (addKineticRigidbody) {
+			parent.AddComponent<Rigidbody2D> ().isKinematic = true;
+		}
+		if (isThrough) {
+			parent.transform.gameObject.tag = "Through";
+			parent.AddComponent<ThroughTerrainScript> ();
+		}
 		doShit = false;
 	}
 
