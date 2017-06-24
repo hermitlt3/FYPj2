@@ -22,4 +22,8 @@ public class InteractiveLock : MonoBehaviour {
 	public virtual void Reset() {
 		isTriggered = false;
 	}
+
+	public virtual void InitVariables () {
+
+	}
 }

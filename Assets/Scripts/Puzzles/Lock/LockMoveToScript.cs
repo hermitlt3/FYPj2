@@ -17,7 +17,7 @@ public class LockMoveToScript : InteractiveLock {
 
 	public float speed;
 
-	public bool toAndFro;
+	public bool changeDirection;
 
 	private Vector3[] wayPoints;
 	private int wayPointIndex = 0;
@@ -42,16 +42,26 @@ public class LockMoveToScript : InteractiveLock {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isTriggered) {
+		if (changeDirection) {
 			wayPointIndex = (wayPointIndex + 1) % wayPoints.Length;
-			Vector3 direction = (transform.position - wayPoints [wayPointIndex]).normalized;
+			changeDirection = false;
+		}
 
-			if ((transform.position - wayPoints [wayPointIndex]).sqrMagnitude < 0.1f) {
+		if (isTriggered) {
+			
+			Vector3 direction = (wayPoints [wayPointIndex] - transform.position).normalized;
+			if ((wayPoints [wayPointIndex] - transform.position).sqrMagnitude < 0.1f) {
 				isTriggered = false;
 				isDone = true;
 			} else {
 				transform.position += direction * speed * Time.deltaTime;
 			}
 		}
+	}
+
+	public override void InitVariables ()
+	{
+		isTriggered = true;
+		changeDirection = true;
 	}
 }

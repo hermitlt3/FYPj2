@@ -34,7 +34,7 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 	protected Collider2D RayDetectedPlayer() {
 		RaycastHit2D hit;// = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
 		Collider2D[] hitCollider = new Collider2D[2];
-		Vector2 size  = GetComponent<SpriteRenderer>().size;
+		Vector2 size = Vector2.zero;//GetComponent<SpriteRenderer>().size;
 
 		for (int i = -1; i <= 1; i += 2) {
 			if (myRigidbody.velocity.magnitude > 1) {

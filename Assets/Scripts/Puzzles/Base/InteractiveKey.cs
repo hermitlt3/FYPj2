@@ -25,7 +25,7 @@ public class InteractiveKey : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-		if (healthScript.isAlive () == false) {
+		if (healthScript.isAlive () == false && !toUnlock.isTriggered) {
 			isTriggered = true;
 		}
 	}

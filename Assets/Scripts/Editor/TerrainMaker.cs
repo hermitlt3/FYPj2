@@ -9,6 +9,7 @@ public class TerrainMaker : EditorWindow {
 	int customCount = -1;
 	int xSize;
 	int ySize;
+	int sortingOrder = 0;
 
 	bool doShit;
 	bool createCollider;
@@ -51,7 +52,7 @@ public class TerrainMaker : EditorWindow {
 	string filePath;
 
 	// For collider
-	Vector2 offset;
+	Vector2 offset = new Vector2(0.5f, 2f);
 	List<Vector2> pathList = new List<Vector2>();
 	Vector2[] thePath;
 
@@ -95,6 +96,7 @@ public class TerrainMaker : EditorWindow {
 
 		lePosition = EditorGUILayout.Vector3Field ("Teraain Position", lePosition, GUILayout.Width(300));
 
+		sortingOrder = EditorGUILayout.IntField("Sorting order", sortingOrder, GUILayout.Width(300));
 
 		resourceType = (GETRESOURCESTYPE)EditorGUILayout.EnumPopup (resourceType, GUILayout.Width(300));
 		SpriteSorter ();
@@ -114,6 +116,7 @@ public class TerrainMaker : EditorWindow {
 			return;
 		}
 		GameObject parent = new GameObject ("TerrainNo"+ count++);
+		customCount = count;
 		parent.transform.position = lePosition;
 		parent.transform.gameObject.layer = LayerMask.NameToLayer ("Terrain");
 
@@ -121,10 +124,11 @@ public class TerrainMaker : EditorWindow {
 			for (int j = 0; j <= ySize + 1; ++j) {
 				GameObject go = new GameObject ("Terrain" + i + j);
 				go.transform.SetParent(parent.transform);
+
 				SpriteArranger (go, i, j);
 				SpritePositioner (go, i, j);
+				go.GetComponent<SpriteRenderer> ().sortingOrder = sortingOrder;
 				if (isThrough) {
-					go.GetComponent<SpriteRenderer> ().sortingOrder = -1;
 					go.GetComponent<SpriteRenderer> ().sortingLayerName = "Behind player";
 				} 
 
@@ -132,7 +136,6 @@ public class TerrainMaker : EditorWindow {
 		}
 		if (createCollider) {
 			PolygonCollider2D collider = parent.AddComponent<PolygonCollider2D> ();
-			parent.GetComponent<PolygonCollider2D> ().isTrigger = true;
 			collider.SetPath(0, CreateCollider (parent, offset.x, offset.y));
 		}
 		if (addKineticRigidbody) {
@@ -141,6 +144,7 @@ public class TerrainMaker : EditorWindow {
 		if (isThrough) {
 			parent.transform.gameObject.tag = "Through";
 			parent.AddComponent<ThroughTerrainScript> ();
+			parent.GetComponent<PolygonCollider2D> ().isTrigger = true;
 		}
 		doShit = false;
 	}
@@ -285,7 +289,6 @@ public class TerrainMaker : EditorWindow {
 	}
 
 	Vector2[] CreateCollider(GameObject parent, float offsetX = 0.5f, float offsetY = 2f) {
-		Vector2 parentPosition = new Vector2 (parent.transform.position.x, parent.transform.position.y);
 		Vector2 minPoint = new Vector2(-0.5f, -0.5f);
 		Vector2 maxPoint = new Vector2(0.5f, 0.5f);
 
