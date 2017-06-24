@@ -11,6 +11,7 @@ public class TerrainMaker : EditorWindow {
 
 	bool doShit;
 	bool createCollider;
+	bool isThrough;
 
 	float scale = 1f;
 	const float spriteSize = 5f;
@@ -48,9 +49,9 @@ public class TerrainMaker : EditorWindow {
 	string filePath;
 
 	// For collider
+	Vector2 offset;
 	List<Vector2> pathList = new List<Vector2>();
 	Vector2[] thePath;
-	Vector2 offset;
 
 	[MenuItem ("Terrain/Make Terrain")]
 	static void MakeTerrain() {
@@ -83,7 +84,7 @@ public class TerrainMaker : EditorWindow {
 
 
 		GUILayout.Label("Terrain Scale", EditorStyles.boldLabel);
-		scale = EditorGUILayout.Slider (scale, 1f, 10f, GUILayout.Width(300));
+		scale = EditorGUILayout.Slider (scale, 0.1f, 10f, GUILayout.Width(300));
 
 
 		lePosition = EditorGUILayout.Vector3Field ("Teraain Position", lePosition, GUILayout.Width(300));
@@ -92,10 +93,11 @@ public class TerrainMaker : EditorWindow {
 		resourceType = (GETRESOURCESTYPE)EditorGUILayout.EnumPopup (resourceType, GUILayout.Width(300));
 		SpriteSorter ();
 
-		createCollider = EditorGUILayout.Toggle ("Create collider", createCollider, GUILayout.Width (300));
+			createCollider = EditorGUILayout.Toggle ("Create collider", createCollider, GUILayout.Width (300));
 		if (createCollider) {
 			offset = EditorGUILayout.Vector2Field ("Offset", offset, GUILayout.Width (300));
 		}
+		isThrough = EditorGUILayout.Toggle ("Is through", isThrough, GUILayout.Width (300));
 		doShit = GUILayout.Button ("Make Terrain", GUILayout.Width(300));
 	}
 
@@ -106,6 +108,9 @@ public class TerrainMaker : EditorWindow {
 		GameObject parent = new GameObject ("TerrainNo"+ count++);
 		parent.transform.position = lePosition;
 		parent.transform.gameObject.layer = LayerMask.NameToLayer ("Terrain");
+		if (isThrough) {
+			parent.transform.gameObject.tag = "Through";
+		}
 		for (int i = 0; i <= xSize + 1; ++i) {
 			for (int j = 0; j <= ySize + 1; ++j) {
 				GameObject go = new GameObject ("Terrain" + i + j);
