@@ -27,7 +27,7 @@ public class MageAI_AttackBehaviour : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		lifeSpan = Mathf.Max (0, lifeSpan = Time.deltaTime);
+		lifeSpan = Mathf.Max (0, lifeSpan - Time.deltaTime);
 		if (lifeSpan <= 0) {
 			this.gameObject.SetActive (false);
 			Destroy (this);
