@@ -9,7 +9,7 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 	// The area where the enemy is allowed to be
 	[SerializeField]
 	protected Transform areaOfAllowedMovement;
-	protected BoxCollider2D areaBounds;
+	protected Collider2D areaBounds;
 	protected float movementSpeed;
 	protected bool moving;
 
@@ -25,7 +25,7 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 
 	protected override void Awake () {
 		base.Awake ();
-		areaBounds = areaOfAllowedMovement.gameObject.GetComponent<BoxCollider2D> ();
+		areaBounds = areaOfAllowedMovement.gameObject.GetComponent<Collider2D> ();
 		movementSpeed = GetComponent<Stat_MovementSpdScript> ().GetBaseMS();
 		originalAggression = aggressionType;
 	}
@@ -40,12 +40,13 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 	void Update () {
 		if (sprite.flipX) {
 			myRigidbody.velocity = new Vector2 (-movementSpeed, myRigidbody.velocity.y);
+			print (areaBounds.bounds.min.x+","+areaBounds.bounds.max.x);
 			if (transform.position.x < areaBounds.bounds.min.x) {
 				sprite.flipX = false;
 			}
 		} else {
 			myRigidbody.velocity = new Vector2 (movementSpeed, myRigidbody.velocity.y);
-			if (transform.position.x > areaBounds.bounds.max.x - GetComponent<SpriteRenderer>().size.x) {
+			if (transform.position.x > areaBounds.bounds.max.x) {
 				sprite.flipX = true;
 			}
 		}

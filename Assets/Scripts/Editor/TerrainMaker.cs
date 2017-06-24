@@ -8,7 +8,9 @@ public class TerrainMaker : EditorWindow {
 	static int count = 0;
 	int xSize;
 	int ySize;
+
 	bool doShit;
+	bool createCollider;
 
 	float scale = 1f;
 	const float spriteSize = 5f;
@@ -45,6 +47,11 @@ public class TerrainMaker : EditorWindow {
 	GETRESOURCESTYPE resourceType;
 	string filePath;
 
+	// For collider
+	List<Vector2> pathList = new List<Vector2>();
+	Vector2[] thePath;
+	Vector2 offset;
+
 	[MenuItem ("Terrain/Make Terrain")]
 	static void MakeTerrain() {
 		TerrainMaker window = (TerrainMaker)EditorWindow.GetWindow(typeof(TerrainMaker), false, "Terrain Maker");
@@ -69,30 +76,56 @@ public class TerrainMaker : EditorWindow {
 	void OnGUITerrainSettings() {
 		GUILayout.Label("Terrain Size", EditorStyles.boldLabel);
 
-		GUILayout.BeginHorizontal ();
+		GUILayout.Label("X Size", GUILayout.Width(50));
+		xSize = EditorGUILayout.IntSlider(xSize, 0, 10, GUILayout.Width(300));
+		GUILayout.Label("Y Size", GUILayout.Width(50));
+		ySize = EditorGUILayout.IntSlider(ySize, 0, 10, GUILayout.Width(300));
 
-		GUILayout.Label("X Size", EditorStyles.boldLabel);
-		xSize = EditorGUILayout.IntSlider(xSize, 0, 10);
-		GUILayout.Label("Y Size", EditorStyles.boldLabel);
-		ySize = EditorGUILayout.IntSlider(ySize, 0, 10);
 
-		GUILayout.EndHorizontal ();
-		GUILayout.BeginHorizontal ();
+		GUILayout.Label("Terrain Scale", EditorStyles.boldLabel);
+		scale = EditorGUILayout.Slider (scale, 1f, 10f, GUILayout.Width(300));
 
-		GUILayout.Label("Scale", EditorStyles.boldLabel);
-		scale = EditorGUILayout.Slider (scale, 1f, 10f);
 
-		GUILayout.EndHorizontal ();
-		GUILayout.BeginHorizontal ();
+		lePosition = EditorGUILayout.Vector3Field ("Teraain Position", lePosition, GUILayout.Width(300));
 
-		lePosition = EditorGUILayout.Vector3Field ("Position", lePosition);
 
-		GUILayout.EndHorizontal ();
-		resourceType = (GETRESOURCESTYPE)EditorGUILayout.EnumPopup (resourceType);
+		resourceType = (GETRESOURCESTYPE)EditorGUILayout.EnumPopup (resourceType, GUILayout.Width(300));
+		SpriteSorter ();
 
+		createCollider = EditorGUILayout.Toggle ("Create collider", createCollider, GUILayout.Width (300));
+		if (createCollider) {
+			offset = EditorGUILayout.Vector2Field ("Offset", offset, GUILayout.Width (300));
+		}
+		doShit = GUILayout.Button ("Make Terrain", GUILayout.Width(300));
+	}
+
+	void CreateTerrain() {
+		if (!doShit) {
+			return;
+		}
+		GameObject parent = new GameObject ("TerrainNo"+ count++);
+		parent.transform.position = lePosition;
+		parent.transform.gameObject.layer = LayerMask.NameToLayer ("Terrain");
+		for (int i = 0; i <= xSize + 1; ++i) {
+			for (int j = 0; j <= ySize + 1; ++j) {
+				GameObject go = new GameObject ("Terrain" + i + j);
+				go.transform.SetParent(parent.transform);
+				SpriteArranger (go, i, j);
+				SpritePositioner (go, i, j);
+			}
+		}
+		if (createCollider) {
+			PolygonCollider2D collider = parent.AddComponent<PolygonCollider2D> ();
+			collider.SetPath(0, CreateCollider (parent, offset.x, offset.y));
+		}
+
+		doShit = false;
+	}
+
+	void SpriteSorter() {
 		switch (resourceType) {
 		case GETRESOURCESTYPE.ENUM_SPRITE:
-			type = (TYPE)EditorGUILayout.EnumPopup (type);
+			type = (TYPE)EditorGUILayout.EnumPopup (type,GUILayout.Width(300));
 			switch (type) {
 			case TYPE.DAY:
 				for (int i = 0; i < sprites.Length; ++i) {
@@ -109,7 +142,7 @@ public class TerrainMaker : EditorWindow {
 			}
 			break;
 		case GETRESOURCESTYPE.CUSTOM:
-			scrollPos = EditorGUILayout.BeginScrollView (scrollPos, GUILayout.Height(300));
+			scrollPos = EditorGUILayout.BeginScrollView (scrollPos, GUILayout.Height(300), GUILayout.Width(300));
 			string temp = "";
 			for (int i = 0; i < sprites.Length; ++i) {
 				switch(i) {
@@ -148,33 +181,12 @@ public class TerrainMaker : EditorWindow {
 		case GETRESOURCESTYPE.RESOURCE_NAME:
 			GUILayout.Label ("File path should be the sprite name until the changing num", EditorStyles.boldLabel);
 
-			GUILayout.BeginHorizontal ();
-			GUILayout.Label ("File path = Resources/");
-			filePath = EditorGUILayout.TextField (filePath);
-			GUILayout.EndHorizontal ();
+			filePath = EditorGUILayout.TextField ("File path = Resources/", filePath, GUILayout.Width(500));
 			for (int i = 0; i < sprites.Length; ++i) {
 				sprites [i] = Resources.Load <Sprite>(filePath + (i+1));
 			}
 			break;
 		}
-
-		doShit = GUILayout.Button ("Make Terrain");
-	}
-
-	void CreateTerrain() {
-		if (!doShit) {
-			return;
-		}
-		GameObject parent = new GameObject ("TerrainNo"+ count++);
-		for (int i = 0; i <= xSize + 1; ++i) {
-			for (int j = 0; j <= ySize + 1; ++j) {
-				GameObject go = new GameObject ("Terrain" + i + j);
-				go.transform.SetParent(parent.transform);
-				SpriteArranger (go, i, j);
-				SpritePositioner (go, i, j);
-			}
-		}
-		doShit = false;
 	}
 
 	void SpriteArranger(GameObject go, int i, int j) {
@@ -245,7 +257,38 @@ public class TerrainMaker : EditorWindow {
 			finalY += finalSpriteSize * 0.5f;
 		}
 		go.transform.localScale = new Vector3 (scale, scale);
-		go.transform.position = lePosition + new Vector3 (finalX, finalY); 	
+		go.transform.localPosition = new Vector3 (finalX, finalY); 	
 		go.GetComponent<SpriteRenderer> ().sortingLayerID = SortingLayer.NameToID ("In front player");
+	}
+
+	Vector2[] CreateCollider(GameObject parent, float offsetX = 0.5f, float offsetY = 2f) {
+		Vector2 parentPosition = new Vector2 (parent.transform.position.x, parent.transform.position.y);
+		Vector2 minPoint = new Vector2(-0.5f, -0.5f);
+		Vector2 maxPoint = new Vector2(0.5f, 0.5f);
+
+		pathList.Clear ();
+		foreach (Transform child in parent.transform) {
+			Bounds childBounds = child.gameObject.GetComponent<SpriteRenderer> ().sprite.bounds;
+			minPoint.x = Mathf.Min (minPoint.x, childBounds.min.x);
+			maxPoint.x = Mathf.Max (maxPoint.x, childBounds.max.x);
+			minPoint.y = Mathf.Min (minPoint.y, childBounds.min.y);
+			maxPoint.y = Mathf.Max (maxPoint.y, childBounds.max.y);
+		}
+		Vector2 point;
+		point = new Vector2 (minPoint.x + offsetX, minPoint.y);	// Min x, min y
+		pathList.Add (point);
+		point = new Vector2 (minPoint.x + offsetX + 0.1f, maxPoint.y - offsetY);	// Min x, max y
+		pathList.Add (point);		  					      
+		point = new Vector2 (maxPoint.x - offsetX - 0.1f, maxPoint.y - offsetY);	// Min x, max y 
+		pathList.Add (point);		   					      
+		point = new Vector2 (maxPoint.x - offsetX, minPoint.y);	// Min x, min y
+		pathList.Add (point);
+
+		thePath = new Vector2[pathList.Count];
+		int i = 0;
+		foreach (Vector2 v in pathList) {
+			thePath [i++] = v;
+		}
+		return thePath;
 	}
 }
