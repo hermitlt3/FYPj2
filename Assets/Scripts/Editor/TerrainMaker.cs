@@ -268,12 +268,15 @@ public class TerrainMaker : EditorWindow {
 
 		pathList.Clear ();
 		foreach (Transform child in parent.transform) {
-			Bounds childBounds = child.gameObject.GetComponent<SpriteRenderer> ().sprite.bounds;
+			Bounds childBounds = child.gameObject.GetComponent<SpriteRenderer> ().bounds;
 			minPoint.x = Mathf.Min (minPoint.x, childBounds.min.x);
 			maxPoint.x = Mathf.Max (maxPoint.x, childBounds.max.x);
 			minPoint.y = Mathf.Min (minPoint.y, childBounds.min.y);
 			maxPoint.y = Mathf.Max (maxPoint.y, childBounds.max.y);
 		}
+		offsetX *= scale;
+		offsetY *= scale;
+
 		Vector2 point;
 		point = new Vector2 (minPoint.x + offsetX, minPoint.y);	// Min x, min y
 		pathList.Add (point);
