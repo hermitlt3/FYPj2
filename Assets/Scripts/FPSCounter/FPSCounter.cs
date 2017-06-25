@@ -13,7 +13,7 @@ public class FPSCounter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (!GetComponent<GUIText>())
+        if (!GetComponent<Text>())
         {
             print("FramesPerSecond needs a GUIText component!");
             enabled = false;
@@ -33,7 +33,7 @@ public class FPSCounter : MonoBehaviour
         if (timeleft <= 0.0)
         {
             // display two fractional digits (f2 format)
-            GetComponent<GUIText>().text = "FPS - " + (accum / frames).ToString("f2");
+			GetComponent<Text>().text = "FPS - " + (accum / frames).ToString("f2");
             timeleft = updateInterval;
             accum = 0.0;
             frames = 0;

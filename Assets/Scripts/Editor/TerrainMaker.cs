@@ -56,15 +56,10 @@ public class TerrainMaker : EditorWindow {
 	List<Vector2> pathList = new List<Vector2>();
 	Vector2[] thePath;
 
-	[MenuItem ("Terrain/Make Terrain")]
+	[MenuItem ("Game stuff/Make Terrain")]
 	static void MakeTerrain() {
 		TerrainMaker window = (TerrainMaker)EditorWindow.GetWindow(typeof(TerrainMaker), false, "Terrain Maker");
 		window.Show();
-	}
-
-	[MenuItem ("Terrain/Reset Terrain Count")]
-	static void ResetTerrainCount() {
-		count = 0;
 	}
 
 	void OnGUI() {

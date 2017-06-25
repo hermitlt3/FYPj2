@@ -123,12 +123,6 @@ public class Controller2D : RaycastController {
 					if (collisions.fallingThroughPlatform) {
 						continue;
 					}
-					if (playerInput.y == -1) {
-						hit.collider.gameObject.GetComponent<ThroughTerrainScript> ().MoveSpriteToBack ();
-						collisions.fallingThroughPlatform = true;
-						Invoke("ResetFallingThroughPlatform",.5f);
-						continue;
-					}
 				}
 
 				moveAmount.y = (hit.distance - skinWidth) * directionY;

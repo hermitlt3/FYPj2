@@ -27,6 +27,11 @@ public class InteractiveKey : MonoBehaviour {
 	protected virtual void Update () {
 		if (healthScript.isAlive () == false && !toUnlock.isTriggered) {
 			isTriggered = true;
+		} if (happensOnce) {
+			if (isDone && toUnlock.isDone) {
+				Destroy (this);
+				Destroy (toUnlock.GetComponent<InteractiveLock> ());
+			}
 		}
 	}
 
