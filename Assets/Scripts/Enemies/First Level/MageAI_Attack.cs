@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MageAI_Attack : EnemyAI_Attack {
 
-	public GameObject prefab;
-
 	protected override void Awake() {
 		base.Awake ();
 	}

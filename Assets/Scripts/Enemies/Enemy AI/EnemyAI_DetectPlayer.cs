@@ -34,22 +34,23 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 	protected Collider2D RayDetectedPlayer() {
 		RaycastHit2D hit;// = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
 		Collider2D[] hitCollider = new Collider2D[2];
-		Vector2 size = Vector2.zero;//GetComponent<SpriteRenderer>().size;
 
 		for (int i = -1; i <= 1; i += 2) {
 			if (myRigidbody.velocity.magnitude > 1) {
-				hit = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y - i * size.y), new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
+				hit = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y - i * thisCollider.bounds.size.y / 2.5f), new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
 
-				hitCollider [Mathf.Clamp(i, 0, 1)] = hit.collider;
+				if(hit) print (hit.collider.name);
+				hitCollider [Mathf.Clamp (i, 0, 1)] = hit.collider;
 
 			} else {
-				hit = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y - i * size.y), new Vector2 (((sprite.flipX == false) ? 1 : -1), 0), attackRange, playerMask);
-				hitCollider [Mathf.Clamp(i, 0, 1)] = hit.collider;
+				hit = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y - i * thisCollider.bounds.size.y / 2.5f), new Vector2 (((sprite.flipX == false) ? 1 : -1), 0), attackRange, playerMask);
+				hitCollider [Mathf.Clamp (i, 0, 1)] = hit.collider;
 			}
 		}
-		for (int i = 0; i < 1; i++) {
-			if (hitCollider [i] != null)
+		for (int i = 0; i < 2; i++) {
+			if (hitCollider [i] != null) {
 				return hitCollider [i];
+			}
 		}
 		return hitCollider [0];
 	}
@@ -79,6 +80,5 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
-		
 	}
 }
