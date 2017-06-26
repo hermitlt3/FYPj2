@@ -4,19 +4,23 @@ using System.Collections;
 public class Player_Experience : MonoBehaviour {
 
     [SerializeField]
-    private float experience = 0;
+    private int experience = 0;
     [SerializeField]
-    private float maxExperience = 100;
+	private int maxExperience = 100;
     [SerializeField]
     private int level = 1;
 	[SerializeField]
 	private float expIncrement = 1.6f;
+
+	private int levelOnePercentageLost;
+	public int percentageLost = 0;
 
 	private Stat_AbilityPoint abilityPoint;
 
     void Start()
 	{
 		abilityPoint = GetComponent<Stat_AbilityPoint> ();
+		levelOnePercentageLost = 20;
 	}
 
 	void Update()
@@ -29,19 +33,20 @@ public class Player_Experience : MonoBehaviour {
 	public void LevelUp() {
 		experience = Mathf.Max (0, experience - maxExperience);
 		level += 1;
-		maxExperience  = maxExperience * expIncrement;
+		maxExperience  = Mathf.FloorToInt(maxExperience * expIncrement);
+		percentageLost = Mathf.FloorToInt (maxExperience % 100) + levelOnePercentageLost;
 		abilityPoint.IncreaseAbilityPoint (1);
 	}
 
-	public void IncreaseExperience(float value) {
+	public void IncreaseExperience(int value) {
 		experience = Mathf.Max(0, experience + value);
 	}
 
-	public void DecreaseExperience(float value) {
+	public void DecreaseExperience(int value) {
 		experience = Mathf.Max(0, experience - value);
 	}
 
-	public float GetExperience() {
+	public int GetExperience() {
 		return experience;
 	}
 }

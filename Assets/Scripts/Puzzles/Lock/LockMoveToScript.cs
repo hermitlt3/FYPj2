@@ -15,7 +15,7 @@ public class LockMoveToScript : InteractiveLock {
 	public Vector3 destination;
 	public Vector3 moveDistance;
 
-	public float speed;
+	public float speed = 1f;
 
 	public bool changeDirection;
 
@@ -24,7 +24,6 @@ public class LockMoveToScript : InteractiveLock {
 
 	// Use this for initialization
 	void Start () {
-		speed = 1f;
 		wayPoints = new Vector3[2];
 
 		switch (moveType) {

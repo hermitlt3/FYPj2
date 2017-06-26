@@ -100,7 +100,7 @@ public class CollectibleBehavior : MonoBehaviour
 	{
 		invulerableTime = 1f;
 		timeToDie = false;
-		speedMultiplier = 1;
+		speedMultiplier = 0.0001f;
 		if (GetComponent<Collider2D> ().enabled == false) {
 			GetComponent<Collider2D> ().enabled = true;
 		}

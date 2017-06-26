@@ -20,7 +20,7 @@ public class TerrainMaker : EditorWindow {
 	const float spriteSize = 5f;
 
 	Sprite[] sprites = new Sprite[9];
-	Vector3 lePosition;
+	Sprite throughSprite;
 
 	// For scroll 
 	Vector2 scrollPos;
@@ -76,7 +76,7 @@ public class TerrainMaker : EditorWindow {
 		customCount = EditorGUILayout.IntField("Count name", customCount, GUILayout.Width(300));
 		if (customCount != -1)
 			count = customCount;
-		
+
 		GUILayout.Label("Terrain Size", EditorStyles.boldLabel);
 
 		GUILayout.Label("X Size", GUILayout.Width(50));
@@ -87,9 +87,6 @@ public class TerrainMaker : EditorWindow {
 
 		GUILayout.Label("Terrain Scale", EditorStyles.boldLabel);
 		scale = EditorGUILayout.Slider (scale, 0.1f, 10f, GUILayout.Width(300));
-
-
-		lePosition = EditorGUILayout.Vector3Field ("Teraain Position", lePosition, GUILayout.Width(300));
 
 		sortingOrder = EditorGUILayout.IntField("Sorting order", sortingOrder, GUILayout.Width(300));
 
@@ -112,7 +109,6 @@ public class TerrainMaker : EditorWindow {
 		}
 		GameObject parent = new GameObject ("TerrainNo"+ count++);
 		customCount = count;
-		parent.transform.position = lePosition;
 		parent.transform.gameObject.layer = LayerMask.NameToLayer ("Terrain");
 
 		for (int i = 0; i <= xSize + 1; ++i) {
@@ -152,13 +148,23 @@ public class TerrainMaker : EditorWindow {
 			case TYPE.DAY:
 				for (int i = 0; i < sprites.Length; ++i) {
 					filePath = "Brutal 2D Adventure Jungle Pack/day/platform-blocks/platform-block-0";
-					sprites [i] = Resources.Load <Sprite>(filePath + (i+1));
+					sprites [i] = Resources.Load <Sprite> (filePath + (i + 1));
+				}
+				if (xSize > 0) {
+					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
+				} else {
+					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
 				}
 				break;
 			case TYPE.NIGHT:
 				for (int i = 0; i < sprites.Length; ++i) {
 					filePath = "Brutal 2D Adventure Jungle Pack/night/platform-blocks/platform-block-0";
 					sprites [i] = Resources.Load <Sprite>(filePath + (i+1));
+				}
+				if (xSize > 0) {
+					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
+				} else {
+					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
 				}
 				break;
 			}
@@ -198,6 +204,7 @@ public class TerrainMaker : EditorWindow {
 				}
 				sprites[i] = (Sprite)EditorGUILayout.ObjectField (temp, sprites[i], typeof(Sprite), false);
 			}
+			throughSprite = (Sprite)EditorGUILayout.ObjectField (temp, throughSprite, typeof(Sprite), false);
 			EditorGUILayout.EndScrollView ();
 			break;
 		case GETRESOURCESTYPE.RESOURCE_NAME:
@@ -206,6 +213,11 @@ public class TerrainMaker : EditorWindow {
 			filePath = EditorGUILayout.TextField ("File path = Resources/", filePath, GUILayout.Width(500));
 			for (int i = 0; i < sprites.Length; ++i) {
 				sprites [i] = Resources.Load <Sprite>(filePath + (i+1));
+			}
+			if (xSize > 0) {
+				throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
+			} else {
+				throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
 			}
 			break;
 		}
@@ -314,5 +326,27 @@ public class TerrainMaker : EditorWindow {
 			thePath [i++] = v;
 		}
 		return thePath;
+	}
+
+	void ForFakeTerrain(ref GameObject go)
+	{
+		go.AddComponent<SpriteRenderer> ().sprite = throughSprite;
+		go.GetComponent<SpriteRenderer> ().sortingLayerID = SortingLayer.NameToID ("In front player");
+		go.GetComponent<SpriteRenderer> ().sortingOrder = sortingOrder;
+		go.transform.localScale = new Vector3 (scale, scale);
+
+		Bounds childBounds = go.GetComponent<SpriteRenderer> ().bounds;
+		Vector2 minPoint = new Vector2 (-0.5f, -0.5f);
+		Vector2 maxPoint = new Vector2(0.5f, 0.5f);
+
+		minPoint.x = childBounds.min.x;
+		maxPoint.x = childBounds.max.x;
+		minPoint.y = childBounds.min.y;
+		maxPoint.y = childBounds.max.y;
+
+		float offsetX = offset.x* scale;
+		float offsetY = offset.y* scale;
+		go.AddComponent<BoxCollider2D> ();
+		go.GetComponent<BoxCollider2D> ().size = new Vector2 (go.GetComponent<BoxCollider2D> ().size.x, go.GetComponent<BoxCollider2D> ().size.y * 0.5f);
 	}
 }

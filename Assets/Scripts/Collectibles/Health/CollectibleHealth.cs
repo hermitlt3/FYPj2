@@ -21,8 +21,6 @@ public class CollectibleHealth : CollectibleBehavior {
 			timeToDestroy <= 0f) {
 
 			gameObject.SetActive (false);
-			// Straight add exp
-			playerGO.GetComponent<Stat_HealthScript>().IncreaseHealth(healthScript.GetCurrentHealth());
 		}
 
 		if ((playerCollider.bounds.Contains (new Vector2(thisCollider.bounds.min.x, thisCollider.bounds.min.y)) &&

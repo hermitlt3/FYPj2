@@ -21,6 +21,11 @@ public class ThroughTerrainScript : MonoBehaviour {
 		
 	}
 		
+	void OnCollisionEnter2D(Collision2D other) {
+		if(other.gameObject.CompareTag("Player")) {
+			Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.collider);
+		}
+	}
 
 	void OnTriggerExit2D(Collider2D collision) {
 		if (collision.transform.gameObject.tag == "Player") {

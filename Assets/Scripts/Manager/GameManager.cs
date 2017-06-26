@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 		player.GetComponent<Animator>().SetBool ("Dead", false);
 		player.transform.position = player.GetComponent<Player_Spawnpoint> ().GetSpawnLocation ();
 		player.GetComponent<Player_Input> ().enabled = true;
-	
+		player.GetComponent<Player_Experience>().exp
 		// Camera. On.
 		Camera.main.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, Camera.main.transform.position.z);
 		Camera.main.GetComponent<Camera2DFollow> ().enabled = true;
