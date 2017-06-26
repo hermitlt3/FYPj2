@@ -16,7 +16,6 @@ public class CollectibleExp : CollectibleBehavior {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
-
 		if (!playerGO.GetComponent<Stat_HealthScript> ().isAlive () ||
 			timeToDestroy <= 0f) {
 
@@ -25,8 +24,8 @@ public class CollectibleExp : CollectibleBehavior {
 			playerGO.GetComponent<Player_Experience>().IncreaseExperience(expScript.GetExperience());
 		}
 
-		if ((playerCollider.bounds.Contains (thisCollider.bounds.min) &&
-		    playerCollider.bounds.Contains (thisCollider.bounds.max)) && timeToDie) {
+		if ((playerCollider.bounds.Contains (new Vector2(thisCollider.bounds.min.x, thisCollider.bounds.min.y)) &&
+			playerCollider.bounds.Contains (new Vector2(thisCollider.bounds.max.x, thisCollider.bounds.max.y))) && timeToDie) {
 
 			playerGO.GetComponent<Player_Experience> ().IncreaseExperience (expScript.GetExperience ());
 			gameObject.SetActive(false);

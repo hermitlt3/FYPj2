@@ -24,7 +24,7 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (myRigidbody.velocity.magnitude > 1) {
+		if (myRigidbody.velocity.sqrMagnitude > 1) {
 			Debug.DrawLine(transform.position, transform.position + new Vector3 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1) * attackRange, 0));
 		} else {
 			Debug.DrawLine(transform.position, transform.position + new Vector3 (((sprite.flipX == false) ? 1 : -1) * attackRange, 0));
@@ -36,10 +36,8 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 		Collider2D[] hitCollider = new Collider2D[2];
 
 		for (int i = -1; i <= 1; i += 2) {
-			if (myRigidbody.velocity.magnitude > 1) {
+			if (myRigidbody.velocity.sqrMagnitude > 1) {
 				hit = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y - i * thisCollider.bounds.size.y / 2.5f), new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, playerMask);
-
-				if(hit) print (hit.collider.name);
 				hitCollider [Mathf.Clamp (i, 0, 1)] = hit.collider;
 
 			} else {
@@ -62,7 +60,7 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 
 	protected Collider2D RayDetectLayer(LayerMask layer) {
 		RaycastHit2D hit;
-		if (myRigidbody.velocity.magnitude > 1) {
+		if (myRigidbody.velocity.sqrMagnitude > 1) {
 			hit = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Clamp (myRigidbody.velocity.x, -1, 1), 0), attackRange, layer);
 			return hit.collider;
 		} else {

@@ -5,12 +5,10 @@ using UnityEngine;
 public class CollectiblesGenerator : MonoBehaviour {
 
 	public static CollectiblesGenerator instance;
-//	[SerializeField]
-	private float healthChance = 0.4f;
 
 	// The number of game objects instantiated = exact value / divider
 	[SerializeField]
-	private float numberOfExpDivider = 2f;
+	private int divider = 2;
 
 	// Spawn velocity of the collectibles
 	[SerializeField]
@@ -49,8 +47,10 @@ public class CollectiblesGenerator : MonoBehaviour {
 	}
 
 	public bool GenerateEXP(Vector3 position, int value) {
-		int numOfExp = Mathf.CeilToInt (value / numberOfExpDivider);
-
+		int numOfExp = Mathf.CeilToInt (value / divider);
+		if (numOfExp <= 0)
+			numOfExp = 1;
+		
 		for (int i = Mathf.FloorToInt (-numOfExp / 2); i <= Mathf.FloorToInt (numOfExp / 2); ++i) {
 			GameObject collectible = ObjectPoolScript.instance.GetPooledObject (0);
 			collectible.SetActive (true);
@@ -58,7 +58,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 			collectible.GetComponent<CollectibleBehavior> ().Reset ();
 
 			collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i / (float)numOfExp * velocityMagnitude.x, velocityMagnitude.y);
-			if (i == Mathf.FloorToInt (numOfExp / 2)) {
+			if (numOfExp > 1 && i == Mathf.FloorToInt (numOfExp / 2) && value % numOfExp > 0) {
 				collectible.GetComponent<Stat_ExperienceScript> ().SetExperience (value % numOfExp);
 			} else {
 				collectible.GetComponent<Stat_ExperienceScript> ().SetExperience (value / numOfExp);
@@ -68,9 +68,9 @@ public class CollectiblesGenerator : MonoBehaviour {
 	}
 
 	public bool GenerateHealth(Vector3 position, int value) {
-		int numOfHealth = (healthChance >= Random.Range (0f, 1f)) ? Random.Range (1, 5) : 0;
+		int numOfHealth = Mathf.CeilToInt (value / divider);
 		if (numOfHealth <= 0) {
-			return false;
+			numOfHealth = 1;
 		}
 
 		for (int i = Mathf.FloorToInt (-numOfHealth / 2); i <= Mathf.FloorToInt (numOfHealth / 2); ++i) {
@@ -81,7 +81,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 			collectible.GetComponent<CollectibleBehavior> ().Reset ();
 
 			collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i / (float)numOfHealth * velocityMagnitude.x, velocityMagnitude.y);
-			if (i == Mathf.FloorToInt (numOfHealth / 2)) {
+			if (numOfHealth > 1 && i == Mathf.FloorToInt (numOfHealth / 2) && value % numOfHealth > 0) {
 				collectible.GetComponent<Stat_HealthScript> ().IncreaseMaxHealth (value / numOfHealth);
 			} else {
 				collectible.GetComponent<Stat_HealthScript> ().IncreaseMaxHealth (value / numOfHealth);

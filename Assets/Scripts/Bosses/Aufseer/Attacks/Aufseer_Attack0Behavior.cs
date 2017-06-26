@@ -36,7 +36,7 @@ public class Aufseer_Attack0Behavior : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (myRigidbody.velocity.magnitude < maxSpeed) {
+		if (myRigidbody.velocity.sqrMagnitude < maxSpeed * maxSpeed) {
 			myRigidbody.velocity += direction.normalized * projectileSpeed * Time.deltaTime;
 		} else {
 			Vector2.ClampMagnitude (myRigidbody.velocity, maxSpeed);

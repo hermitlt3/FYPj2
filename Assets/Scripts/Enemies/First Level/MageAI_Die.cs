@@ -18,7 +18,7 @@ public class MageAI_Die : EnemyAI_Die {
 
 		base.Deactivate ();
 
-		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expOutputScript.GetExperience(), Random.Range(5, 20));
+		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expOutputScript.GetExperience(), Random.Range(0, 20));
 		if (youOnlyLiveOnce) {
 			ReloadCheckpointSystem.RemoveEnemyToReloadList (this.gameObject);
 

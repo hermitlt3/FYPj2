@@ -27,9 +27,17 @@ public class CollectibleBehavior : MonoBehaviour
     [SerializeField]
 	protected float maxSpeed = 10f;
 
+	// How long can it be invulerable
 	[SerializeField]
 	protected float invulerableTime = 1f;
+
+	// Timer to check if it got stuck
+	protected float stuckTime = 0f;
+
+	// As the name suggests
 	protected bool timeToDie;
+
+	protected Vector2 direction;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -43,12 +51,30 @@ public class CollectibleBehavior : MonoBehaviour
 
 		timeToDestroyReset = timeToDestroy;
 		timeToDie = false;
+
+		direction = Vector2.zero;
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update()
 	{
-		speedMultiplier += Time.deltaTime;
+		direction = (playerGO.transform.position - transform.position).normalized;
+
+		// For stuck purposes
+		if (myRigidBody.velocity.sqrMagnitude > 0.1f) {
+			speedMultiplier = Mathf.Min(10, speedMultiplier + Time.deltaTime);
+			stuckTime = 0f;
+		} else {
+			stuckTime += Time.deltaTime;
+		} 
+
+		if (stuckTime > 1f) {
+			thisCollider.enabled = false;
+			myRigidBody.gravityScale = 0f;
+			myRigidBody.velocity = myRigidBody.velocity.normalized * 5f;
+		}
+
+		//////////////////////
 
 		if (!GetComponent<SpriteRenderer> ().isVisible) {
 			timeToDestroy = Mathf.Max (0, timeToDestroy - Time.deltaTime);
@@ -64,8 +90,8 @@ public class CollectibleBehavior : MonoBehaviour
 
 	void FixedUpdate()
     {
-        if (myRigidBody.velocity.magnitude < maxSpeed)
-            myRigidBody.velocity += new Vector2(playerGO.transform.position.x - transform.position.x, playerGO.transform.position.y - transform.position.y).normalized * speedMultiplier;
+		if (myRigidBody.velocity.sqrMagnitude < maxSpeed * maxSpeed)
+			myRigidBody.velocity += direction * speedMultiplier;
         else
             Vector2.ClampMagnitude(myRigidBody.velocity, maxSpeed);
     }
@@ -75,5 +101,9 @@ public class CollectibleBehavior : MonoBehaviour
 		invulerableTime = 1f;
 		timeToDie = false;
 		speedMultiplier = 1;
+		if (GetComponent<Collider2D> ().enabled == false) {
+			GetComponent<Collider2D> ().enabled = true;
+		}
+		GetComponent<Rigidbody2D>().gravityScale = 2;
 	}
 }
