@@ -23,7 +23,7 @@ public class LockMoveToScript : InteractiveLock {
 	private int wayPointIndex = 0;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
 		wayPoints = new Vector3[2];
 
 		switch (moveType) {
@@ -40,7 +40,7 @@ public class LockMoveToScript : InteractiveLock {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
 		if (changeDirection) {
 			wayPointIndex = (wayPointIndex + 1) % wayPoints.Length;
 			changeDirection = false;

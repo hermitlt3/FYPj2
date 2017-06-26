@@ -344,8 +344,6 @@ public class TerrainMaker : EditorWindow {
 		minPoint.y = childBounds.min.y;
 		maxPoint.y = childBounds.max.y;
 
-		float offsetX = offset.x* scale;
-		float offsetY = offset.y* scale;
 		go.AddComponent<BoxCollider2D> ();
 		go.GetComponent<BoxCollider2D> ().size = new Vector2 (go.GetComponent<BoxCollider2D> ().size.x, go.GetComponent<BoxCollider2D> ().size.y * 0.5f);
 	}
