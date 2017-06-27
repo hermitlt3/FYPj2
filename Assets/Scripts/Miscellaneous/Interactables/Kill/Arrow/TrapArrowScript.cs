@@ -25,7 +25,7 @@ public class TrapArrowScript : MonoBehaviour {
 		fixedInvulerablePeriod = invulerablePeriod;
 
 		moveDirection.Normalize ();
-		transform.rotation = Quaternion.Euler (0, 0, -Mathf.Rad2Deg * (Mathf.Atan2(moveDirection.y, moveDirection.x)));	
+		transform.rotation = Quaternion.Euler (0, 0, Mathf.Rad2Deg * (Mathf.Atan2(moveDirection.y, moveDirection.x)));	
 
 		damage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
 
@@ -71,6 +71,6 @@ public class TrapArrowScript : MonoBehaviour {
 		lifeTime = fixedLifeTime;
 		invulerablePeriod = fixedInvulerablePeriod;
 		myRigidbody.velocity = Vector3.zero;
-		transform.rotation = Quaternion.Euler (0, 0, -Mathf.Rad2Deg * (Mathf.Atan2(moveDirection.y, moveDirection.x)));	
+		transform.rotation = Quaternion.Euler (0, 0, Mathf.Rad2Deg * (Mathf.Atan2(moveDirection.y, moveDirection.x)));	
 	}
 }
