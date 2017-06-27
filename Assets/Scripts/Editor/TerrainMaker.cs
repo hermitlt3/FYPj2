@@ -150,30 +150,34 @@ public class TerrainMaker : EditorWindow {
 					filePath = "Brutal 2D Adventure Jungle Pack/day/platform-blocks/platform-block-0";
 					sprites [i] = Resources.Load <Sprite> (filePath + (i + 1));
 				}
-				if (xSize > 0) {
-					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
-				} else {
-					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
+				if (isThrough) {
+					if (xSize > 0) {
+						throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
+					} else {
+						throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
+					}
 				}
 				break;
 			case TYPE.NIGHT:
 				for (int i = 0; i < sprites.Length; ++i) {
 					filePath = "Brutal 2D Adventure Jungle Pack/night/platform-blocks/platform-block-0";
-					sprites [i] = Resources.Load <Sprite>(filePath + (i+1));
+					sprites [i] = Resources.Load <Sprite> (filePath + (i + 1));
 				}
-				if (xSize > 0) {
-					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
-				} else {
-					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
+				if (isThrough) {
+					if (xSize > 0) {
+						throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
+					} else {
+						throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
+					}
 				}
 				break;
 			}
 			break;
 		case GETRESOURCESTYPE.CUSTOM:
-			scrollPos = EditorGUILayout.BeginScrollView (scrollPos, GUILayout.Height(300), GUILayout.Width(300));
+			scrollPos = EditorGUILayout.BeginScrollView (scrollPos, GUILayout.Height (300), GUILayout.Width (300));
 			string temp = "";
 			for (int i = 0; i < sprites.Length; ++i) {
-				switch(i) {
+				switch (i) {
 				case 0:
 					temp = "Top left image";
 					break;
@@ -202,22 +206,26 @@ public class TerrainMaker : EditorWindow {
 					temp = "Bottom right image";
 					break;
 				}
-				sprites[i] = (Sprite)EditorGUILayout.ObjectField (temp, sprites[i], typeof(Sprite), false);
+				sprites [i] = (Sprite)EditorGUILayout.ObjectField (temp, sprites [i], typeof(Sprite), false);
 			}
-			throughSprite = (Sprite)EditorGUILayout.ObjectField (temp, throughSprite, typeof(Sprite), false);
+			if (isThrough) {
+				throughSprite = (Sprite)EditorGUILayout.ObjectField (temp, throughSprite, typeof(Sprite), false);
+			}
 			EditorGUILayout.EndScrollView ();
 			break;
 		case GETRESOURCESTYPE.RESOURCE_NAME:
 			GUILayout.Label ("File path should be the sprite name until the changing num", EditorStyles.boldLabel);
 
-			filePath = EditorGUILayout.TextField ("File path = Resources/", filePath, GUILayout.Width(500));
+			filePath = EditorGUILayout.TextField ("File path = Resources/", filePath, GUILayout.Width (500));
 			for (int i = 0; i < sprites.Length; ++i) {
-				sprites [i] = Resources.Load <Sprite>(filePath + (i+1));
+				sprites [i] = Resources.Load <Sprite> (filePath + (i + 1));
 			}
-			if (xSize > 0) {
-				throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
-			} else {
-				throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
+			if (isThrough) {
+				if (xSize > 0) {
+					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 1));
+				} else {
+					throughSprite = Resources.Load<Sprite> (filePath + (sprites.Length + 2));
+				}
 			}
 			break;
 		}
