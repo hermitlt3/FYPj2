@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LeverPuzzleKey : InteractiveKey {
 
-	public float rotateZ;
 	private bool reverse;
 	protected override void Start () {
 		base.Start ();
@@ -16,10 +15,10 @@ public class LeverPuzzleKey : InteractiveKey {
 		base.Update ();
 		if (isTriggered) {
 			if (!reverse) {
-				transform.rotation = Quaternion.Euler (new Vector3 (0, 0, rotateZ));
+				this.gameObject.GetComponent<SpriteRenderer> ().flipX = true;
 				reverse = true;
 			} else {
-				transform.rotation = Quaternion.Euler (new Vector3 (0, 0, 0));
+				this.gameObject.GetComponent<SpriteRenderer> ().flipX = false;
 				reverse = false;
 			}
 			isDone = true;

@@ -24,7 +24,6 @@ public class KillZone : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (((1 << coll.gameObject.layer) & killLayers) != 0) {
-
 			// Destroy health
 			if (coll.GetComponent<Stat_HealthScript> ()) {
 				int damage = coll.GetComponent<Stat_HealthScript> ().GetMaxHealth ();

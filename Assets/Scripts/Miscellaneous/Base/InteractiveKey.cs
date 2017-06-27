@@ -20,7 +20,6 @@ public class InteractiveKey : MonoBehaviour {
 	// Use this for initialization
 	protected virtual void Start () {
 		healthScript = GetComponent<Stat_HealthScript> ();
-		isTriggered = happensOnce = isDone = false;
 	}
 	
 	// Update is called once per frame
@@ -30,7 +29,9 @@ public class InteractiveKey : MonoBehaviour {
 		} if (happensOnce) {
 			if (isDone && toUnlock.isDone) {
 				Destroy (this);
-				Destroy (toUnlock.GetComponent<InteractiveLock> ());
+				if (toUnlock.GetComponent<InteractiveLock> ()) {
+					Destroy (toUnlock.GetComponent<InteractiveLock> ());
+				}
 			}
 		}
 	}
