@@ -19,6 +19,7 @@ public class TrapArrowScript : MonoBehaviour {
 	public float invulerablePeriod = 0.5f;
 	private float fixedInvulerablePeriod;
 
+	bool canKill = true;
 	// Use this for initialization
 	void Start () {
 		fixedLifeTime = lifeTime;
@@ -36,11 +37,12 @@ public class TrapArrowScript : MonoBehaviour {
 	void Update () {
 		UpdateTimer ();
 		UpdateMovement ();
+	
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {
 		if (((1 << other.gameObject.layer) & layerMask) != 0) {
-			if (other.gameObject.GetComponent<Stat_HealthScript> ()) {
+			if (other.gameObject.GetComponent<Stat_HealthScript> () && canKill) {
 				other.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (damage);
 
 				TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> (), other.transform.position, "-" + damage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
@@ -48,7 +50,8 @@ public class TrapArrowScript : MonoBehaviour {
 				this.gameObject.SetActive (false);
 			}
 			if (invulerablePeriod <= 0f && other.gameObject.layer == LayerMask.NameToLayer("Terrain")) {
-				myRigidbody.velocity = Vector3.zero;
+				myRigidbody.bodyType = RigidbodyType2D.Static;
+				canKill = false;
 			}
 		}
 	}
@@ -64,13 +67,17 @@ public class TrapArrowScript : MonoBehaviour {
 	}
 
 	void UpdateMovement() {
-		myRigidbody.velocity = moveDirection * arrowSpeed;
+		if (myRigidbody.bodyType != RigidbodyType2D.Static) {
+			myRigidbody.velocity = moveDirection * arrowSpeed;
+		}
 	}
 
 	void Reset() {
 		lifeTime = fixedLifeTime;
 		invulerablePeriod = fixedInvulerablePeriod;
+		myRigidbody.bodyType = RigidbodyType2D.Dynamic;
 		myRigidbody.velocity = Vector3.zero;
-		transform.rotation = Quaternion.Euler (0, 0, Mathf.Rad2Deg * (Mathf.Atan2(moveDirection.y, moveDirection.x)));	
+		transform.rotation = Quaternion.Euler (0, 0, Mathf.Rad2Deg * (Mathf.Atan2(moveDirection.y, moveDirection.x)));
+		canKill = true;
 	}
 }

@@ -73,6 +73,7 @@ public class TerrainMaker : EditorWindow {
 
 	//Monster
 	void OnGUITerrainSettings() {
+		GUILayout.Label("IMPORTANT: DON'T ROTATE THE THROUGH TERRAINS! IT WILL CAUSE A SHIT TON OF BUGS", EditorStyles.boldLabel);
 		customCount = EditorGUILayout.IntField("Count name", customCount, GUILayout.Width(300));
 		if (customCount != -1)
 			count = customCount;
