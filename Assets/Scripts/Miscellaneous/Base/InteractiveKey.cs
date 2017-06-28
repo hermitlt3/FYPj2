@@ -29,7 +29,7 @@ public class InteractiveKey : MonoBehaviour {
 		} if (happensOnce) {
 			if (isDone && toUnlock.isDone) {
 				Destroy (this);
-				if (toUnlock.GetComponent<InteractiveLock> ()) {
+				if (toUnlock && toUnlock.GetComponent<InteractiveLock> ()) {
 					Destroy (toUnlock.GetComponent<InteractiveLock> ());
 				}
 			}

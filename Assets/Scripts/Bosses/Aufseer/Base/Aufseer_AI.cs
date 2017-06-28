@@ -12,11 +12,9 @@ public class Aufseer_AI : Boss_AI {
 	private GameObject target;
 	private Animator animator;
 
-	public float maxTimeBetweenIntervalsDerived = 5f;
-	public float timeBetweenIntervalsDerived 	= 5f;
-
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+		base.Start ();
 		numberOfAttackPatterns = 3;
 		currentAttackPattern = -1;
 
@@ -27,12 +25,12 @@ public class Aufseer_AI : Boss_AI {
 		target = GameObject.FindGameObjectWithTag ("Player");
 		animator = GetComponent<Animator> ();
 
-		maxTimeBetweenIntervals = maxTimeBetweenIntervalsDerived;
-		timeBetweenIntervals = timeBetweenIntervalsDerived;
+		maxTimeBetweenIntervals = timeBetweenIntervals;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
+		base.Update ();
 		if (!GetComponent<Stat_HealthScript> ().isAlive ()) {
 			animator.SetBool ("Dead", true);
 		} else {
@@ -72,6 +70,11 @@ public class Aufseer_AI : Boss_AI {
 				Aufseer_Attack1 attackTwo = this.gameObject.AddComponent<Aufseer_Attack1> ();
 				attackTwo.SetTarget (target);
 				break;
+			case 2:
+				Aufseer_Attack2 attackThree = this.gameObject.AddComponent<Aufseer_Attack2> ();
+				attackThree.SetTarget (target);
+				attackThree.Reset ();
+				break;
 			}
 			currentAttackPattern = -1;
 		}
@@ -89,5 +92,9 @@ public class Aufseer_AI : Boss_AI {
 
 	void DestroyItself () {
 		Destroy (this.gameObject);
+	}
+
+	public void ResetTimer (float timer = 0f) {
+		selfTimer = timer;
 	}
 }

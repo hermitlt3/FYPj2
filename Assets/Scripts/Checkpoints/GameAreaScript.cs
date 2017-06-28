@@ -10,7 +10,7 @@ public class GameAreaScript : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D colli) 
 	{
-		if (colli.transform.gameObject.tag == "Player") {
+		if (colli.gameObject.CompareTag("Player")) {
 			colli.transform.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (colli.gameObject.GetComponent<Stat_HealthScript> ().GetCurrentHealth ());
 		}
 	}

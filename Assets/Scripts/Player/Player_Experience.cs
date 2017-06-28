@@ -11,16 +11,16 @@ public class Player_Experience : MonoBehaviour {
     private int level = 1;
 	[SerializeField]
 	private float expIncrement = 1.6f;
-
-	private int levelOnePercentageLost;
-	public int percentageLost = 0;
+	[SerializeField]
+	private int levelOnePercentageLost= 20;
+	private int percentageLost = 0;
 
 	private Stat_AbilityPoint abilityPoint;
 
     void Start()
 	{
 		abilityPoint = GetComponent<Stat_AbilityPoint> ();
-		levelOnePercentageLost = 20;
+		percentageLost = maxExperience / 100 + levelOnePercentageLost;
 	}
 
 	void Update()
@@ -34,7 +34,7 @@ public class Player_Experience : MonoBehaviour {
 		experience = Mathf.Max (0, experience - maxExperience);
 		level += 1;
 		maxExperience  = Mathf.FloorToInt(maxExperience * expIncrement);
-		percentageLost = Mathf.FloorToInt (maxExperience % 100) + levelOnePercentageLost;
+		percentageLost = maxExperience / 100 + levelOnePercentageLost;
 		abilityPoint.IncreaseAbilityPoint (1);
 	}
 
@@ -48,5 +48,10 @@ public class Player_Experience : MonoBehaviour {
 
 	public int GetExperience() {
 		return experience;
+	}
+
+	// Called when player dies
+	public void LoseExperience() {
+		experience = Mathf.Max (0, experience - (percentageLost * maxExperience / 100));
 	}
 }

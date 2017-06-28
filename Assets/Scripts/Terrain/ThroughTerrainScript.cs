@@ -28,7 +28,7 @@ public class ThroughTerrainScript : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D collision) {
-		if (collision.transform.gameObject.tag == "Player") {
+		if (collision.gameObject.CompareTag("Player")) {
 			MoveSpriteToBack ();		}
 	}
 

@@ -36,10 +36,10 @@ public class Aufseer_Attack1Behavior : MonoBehaviour {
 		
 	void OnCollisionEnter2D(Collision2D other) {
 
-		if (other.collider.gameObject.tag == "Player") {
+		if (other.collider.gameObject.CompareTag( "Player")) {
 
 			other.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage.GetBaseAttackDamage ());
-			TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), transform.position, attackDamage.GetBaseAttackDamage ().ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
+			TextPopupManager.instance.ShowDamageTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.transform.position, attackDamage.GetBaseAttackDamage ());
 
 			this.gameObject.SetActive (false);
 			Destroy (this);

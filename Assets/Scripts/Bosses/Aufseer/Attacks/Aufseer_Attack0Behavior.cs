@@ -50,18 +50,26 @@ public class Aufseer_Attack0Behavior : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 
-		if (other.collider.gameObject.tag == "Player") {
+		if (other.gameObject.CompareTag("Player")) {
 			if (invulerablePeriod > 0f) {
 				return;
 			}
 			other.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage.GetBaseAttackDamage ());
-			TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), transform.position, attackDamage.GetBaseAttackDamage ().ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
+			TextPopupManager.instance.ShowDamageTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.transform.position, attackDamage.GetBaseAttackDamage ());
 
 			this.gameObject.SetActive (false);
 			Destroy (this);
 		}
 
 		else if (other.collider.gameObject.layer == LayerMask.NameToLayer ("Terrain")) {
+			this.gameObject.SetActive (false);
+			Destroy (this);
+
+		} 
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.layer == LayerMask.NameToLayer ("Terrain")) {
 			this.gameObject.SetActive (false);
 			Destroy (this);
 

@@ -54,11 +54,11 @@ public class Checkpoint : MonoBehaviour
     {
         if (!hasBeenActivated)
         {
-            if (other.transform.gameObject.tag == "Player")
+			if (other.gameObject.CompareTag("Player"))
             {
                 hasBeenActivated = true;
 				mainPlayer.GetComponent<Player_Spawnpoint>().SetSpawnLocation(new Vector2(transform.position.x, transform.position.y + yOffset));
-				TextPopupManager.instance.ShowTextPopup(other.transform.gameObject.GetComponentInChildren<Canvas> (), transform.position, "Checkpoint!", TextPopupManager.TEXT_TYPE.HEAL);
+				TextPopupManager.instance.ShowTextPopup(other.transform.gameObject.GetComponentInChildren<Canvas> (), other.transform.position, "Checkpoint!", TextPopupManager.TEXT_TYPE.HEAL);
             }
         }
     }

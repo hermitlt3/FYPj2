@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
 
 		// Player. On.
 		player.GetComponent<Stat_HealthScript>().IncreaseHealth (player.GetComponent<Stat_HealthScript>().GetMaxHealth ());
+		player.GetComponent<Player_Experience> ().LoseExperience ();
 		player.GetComponent<Animator>().SetBool ("Dead", false);
 		player.transform.position = player.GetComponent<Player_Spawnpoint> ().GetSpawnLocation ();
 		player.GetComponent<Player_Input> ().enabled = true;
