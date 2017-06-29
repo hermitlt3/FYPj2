@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    GameObject mainPlayer;
-    Light checkPointLight;
-
     // Check if the player first time to this checkpoint
     bool hasBeenActivated;
     // Check if the light has been lit
@@ -15,18 +12,8 @@ public class Checkpoint : MonoBehaviour
 
     [SerializeField]
     float yOffset = 5f;
-    [SerializeField]
-    float lightIntensity = 5f;
-    [SerializeField]
-    float timeToLit = 2f;
 
     // Use this for initialization
-    void Awake()
-    {
-        mainPlayer = GameObject.FindGameObjectWithTag("Player");
-        checkPointLight = transform.GetChild(0).GetComponent<Light>();
-    }
-
     void Start()
     {
         hasBeenActivated = false;
@@ -38,15 +25,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (hasBeenActivated && !lightIsLit)
         {
-            if (checkPointLight.intensity < lightIntensity)
-            {
-                checkPointLight.intensity += Time.deltaTime * timeToLit;
-            }
-            else
-            {
-                checkPointLight.intensity = lightIntensity;
-                lightIsLit = true;
-            }
+
         }
     }
 
@@ -57,7 +36,7 @@ public class Checkpoint : MonoBehaviour
 			if (other.gameObject.CompareTag("Player"))
             {
                 hasBeenActivated = true;
-				mainPlayer.GetComponent<Player_Spawnpoint>().SetSpawnLocation(new Vector2(transform.position.x, transform.position.y + yOffset));
+				other.gameObject.GetComponent<Player_Spawnpoint>().SetSpawnLocation(new Vector2(transform.position.x, transform.position.y + yOffset));
 				TextPopupManager.instance.ShowTextPopup(other.transform.gameObject.GetComponentInChildren<Canvas> (), other.transform.position, "Checkpoint!", TextPopupManager.TEXT_TYPE.HEAL);
             }
         }
