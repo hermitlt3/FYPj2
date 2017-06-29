@@ -54,7 +54,8 @@ public class CollectiblesGenerator : MonoBehaviour {
 		for (int i = Mathf.FloorToInt (-numOfExp / 2); i <= Mathf.FloorToInt (numOfExp / 2); ++i) {
 			GameObject collectible = ObjectPoolScript.instance.GetPooledObject (0);
 			collectible.SetActive (true);
-			collectible.transform.position = position;
+			Vector3 randomness = new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f));
+			collectible.transform.position = position + randomness;
 			collectible.GetComponent<CollectibleBehavior> ().Reset ();
 
 			collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i / (float)numOfExp * velocityMagnitude.x, velocityMagnitude.y);
@@ -76,8 +77,9 @@ public class CollectiblesGenerator : MonoBehaviour {
 		for (int i = Mathf.FloorToInt (-numOfHealth / 2); i <= Mathf.FloorToInt (numOfHealth / 2); ++i) {
 			GameObject collectible = ObjectPoolScript.instance.GetPooledObject (1);
 			collectible.SetActive (true);
-			collectible.transform.position = position;
-			collectible.transform.position -= new Vector3 (0, 0, 0.5f);
+			Vector3 randomness = new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f));
+			collectible.transform.position = position + randomness;
+			//collectible.transform.position -= new Vector3 (0, 0, 0.5f);
 			collectible.GetComponent<CollectibleBehavior> ().Reset ();
 
 			collectible.GetComponent<Rigidbody2D> ().velocity = new Vector2 ((float)i / (float)numOfHealth * velocityMagnitude.x, velocityMagnitude.y);
