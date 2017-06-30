@@ -50,6 +50,9 @@ public class Player_Experience : MonoBehaviour {
 		return experience;
 	}
 
+	public int GetMaxExperience() {
+		return maxExperience;
+	}
 	// Called when player dies
 	public void LoseExperience() {
 		experience = Mathf.Max (0, experience - (percentageLost * maxExperience / 100));
