@@ -28,7 +28,7 @@ public class Aufseer_Attack0 : Boss_Attack {
 		for (int i = 0; i < 5; ++i) {
 			GameObject temp = pool.GetPooledObject (attackPatternIndex);
 			temp.transform.parent = transform;
-			temp.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z + 0.5f);
+			temp.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z + 0.1f);
 			temp.SetActive (true);
 
 			int targetDir = (target.transform.position.x < transform.position.x) ? 1 : -1;

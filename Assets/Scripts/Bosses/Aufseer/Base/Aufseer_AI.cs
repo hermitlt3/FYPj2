@@ -45,13 +45,14 @@ public class Aufseer_AI : Boss_AI {
 			float chosenSkill = 0f;
 			float minValue = 0f;
 			for (int i = 0; i < numberOfAttackPatterns; ++i) {
+				print (minValue);
 				chosenSkill += skillsChance [i];
 				if (randomSkill >= minValue && randomSkill < chosenSkill) {
 					currentAttackPattern = i;
+					break;
 				}
-				minValue += chosenSkill;
+				minValue += skillsChance[i];
 			}
-
 			animator.SetInteger ("AttackStyle", currentAttackPattern);
 			selfTimer = 0f;
 		}
@@ -73,7 +74,6 @@ public class Aufseer_AI : Boss_AI {
 			case 2:
 				Aufseer_Attack2 attackThree = this.gameObject.AddComponent<Aufseer_Attack2> ();
 				attackThree.SetTarget (target);
-				attackThree.Reset ();
 				break;
 			}
 			currentAttackPattern = -1;

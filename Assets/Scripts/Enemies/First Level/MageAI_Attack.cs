@@ -50,7 +50,7 @@ public class MageAI_Attack : EnemyAI_Attack {
 	protected override bool Attack() {
 
 		GameObject temp = ObjectPoolScript.instance.GetPooledObject (2);
-		temp.transform.position = transform.position;
+		temp.transform.position = transform.position + new Vector3(0,0, -1);
 		temp.SetActive (true);
 
 		MageAI_AttackBehaviour behav = temp.AddComponent<MageAI_AttackBehaviour> ();
