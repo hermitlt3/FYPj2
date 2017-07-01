@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ExpScript : BarScript {
+public class PlayerExpScript : BarScript {
 
 	private Player_Experience expScript;
 	private Text expText;
@@ -14,7 +14,8 @@ public class ExpScript : BarScript {
 	protected override void Start () {
 		base.Start ();
 		barImage = GetComponentsInChildren<Image> ()[1];
-		expScript = player.GetComponent<Player_Experience> ();
+		expScript = gO.GetComponent<Player_Experience> ();
+
 		expText = GetComponentInChildren<Text> ();
 
 		newExpPercent = (float)(expScript.GetExperience () * 100)/ (float)(expScript.GetMaxExperience ()) ;

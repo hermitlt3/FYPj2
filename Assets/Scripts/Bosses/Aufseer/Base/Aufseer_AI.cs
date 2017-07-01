@@ -45,7 +45,6 @@ public class Aufseer_AI : Boss_AI {
 			float chosenSkill = 0f;
 			float minValue = 0f;
 			for (int i = 0; i < numberOfAttackPatterns; ++i) {
-				print (minValue);
 				chosenSkill += skillsChance [i];
 				if (randomSkill >= minValue && randomSkill < chosenSkill) {
 					currentAttackPattern = i;
@@ -90,8 +89,9 @@ public class Aufseer_AI : Boss_AI {
 		}
 	}
 
-	void DestroyItself () {
-		Destroy (this.gameObject);
+	void ReleaseStuff () {	
+		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, 100, 20);
+		Destroy (this.gameObject.GetComponentInChildren<Canvas> ().gameObject);
 	}
 
 	public void ResetTimer (float timer = 0f) {
