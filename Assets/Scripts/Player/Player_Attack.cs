@@ -30,9 +30,13 @@ public class Player_Attack : MonoBehaviour {
 	void Attack() {
 		int attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage () + GetComponent<Stat_AttackScript> ().bonusAttack;
 		float isCrit = 0f;
+		bool gotCrit = false;
 		if (GetComponent<Stat_CritChance> ()) {
 			isCrit = GetComponent<Stat_CritChance> ().GetCriticalChance ();
-			attackDamage *= (isCrit >= Random.Range (0, 100)) ? 2 : 1;
+			gotCrit = (isCrit >= Random.Range (0, 100)) ? true : false;
+		}
+		if (gotCrit) {
+			attackDamage *= 2;
 		}
 		Collider2D hit = Physics2D.OverlapBox(new Vector2(transform.position.x + Mathf.Clamp (controller.collisions.faceDir, -1, 1) * attackRange / 2, transform.position.y), new Vector2(attackRange, GetComponent<SpriteRenderer>().size.y), 0, enemies);
 
@@ -42,7 +46,7 @@ public class Player_Attack : MonoBehaviour {
 			hit.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
 
 			if (hit.gameObject.GetComponent<EnemyAI_Logic> () || hit.gameObject.GetComponent<Boss_AI>() && hit.gameObject.GetComponent<Stat_HealthScript>().isAlive()) {
-				if (isCrit > 0f) {
+				if (gotCrit) {
 					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.CRITICAL);
 				} else {
 					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);

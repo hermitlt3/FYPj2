@@ -48,6 +48,7 @@ public class BossArenaScript : MonoBehaviour {
 				go.SetActive (true);
 			}
 			boss.SetActive (true);
+			boss.GetComponent<Stat_HealthScript> ().SetCurrentHealth (boss.GetComponent<Stat_HealthScript> ().GetMaxHealth ());
 
 			mainCamera.GetComponent<Camera2DFollow> ().enabled = false;
 			mainCamera.GetComponent<CameraStationary> ().enabled = true;

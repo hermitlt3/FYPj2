@@ -81,9 +81,9 @@ public class TerrainMaker : EditorWindow {
 		GUILayout.Label("Terrain Size", EditorStyles.boldLabel);
 
 		GUILayout.Label("X Size", GUILayout.Width(50));
-		xSize = EditorGUILayout.IntSlider(xSize, 0, 10, GUILayout.Width(300));
+		xSize = EditorGUILayout.IntSlider(xSize, 0, 20, GUILayout.Width(300));
 		GUILayout.Label("Y Size", GUILayout.Width(50));
-		ySize = EditorGUILayout.IntSlider(ySize, 0, 10, GUILayout.Width(300));
+		ySize = EditorGUILayout.IntSlider(ySize, 0, 20, GUILayout.Width(300));
 
 
 		GUILayout.Label("Terrain Scale", EditorStyles.boldLabel);
