@@ -42,16 +42,15 @@ public class Player_Attack : MonoBehaviour {
 
 		if(hit && hit.gameObject != null) {
 			hit.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
-
-			hit.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
-
-			if (hit.gameObject.GetComponent<EnemyAI_Logic> () || hit.gameObject.GetComponent<Boss_AI>() && hit.gameObject.GetComponent<Stat_HealthScript>().isAlive()) {
+	
+			if ((hit.gameObject.GetComponent<EnemyAI_Logic> () || hit.gameObject.GetComponent<Boss_AI>()) && hit.gameObject.GetComponent<Stat_HealthScript>().isAlive()) {
 				if (gotCrit) {
 					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.CRITICAL);
 				} else {
 					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
 				}
 			}
+			hit.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage);
 		}
 	}
 }

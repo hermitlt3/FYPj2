@@ -35,7 +35,7 @@ public class HealthbarScript : BarScript {
 	}
 
 	void HealthBarAnimation(float old, float replace, float time) {
-		healthText.text = newHealthPercent + "%";
+		healthText.text = newHealthPercent.ToString("F1") + "%";
 //		float difference = (replace - old) * 0.01f;
 //		if (barImage.fillAmount - difference > Mathf.Epsilon) {
 //			float dir = (difference < 0f) ? -1f : 1f;
