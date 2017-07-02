@@ -6,8 +6,6 @@ public class Checkpoint : MonoBehaviour
 {
     // Check if the player first time to this checkpoint
     bool hasBeenActivated;
-    // Check if the light has been lit
-    bool lightIsLit;
 
 
     [SerializeField]
@@ -17,16 +15,12 @@ public class Checkpoint : MonoBehaviour
     void Start()
     {
         hasBeenActivated = false;
-        lightIsLit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hasBeenActivated && !lightIsLit)
-        {
 
-        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -36,6 +30,7 @@ public class Checkpoint : MonoBehaviour
 			if (other.gameObject.CompareTag("Player"))
             {
                 hasBeenActivated = true;
+				transform.GetChild (0).gameObject.SetActive (true);
 				other.gameObject.GetComponent<Player_Spawnpoint>().SetSpawnLocation(new Vector2(transform.position.x, transform.position.y + yOffset));
 				TextPopupManager.instance.ShowTextPopup(other.transform.gameObject.GetComponentInChildren<Canvas> (), other.transform.position, "Checkpoint!", TextPopupManager.TEXT_TYPE.HEAL);
             }
