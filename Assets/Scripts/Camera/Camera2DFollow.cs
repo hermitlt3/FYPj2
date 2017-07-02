@@ -20,14 +20,14 @@ public class Camera2DFollow : MonoBehaviour
 	{
 		m_LastTargetPosition = target.position;
 		m_OffsetZ = (transform.position - target.position).z;
-		transform.parent = null;
+		transform.parent = null;	
 	}
 		
         // Update is called once per frame
     void Update()
 	{
-		if (GetComponent<CameraStationary> ().enabled) {
-			GetComponent<CameraStationary> ().enabled = false;
+		if (GetComponent<BossCamera> ().enabled) {
+			GetComponent<BossCamera> ().enabled = false;
 		}
 		// only update lookahead pos if accelerating or changed direction
 		float xMoveDelta = (target.position - m_LastTargetPosition).x;

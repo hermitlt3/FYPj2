@@ -5,19 +5,21 @@ using UnityEngine;
 public class BossArenaScript : MonoBehaviour {
 
 	GameObject player;
-	//BoxCollider2D areaCollide;
+	BoxCollider2D bossArea;
 	GameObject mainCamera;
 
 	public GameObject[] blockingGO;
 	public GameObject boss;
 	public GameObject checkPointUnlocked;
 
+	public float xOffset = 5f;
+
 	public bool DestroyArea;
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
-		//areaCollide = GetComponent<BoxCollider2D> ();
+		bossArea = GetComponent<BoxCollider2D> ();
 	}
 	
 	// Update is called once per frame
@@ -28,7 +30,7 @@ public class BossArenaScript : MonoBehaviour {
 				go.SetActive (false);
 			}
 
-			mainCamera.GetComponent<CameraStationary> ().ResetToFollow ();
+			mainCamera.GetComponent<BossCamera> ().ResetToFollow ();
 			checkPointUnlocked.SetActive (true);
 
 			if(DestroyArea)
@@ -51,8 +53,9 @@ public class BossArenaScript : MonoBehaviour {
 			boss.GetComponent<Stat_HealthScript> ().SetCurrentHealth (boss.GetComponent<Stat_HealthScript> ().GetMaxHealth ());
 
 			mainCamera.GetComponent<Camera2DFollow> ().enabled = false;
-			mainCamera.GetComponent<CameraStationary> ().enabled = true;
-			mainCamera.GetComponent<CameraStationary> ().moveToPosition = transform.position;
+			mainCamera.GetComponent<BossCamera> ().enabled = true;
+			mainCamera.GetComponent<BossCamera> ().moveToPosition = bossArea.bounds.center;
+			mainCamera.GetComponent<BossCamera> ().SetOrthoTargetSize (bossArea.bounds.size.x + xOffset * 2);
 		}
 	}
 
