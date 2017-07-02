@@ -47,13 +47,14 @@ public class LockMoveToScript : InteractiveLock {
 		}
 
 		if (isTriggered) {
-			
 			Vector3 direction = (wayPoints [wayPointIndex] - transform.position).normalized;
 			if ((wayPoints [wayPointIndex] - transform.position).sqrMagnitude < 0.1f) {
+                StartCoroutine(AudioManager.instance.FadeOut(GetComponent<AudioSource>(), 0.5f));
 				isTriggered = false;
 				isDone = true;
 			} else {
-				transform.position += direction * speed * Time.deltaTime;
+                AudioManager.instance.PlaySound(GetComponent<AudioSource>(), 0.5f);
+                transform.position += direction * speed * Time.deltaTime;
 			}
 		}
 	}

@@ -14,6 +14,7 @@ public class LeverPuzzleKey : InteractiveKey {
 	protected override void Update () {
 		base.Update ();
 		if (isTriggered) {
+            AudioManager.instance.PlaySound(GetComponent<AudioSource>());
 			if (!reverse) {
 				this.gameObject.GetComponent<SpriteRenderer> ().flipX = true;
 				reverse = true;
