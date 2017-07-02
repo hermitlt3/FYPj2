@@ -27,8 +27,13 @@ public class CollectibleExp : CollectibleBehavior {
 		if ((playerCollider.bounds.Contains (new Vector2(thisCollider.bounds.min.x, thisCollider.bounds.min.y)) &&
 			playerCollider.bounds.Contains (new Vector2(thisCollider.bounds.max.x, thisCollider.bounds.max.y))) && timeToDie) {
 
-			playerGO.GetComponent<Player_Experience> ().IncreaseExperience (expScript.GetExperience ());
-			gameObject.SetActive(false);
-		}
-	}
+            playerGO.GetComponent<Player_Experience> ().IncreaseExperience (expScript.GetExperience ());
+
+            GameObject temp = Instantiate(Resources.Load<GameObject>("Audio/TempAudioCollectible"));
+            temp.transform.position = transform.position;
+            temp.SetActive(true);
+
+            gameObject.SetActive(false);
+        }
+    }
 }

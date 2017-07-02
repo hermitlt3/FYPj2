@@ -17,6 +17,7 @@ public class BoulderScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GetComponent<Rigidbody2D> ().velocity.sqrMagnitude > dangerSpeed) {
+            AudioManager.instance.PlaySound(GetComponent<AudioSource>());
 			// Change to collectible becuz it has the same behavior as collectible
 			this.gameObject.layer = LayerMask.NameToLayer ("Collectible");
 		} else {
@@ -26,7 +27,11 @@ public class BoulderScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (isDestroying && other.gameObject == toBeDestroyed) {
-			Destroy (this.gameObject);
+            GameObject temp = Instantiate(Resources.Load<GameObject>("Audio/TempAudioBoulderHit"));
+            temp.transform.position = transform.position;
+            temp.SetActive(true);
+
+            Destroy (this.gameObject);
 			Destroy (other.gameObject);
 		}
 	}

@@ -15,10 +15,12 @@ public class LockDeactivateScript : InteractiveLock {
 	// Update is called once per frame
 	protected override void Update () {
 		if (isTriggered) {
+            AudioManager.instance.PlaySound(GetComponent<AudioSource>());
 			deactivateTimer = Mathf.Max (0, deactivateTimer - Time.deltaTime);
 		}
 		if (deactivateTimer <= 0) {
-			isDone = true;
+            AudioManager.instance.FadeOut(GetComponent<AudioSource>(), 0.5f);
+            isDone = true;
 			isTriggered = false;
 
 			if (toDestroy) {

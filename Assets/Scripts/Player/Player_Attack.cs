@@ -38,6 +38,7 @@ public class Player_Attack : MonoBehaviour {
 		if (gotCrit) {
 			attackDamage *= 2;
 		}
+        AudioManager.instance.PlaySound(GetComponent<AudioSource>());
 		Collider2D hit = Physics2D.OverlapBox(new Vector2(transform.position.x + Mathf.Clamp (controller.collisions.faceDir, -1, 1) * attackRange / 2, transform.position.y), new Vector2(attackRange, GetComponent<SpriteRenderer>().size.y), 0, enemies);
 
 		if(hit && hit.gameObject != null) {

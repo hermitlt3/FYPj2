@@ -28,7 +28,12 @@ public class CollectibleHealth : CollectibleBehavior {
 
 			TextPopupManager.instance.ShowTextPopup (playerGO.GetComponentInChildren<Canvas> (), playerGO.transform.position, "+"+healthScript.GetCurrentHealth (), TextPopupManager.TEXT_TYPE.HEAL);
 			playerGO.GetComponent<Stat_HealthScript>().IncreaseHealth(healthScript.GetCurrentHealth());
-			gameObject.SetActive(false);
+
+            GameObject temp = Instantiate(Resources.Load<GameObject>("Audio/TempAudioCollectible"));
+            temp.transform.position = transform.position;
+            temp.SetActive(true);
+
+            gameObject.SetActive(false);
 		}
 	}
 }

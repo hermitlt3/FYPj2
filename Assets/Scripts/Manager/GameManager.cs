@@ -4,8 +4,8 @@ using UnityEngine;
 
 // Where everything works
 public class GameManager : MonoBehaviour {
-
-	public static GameManager instance;
+   
+    public static GameManager instance;
 	private GameObject player;
 
 	void Awake() {
