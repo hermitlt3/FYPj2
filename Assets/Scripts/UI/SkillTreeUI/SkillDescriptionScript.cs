@@ -9,9 +9,16 @@ public class SkillDescriptionScript : MonoBehaviour {
 	void Start () {
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+	}
+
+	public void ChangeDescription(string levelText, string descText) {
+		// first index is level, second index is description
+		Text[] theTexts = transform.GetComponentsInChildren<Text>();
+		theTexts [0].text = levelText;
+		theTexts [1].text = descText;
 	}
 
 	public void ShowDescription(RectTransform transform, int flipX, int flipY) {

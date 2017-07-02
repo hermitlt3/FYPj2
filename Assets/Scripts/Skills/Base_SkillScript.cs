@@ -15,6 +15,19 @@ public class Base_SkillScript : MonoBehaviour {
 	// JUST A DEBUG
 	public bool getsUnlocked = false;
 
+	public enum SKILL_TYPE
+	{
+		CRITICAL = 0,
+		ATTACK_DAMAGE,
+		ATTACK_SPEED,
+		HEALTH
+	}
+	public SKILL_TYPE skillType;
+	public int skillLevel;
+
+	protected virtual void Awake() {
+		skillLevel = transform.GetSiblingIndex () + 1;
+	}
 
 	protected virtual void Start() {
 

@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-
+		CursorTextureChange();
 	}
 
 	public void OnPlayerDead() {
@@ -55,5 +55,13 @@ public class GameManager : MonoBehaviour {
 
 	public bool LoadScene() {
 		return false;
+	}
+
+	void CursorTextureChange() {
+		if (Input.GetButton("Fire1")) {
+			Cursor.SetCursor ((Resources.Load ("Cursors/CursorClick")) as Texture2D, new Vector2(82, 41), CursorMode.Auto);
+		} else {
+			Cursor.SetCursor ((Resources.Load ("Cursors/Cursor")) as Texture2D, new Vector2(82, 41), CursorMode.Auto);
+		}
 	}
 }

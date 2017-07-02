@@ -14,6 +14,10 @@ public class UnlockButtonScript : MonoBehaviour {
 
 	public SkillsInfo_Script skillsInfo;			// The skills from the skill tree are here
 
+	public Text unlockText;
+
+	public GameObject confirmPopup;
+
 	// Use this for initialization
 	void Start () {
 		// Gets toggle group
@@ -42,13 +46,19 @@ public class UnlockButtonScript : MonoBehaviour {
 			// Codes to make the button interactive or not based on the skill script's unlockable variable and enuf exp bo
 			if (skillScript.isUnlockable && playerAP.GetAbilityPoint() >= skillScript.GetComponent<Stat_AbilityPoint>().GetAbilityPoint()) {
 				disButton.interactable = true;
+				unlockText.color = new Color (unlockText.color.r, unlockText.color.g, unlockText.color.b, 1f);
 			} else {
 				disButton.interactable = false;
+				unlockText.color = new Color (unlockText.color.r, unlockText.color.g, unlockText.color.b, 0.2f);
 			}
 		}
 	}
 
 	public void UnlockIsClicked() {
+		confirmPopup.SetActive (true);
+	}
+
+	public void LevelUpSkill() {
 		// Deduct the experience points
 		playerAP.DecreaseAbilityPoint(skillScript.GetComponent<Stat_AbilityPoint> ().GetAbilityPoint ());
 		// Call the function in the skill script to unlock skill
