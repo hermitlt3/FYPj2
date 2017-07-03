@@ -50,9 +50,10 @@ public class BossArenaScript : MonoBehaviour {
 				go.SetActive (true);
 			}
 			boss.SetActive (true);
-			boss.GetComponent<Stat_HealthScript> ().SetCurrentHealth (boss.GetComponent<Stat_HealthScript> ().GetMaxHealth ());
+            boss.GetComponent<Stat_HealthScript>().SetCurrentHealth(boss.GetComponent<Stat_HealthScript>().GetMaxHealth());
+            boss.transform.GetChild(0).gameObject.SetActive(true);
 
-			mainCamera.GetComponent<Camera2DFollow> ().enabled = false;
+            mainCamera.GetComponent<Camera2DFollow> ().enabled = false;
 			mainCamera.GetComponent<BossCamera> ().enabled = true;
 			mainCamera.GetComponent<BossCamera> ().moveToPosition = bossArea.bounds.center;
 			mainCamera.GetComponent<BossCamera> ().SetOrthoTargetSize (bossArea.bounds.size.x + xOffset * 2);
@@ -62,11 +63,8 @@ public class BossArenaScript : MonoBehaviour {
 	public void Reset() {
 		foreach (GameObject go in blockingGO) {
 			go.SetActive (false);
-		} 
-		foreach (Boss_AI ai in boss.GetComponents<Boss_AI>()) {
-			ai.Reset ();
 		}
-
+        boss.GetComponent<Boss_AI>().Reset ();
 		boss.SetActive (false);
 	}
 }

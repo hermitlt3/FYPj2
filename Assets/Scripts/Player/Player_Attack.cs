@@ -38,14 +38,15 @@ public class Player_Attack : MonoBehaviour {
 		if (gotCrit) {
 			attackDamage *= 2;
 		}
-        AudioManager.instance.PlaySound(GetComponent<AudioSource>());
+        AudioManager.instance.PlaySound(GetComponents<AudioSource>()[0]);
 		Collider2D hit = Physics2D.OverlapBox(new Vector2(transform.position.x + Mathf.Clamp (controller.collisions.faceDir, -1, 1) * attackRange / 2, transform.position.y), new Vector2(attackRange, GetComponent<SpriteRenderer>().size.y), 0, enemies);
 
 		if(hit && hit.gameObject != null) {
 			hit.gameObject.SendMessage ("GetsHit", gameObject, SendMessageOptions.DontRequireReceiver);
 	
 			if ((hit.gameObject.GetComponent<EnemyAI_Logic> () || hit.gameObject.GetComponent<Boss_AI>()) && hit.gameObject.GetComponent<Stat_HealthScript>().isAlive()) {
-				if (gotCrit) {
+                AudioManager.instance.PlaySound(GetComponents<AudioSource>()[2]);
+                if (gotCrit) {
 					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.CRITICAL);
 				} else {
 					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);

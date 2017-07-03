@@ -28,7 +28,8 @@ public class Aufseer_Attack1 : Boss_Attack {
 		fireBall.transform.parent = transform;
 		fireBall.transform.position = new Vector3 (positionX , transform.position.y + 1f, transform.position.z + 0.1f);
 		fireBall.SetActive (true);
+        fireBall.GetComponent<AudioSource>().Play();
 
-		Destroy (this);
+        Destroy(this);
 	}
 }

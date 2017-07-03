@@ -7,7 +7,7 @@ public class LockActivateScript : InteractiveLock {
 	private List<Vector3> resetPositions;
 	private bool activate;
 	// A little delay for our dearest player
-	private float delayTimer = 3f;
+	private float delayTimer = 1f;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -25,7 +25,8 @@ public class LockActivateScript : InteractiveLock {
 			delayTimer = Mathf.Max (0, delayTimer - Time.deltaTime);
 
 			if (activate) {
-				int index = 0;
+            AudioManager.instance.PlaySound(GetComponent<AudioSource>());
+                int index = 0;
 				foreach (Transform trans in transform) {
 					trans.position = resetPositions [index++];
 					trans.gameObject.SetActive (true);
@@ -43,6 +44,6 @@ public class LockActivateScript : InteractiveLock {
 	public override void InitVariables () {
 		isTriggered = true;
 		activate = true;
-		delayTimer = 3f;
+		delayTimer = 1f;
 	}
 }

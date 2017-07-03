@@ -73,6 +73,7 @@ public class PressurePlate : InteractiveKey {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (((1 << other.gameObject.layer) & layerMask) != 0) {
 			if (!toUnlock.isTriggered && canTrigger) {
+                AudioManager.instance.PlaySound(GetComponents<AudioSource>()[0]);
 				isTriggered = true;
 				canTrigger = false;
 				currentWayPoint = (currentWayPoint + 1) % wayPoints.Length;

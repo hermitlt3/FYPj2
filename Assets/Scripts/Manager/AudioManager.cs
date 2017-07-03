@@ -27,6 +27,11 @@ public class AudioManager : MonoBehaviour {
 
     public IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
     {
+        if(audioSource == null)
+        {
+            yield return null;
+        }
+
         float startVolume = audioSource.volume;
 
         while (audioSource.volume > 0)
@@ -42,6 +47,11 @@ public class AudioManager : MonoBehaviour {
 
     public void PlaySound(AudioSource audioSource, float delay = 0f)
     {
+        if(audioSource == null)
+        {
+            return;
+        }
+
         if(audioSource.isPlaying)
         {
             return;

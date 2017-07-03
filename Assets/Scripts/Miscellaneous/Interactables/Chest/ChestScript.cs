@@ -17,6 +17,8 @@ public class ChestScript : MonoBehaviour {
 	Stat_HealthScript health;
 	Animator thisAnimator;
 
+    bool playSound;
+
 	// Use this for initialization
 	void Start () {
 		health = GetComponent<Stat_HealthScript> ();
@@ -34,12 +36,19 @@ public class ChestScript : MonoBehaviour {
 		} else if (healthValue != 0 && expValue != 0 && itemType != DROPPEDITEM_TYPE.BOTH) {
 			itemType = DROPPEDITEM_TYPE.BOTH;
 		}
+
+        playSound = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!health.isAlive ()) {
 			thisAnimator.SetBool ("isOpened", true);
+            if(playSound)
+            {
+                AudioManager.instance.PlaySound(GetComponent<AudioSource>());
+                playSound = false;
+            }
 		}
 	}
 

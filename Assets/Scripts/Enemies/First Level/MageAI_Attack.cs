@@ -52,8 +52,9 @@ public class MageAI_Attack : EnemyAI_Attack {
 		GameObject temp = ObjectPoolScript.instance.GetPooledObject (2);
 		temp.transform.position = transform.position + new Vector3(0,0, -1);
 		temp.SetActive (true);
+        temp.GetComponent<AudioSource>().Play();
 
-		MageAI_AttackBehaviour behav = temp.AddComponent<MageAI_AttackBehaviour> ();
+        MageAI_AttackBehaviour behav = temp.AddComponent<MageAI_AttackBehaviour> ();
 		if (RayDetectedPlayer() != null) {
 			behav.SetTarget (RayDetectedPlayer ().gameObject);
 		} else {

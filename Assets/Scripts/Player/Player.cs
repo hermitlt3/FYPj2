@@ -27,6 +27,7 @@ public class Player : MonoBehaviour {
 
 	SpriteRenderer playerSpriteRenderer;
 	GameManager gM;
+    bool playSound;
 
 	void Awake() {
 		DontDestroyOnLoad (this.gameObject);
@@ -40,8 +41,9 @@ public class Player : MonoBehaviour {
 
 		playerSpriteRenderer = GetComponent<SpriteRenderer> ();
 		gM = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager>();
+        playSound = true;
 
-		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+        gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 	}
 
@@ -64,6 +66,11 @@ public class Player : MonoBehaviour {
 		if(!healthScript.isAlive ()) {
 			animator.SetBool ("Dead" , true);
 			velocity = Vector3.zero;
+            if(playSound)
+            {
+                AudioManager.instance.PlaySound(GetComponents<AudioSource>()[1]);
+                playSound = false;
+            }
 		}
 
 		if (animator.GetBool ("Dead") == true) {
@@ -115,6 +122,7 @@ public class Player : MonoBehaviour {
 
 	void Resurrect() {
 		gM.OnPlayerDead ();
+        playSound = true;
 		StartCoroutine(SceneTransitManager.instance.ReloadSceneWithFade (-1));
 	}
 

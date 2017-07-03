@@ -36,6 +36,8 @@ public class Aufseer_Attack2 : Boss_Attack {
 			// the animation works, so no addcomponent is needed
 			fireBomb.transform.position = target.transform.position;
 			fireBomb.SetActive (true);
+            fireBomb.GetComponent<AudioSource>().Play();
+
 			timer = fixedTimer;
 			attackCount++;
 		}

@@ -30,6 +30,7 @@ public class Checkpoint : MonoBehaviour
 			if (other.gameObject.CompareTag("Player"))
             {
                 hasBeenActivated = true;
+                AudioManager.instance.PlaySound(GetComponent<AudioSource>());
 				transform.GetChild (0).gameObject.SetActive (true);
 				other.gameObject.GetComponent<Player_Spawnpoint>().SetSpawnLocation(new Vector2(transform.position.x, transform.position.y + yOffset));
 				TextPopupManager.instance.ShowTextPopup(other.transform.gameObject.GetComponentInChildren<Canvas> (), other.transform.position, "Checkpoint!", TextPopupManager.TEXT_TYPE.HEAL);

@@ -30,6 +30,7 @@ public class Aufseer_Attack0 : Boss_Attack {
 			temp.transform.parent = transform;
 			temp.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z + 0.1f);
 			temp.SetActive (true);
+            temp.GetComponent<AudioSource>().Play();
 
 			int targetDir = (target.transform.position.x < transform.position.x) ? 1 : -1;
 			temp.AddComponent<Aufseer_Attack0Behavior> ().SetTarget(target);
