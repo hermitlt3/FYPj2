@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneTransitManager : MonoBehaviour {
 
 	public static SceneTransitManager instance;
-
-	public TransitFade fading;
+    public TransitFade fading;
 
 	void Awake() {
 		if (instance && instance != this) {
@@ -56,12 +55,14 @@ public class SceneTransitManager : MonoBehaviour {
 		}
 	}
 
-	public IEnumerator ChangeScene(string sceneName) 
+	public IEnumerator ChangeScene(string sceneName, float moreTime = 0f) 
 	{
 		float fadeTime = fading.BeginFade (1);
 		yield return new WaitForSeconds (fadeTime);
 
-		AsyncOperation async = SceneManager.LoadSceneAsync (sceneName);
+        yield return new WaitForSeconds(moreTime);
+
+        AsyncOperation async = SceneManager.LoadSceneAsync (sceneName);
 		yield return async;
 	}
 }

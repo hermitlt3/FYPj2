@@ -53,8 +53,10 @@ public class GameManager : MonoBehaviour {
 		// Trace. On.
 	}
 
-	public bool LoadScene() {
-		return false;
+	public bool GoNextLevel(string sceneName) {
+
+        StartCoroutine(SceneTransitManager.instance.ChangeScene(sceneName));
+        return false;
 	}
 
 	void CursorTextureChange() {

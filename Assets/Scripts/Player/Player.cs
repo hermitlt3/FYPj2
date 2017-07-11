@@ -110,7 +110,7 @@ public class Player : MonoBehaviour {
 	public void OnInteraction() {
 		if (animator.GetBool ("Attacking"))
 			return;
-		if (EventSystem.current.IsPointerOverGameObject())
+		if (EventSystem.current && EventSystem.current.IsPointerOverGameObject())
 			return;
 		
 		animator.SetBool ("Attacking", true);

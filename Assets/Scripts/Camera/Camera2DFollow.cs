@@ -14,13 +14,21 @@ public class Camera2DFollow : MonoBehaviour
   	private Vector3 m_LastTargetPosition;
   	private Vector3 m_CurrentVelocity;
   	private Vector3 m_LookAheadPos;
-  	
-  	// Use this for initialization
-  	void Start()
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+    // Use this for initialization
+    void Start()
 	{
 		m_LastTargetPosition = target.position;
 		m_OffsetZ = (transform.position - target.position).z;
 		transform.parent = null;	
+        if(target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
+        }
 	}
 		
         // Update is called once per frame
@@ -52,5 +60,6 @@ public class Camera2DFollow : MonoBehaviour
 
 	public void Reset() {
 		GetComponent<Camera> ().orthographicSize = orthoSize;
+        m_CurrentVelocity = Vector3.zero;
 	}
 }

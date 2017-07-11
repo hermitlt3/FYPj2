@@ -22,7 +22,7 @@ public class LevelTransition : MonoBehaviour {
 
     void Update()
     {
-        if (!Boss.isAlive() && !isTriggered)
+        if (Boss && !Boss.isAlive() && !isTriggered)
         {
             TimeDelay++;
         }
@@ -37,5 +37,6 @@ public class LevelTransition : MonoBehaviour {
     void RunOnce()
     {
         StartCoroutine(SceneTransitManager.instance.ChangeScene(MapName));
+        GameObject.FindGameObjectWithTag("Finish").GetComponent<LevelIniter>();
     }
 }
