@@ -19,6 +19,7 @@ public class LevelIniter : MonoBehaviour {
             player = GameObject.FindGameObjectWithTag("Player");
         }
         player.transform.position = playerStartPosition;
+        player.GetComponent<Player_Spawnpoint>().SetSpawnLocation(playerStartPosition);
 
         mainCamera.GetComponent<Camera2DFollow>().enabled = false;
         mainCamera.transform.position = new Vector3(playerStartPosition.x, playerStartPosition.y, mainCamera.transform.position.z);

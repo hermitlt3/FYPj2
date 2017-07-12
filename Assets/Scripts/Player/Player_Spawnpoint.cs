@@ -9,7 +9,7 @@ public class Player_Spawnpoint : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//gameArea = GameObject.FindGameObjectWithTag ("Game Area").GetComponent<Collider2D> ();
+
 	}
 	
 	// Update is called once per frame

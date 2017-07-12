@@ -19,13 +19,12 @@ public class MageAI_Die : EnemyAI_Die {
 		base.Deactivate ();
 
 		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expOutputScript.GetExperience(), Random.Range(0, 20));
-		if (youOnlyLiveOnce) {
-			ReloadCheckpointSystem.RemoveEnemyToReloadList (this.gameObject);
-
-		} else {
-			this.gameObject.SetActive (false);
-		}
-	}
+        if (youOnlyLiveOnce)
+        {
+            ReloadCheckpointSystem.RemoveEnemyToReloadList(this.gameObject);
+        }
+        this.gameObject.SetActive(false);
+    }
 
 	protected override void ShouldDie() {
 		if (!GameObject.FindGameObjectWithTag ("Player").GetComponent<Stat_HealthScript> ().isAlive ()) {

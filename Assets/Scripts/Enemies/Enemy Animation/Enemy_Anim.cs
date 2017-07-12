@@ -8,7 +8,7 @@ public class Enemy_Anim : MonoBehaviour {
 	protected Animator animator;
 
 	// Health of the enemy
-	private Stat_HealthScript healthScript;
+	protected Stat_HealthScript healthScript;
 
 	private EnemyAI_Attack aiAttack;
 	private EnemyAI_Move aiMove;
@@ -48,7 +48,7 @@ public class Enemy_Anim : MonoBehaviour {
 		}
 	}
 
-	public void Reset() {
+	public virtual void Reset() {
 		animator.SetBool ("Dead", false);
 		animator.SetTrigger ("Reset");
 	}

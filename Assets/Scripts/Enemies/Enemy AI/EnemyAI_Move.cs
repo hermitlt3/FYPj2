@@ -37,7 +37,7 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		if (sprite.flipX) {
 			myRigidbody.velocity = new Vector2 (-movementSpeed, myRigidbody.velocity.y);
 			if (transform.position.x < areaBounds.bounds.min.x) {

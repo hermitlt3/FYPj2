@@ -13,5 +13,9 @@ public class MageAI_Move : EnemyAI_Move {
 		base.Start ();
 	}
 
-	// Update is called once per frame
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+    }
 }
