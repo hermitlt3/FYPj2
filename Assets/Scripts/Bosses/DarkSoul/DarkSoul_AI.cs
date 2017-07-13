@@ -6,15 +6,15 @@ public class DarkSoul_AI : Boss_AI {
 
 	// Use this for initialization
 	protected override void Start () {
-		
+        shouldDie = false;
 	}
 
     // Update is called once per frame
     protected override void Update () {
-        if (!GetComponent<Stat_HealthScript>().isAlive()) {
+        if (!GetComponent<Stat_HealthScript>().isAlive() &&
+             !GetComponent<Animator>().GetBool("Dead")) {
             GetComponent<Animator>().SetBool("Dead", true);
             Destroy(this.gameObject.GetComponentInChildren<Canvas>().gameObject);
-            Destroy(this);
         }
     }
 
