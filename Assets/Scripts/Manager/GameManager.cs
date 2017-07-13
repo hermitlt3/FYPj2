@@ -60,10 +60,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void CursorTextureChange() {
-		if (Input.GetButton("Fire1")) {
-			Cursor.SetCursor ((Resources.Load ("Cursors/CursorClick")) as Texture2D, new Vector2(82, 41), CursorMode.Auto);
+        Texture2D cursorClicked = Resources.Load("Cursors/CursorClick") as Texture2D;
+        Texture2D cursor = Resources.Load("Cursors/Cursor") as Texture2D;
+
+        if (Input.GetButton("Fire1")) {
+			Cursor.SetCursor (cursorClicked, new Vector2(cursorClicked.width, 0), CursorMode.Auto);
 		} else {
-			Cursor.SetCursor ((Resources.Load ("Cursors/Cursor")) as Texture2D, new Vector2(82, 41), CursorMode.Auto);
+			Cursor.SetCursor (cursor, new Vector2(cursorClicked.width, 0), CursorMode.Auto);
 		}
 	}
 }
