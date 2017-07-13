@@ -26,7 +26,7 @@ public class Aufseer_AI : Boss_AI {
 		animator = GetComponent<Animator> ();
 
 		maxTimeBetweenIntervals = timeBetweenIntervals;
-	}
+    }
 	
 	// Update is called once per frame
 	protected override void Update () {
@@ -84,17 +84,38 @@ public class Aufseer_AI : Boss_AI {
 	}
 
 	public override void Reset() {
-		for (int i = 0; i < transform.childCount; ++i) {
-			transform.GetChild(i).gameObject.SetActive(false);
-		}
-	}
+        animator.SetTrigger("Reset");
+        animator.SetBool("Dead", false);
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+        shouldDie = false;
+        GetComponent<Stat_HealthScript>().SetCurrentHealth(GetComponent<Stat_HealthScript>().GetMaxHealth());
+    }
 
-	void ReleaseStuff () {	
-		CollectiblesGenerator.instance.GenerateCollectibles (transform.position, 100, 20);
+    void ReleaseStuff () {
+        if(!shouldDie)
+        {
+            return;
+        }
+
+        CollectiblesGenerator.instance.GenerateCollectibles (transform.position, 100, 20);
 		Destroy (this.gameObject.GetComponentInChildren<Canvas> ().gameObject);
 	}
 
-	public void ResetTimer (float timer = 0f) {
+    void ShouldDie()
+    {
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Stat_HealthScript>().isAlive() == false)
+        {
+            shouldDie = false;
+        } else
+        {
+            shouldDie = true;
+        }
+    }
+
+    public void ResetTimer (float timer = 0f) {
 		selfTimer = timer;
 	}
 }
