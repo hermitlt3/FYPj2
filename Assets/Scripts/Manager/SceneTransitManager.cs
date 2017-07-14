@@ -65,4 +65,15 @@ public class SceneTransitManager : MonoBehaviour {
         AsyncOperation async = SceneManager.LoadSceneAsync (sceneName);
 		yield return async;
 	}
+
+    public IEnumerator FadeInAndOut(float delayTime = 0f)
+    {
+        float fadeTime = fading.BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+
+        yield return new WaitForSeconds(delayTime);
+
+        fadeTime = fading.BeginFade(-1);
+        yield return new WaitForSeconds(fadeTime);
+    }
 }

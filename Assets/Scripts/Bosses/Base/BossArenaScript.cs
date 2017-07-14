@@ -25,7 +25,7 @@ public class BossArenaScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!boss.GetComponent<Stat_HealthScript>().isAlive()) {
+		if (boss.GetComponent<Boss_AI>().shouldDie) {
 			foreach (GameObject go in blockingGO) {
 				go.SetActive (false);
 			}

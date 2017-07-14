@@ -25,11 +25,14 @@ public class ObjectivesManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach (BaseObjectiveScript bs in objectivesList)
+        if (objectivesList.Count > 0)
         {
-            if(bs.isFinished)
+            foreach (BaseObjectiveScript bs in objectivesList)
             {
-                objectivesList.Remove(bs);
+                if (bs.isFinished)
+                {
+                    objectivesList.Remove(bs);
+                }
             }
         }
 	}

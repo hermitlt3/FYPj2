@@ -7,6 +7,7 @@ public class LevelIniter : MonoBehaviour {
     public Vector3 playerStartPosition;
     public GameObject mainCamera;
     public GameObject player;
+    public Sprite backgroundSprite;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,11 @@ public class LevelIniter : MonoBehaviour {
         mainCamera.GetComponent<Camera2DFollow>().enabled = false;
         mainCamera.transform.position = new Vector3(playerStartPosition.x, playerStartPosition.y, mainCamera.transform.position.z);
         mainCamera.GetComponent<Camera2DFollow>().enabled = true;
+
+        if(backgroundSprite)
+        {
+            mainCamera.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = backgroundSprite;
+        }
 
         Destroy(this.gameObject);
 	}
