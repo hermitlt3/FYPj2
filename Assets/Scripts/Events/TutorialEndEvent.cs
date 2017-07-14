@@ -5,6 +5,7 @@ using UnityEngine;
 public class TutorialEndEvent : CustomEventBaseScript
 {
     public GameObject boss;
+    public string sceneName;
 	// Use this for initialization
 	protected override void Start () {
 		
@@ -12,10 +13,10 @@ public class TutorialEndEvent : CustomEventBaseScript
 
     // Update is called once per frame
     protected override void Update () {
-		if(!boss.GetComponent<Stat_HealthScript>().isAlive() && !startEvent)
+		if(boss.GetComponent<Boss_AI>().shouldDie && !startEvent)
         {
             startEvent = true;
-           // StartCoroutine(SceneTransitManager.instance.FadeInAndOut());
+            StartCoroutine(SceneTransitManager.instance.ChangeScene(sceneName));
         }
 	}
 }

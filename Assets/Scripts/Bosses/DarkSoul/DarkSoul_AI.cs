@@ -13,6 +13,7 @@ public class DarkSoul_AI : Boss_AI {
     protected override void Update () {
         if (!GetComponent<Stat_HealthScript>().isAlive() &&
              !GetComponent<Animator>().GetBool("Dead")) {
+            shouldDie = true;
             GetComponent<Animator>().SetBool("Dead", true);
             Destroy(this.gameObject.GetComponentInChildren<Canvas>().gameObject);
         }
