@@ -12,7 +12,7 @@ public class TextPopupScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        GetComponent<RectTransform>().anchoredPosition += new Vector2(0, 75f * Time.deltaTime);
 	}
 		
 	// Called when the animation for the popup ends
