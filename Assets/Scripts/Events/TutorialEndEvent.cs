@@ -15,7 +15,7 @@ public class TutorialEndEvent : CustomEventBaseScript
 		if(!boss.GetComponent<Stat_HealthScript>().isAlive() && !startEvent)
         {
             startEvent = true;
-            StartCoroutine(SceneTransitManager.instance.FadeInAndOut());
+           // StartCoroutine(SceneTransitManager.instance.FadeInAndOut());
         }
 	}
 }
