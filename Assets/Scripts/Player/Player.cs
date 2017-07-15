@@ -12,7 +12,6 @@ public class Player : MonoBehaviour {
 	Animator animator;
 
 	float moveSpeed;
-	float health;
 
 	Stat_HealthScript healthScript;
 
@@ -22,7 +21,7 @@ public class Player : MonoBehaviour {
 	Vector3 velocity;
 	float velocityXSmoothing;
 
-	Controller2D controller;
+	public Controller2D controller;
 	Vector2 directionalInput;
 
 	SpriteRenderer playerSpriteRenderer;
@@ -77,7 +76,6 @@ public class Player : MonoBehaviour {
 			GetComponent<Player_Input> ().enabled = false;
 		}
 
-		ImageRotate ();
 	}
 
 	public void SetDirectionalInput (Vector2 input) {
@@ -124,13 +122,5 @@ public class Player : MonoBehaviour {
 		gM.OnPlayerDead ();
         playSound = true;
 		StartCoroutine(SceneTransitManager.instance.ReloadSceneWithFade (-1));
-	}
-
-	void ImageRotate() {
-		if (controller.collisions.faceDir == 1) {
-			playerSpriteRenderer.flipX = true;
-		} else {
-			playerSpriteRenderer.flipX = false;
-		}
 	}
 }

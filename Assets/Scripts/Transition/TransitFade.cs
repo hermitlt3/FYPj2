@@ -24,8 +24,18 @@ public class TransitFade : MonoBehaviour {
 		fadeDir = direction;
 		return fadeSpeed;
 	}
-
-	public float GetAlpha() {
-		return alpha;
-	}
+    
+    public void InstantTransmission(int direction)
+    {
+        if (direction == -1)
+        {
+            fadeDir = -1;
+            alpha = 0;
+        }
+        else if (direction == 1)
+        {
+            fadeDir = 1;
+            alpha = 1;
+        }
+    }
 }

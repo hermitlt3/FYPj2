@@ -13,6 +13,10 @@ public class PlayerExpScript : BarScript {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
+        if(gO == null)
+        {
+            gO = GameObject.FindGameObjectWithTag("Player");
+        }
 		barImage = GetComponentsInChildren<Image> ()[1];
 		expScript = gO.GetComponent<Player_Experience> ();
 
