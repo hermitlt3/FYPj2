@@ -66,14 +66,27 @@ public class SceneTransitManager : MonoBehaviour {
 		yield return async;
 	}
 
-    public IEnumerator FadeInAndOut(float delayTime = 0f)
+    public IEnumerator FadeInAndOut(float delayTime = 0f, bool instantFadeIn = false, bool instantFadeOut = false)
     {
-        float fadeTime = fading.BeginFade(1);
-        yield return new WaitForSeconds(fadeTime);
+        if (!instantFadeIn)
+        {
+            float fadeTime = fading.BeginFade(1);
+            yield return new WaitForSeconds(fadeTime);
+            yield return new WaitForSeconds(delayTime);
+        }
+        else
+        {
+            fading.InstantTransmission(1);
+        }
 
-        yield return new WaitForSeconds(delayTime);
-
-        fadeTime = fading.BeginFade(-1);
-        yield return new WaitForSeconds(fadeTime);
+        if(!instantFadeOut)
+        {
+            float fadeTime = fading.BeginFade(-1);
+            yield return new WaitForSeconds(fadeTime);
+        }
+        else
+        {
+            fading.InstantTransmission(-1);
+        }
     }
 }

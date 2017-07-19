@@ -13,6 +13,10 @@ public class HealthbarScript : BarScript {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
+        if(gO == null)
+        {
+            gO = GameObject.FindGameObjectWithTag("Player");
+        }
 		barImage = GetComponentsInChildren<Image> ()[1];
 		healthScript = gO.GetComponent<Stat_HealthScript> ();
 		healthText = GetComponentInChildren<Text> ();

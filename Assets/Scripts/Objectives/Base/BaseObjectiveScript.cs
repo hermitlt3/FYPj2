@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // For tutorial(s)
 public class BaseObjectiveScript : MonoBehaviour {
@@ -12,7 +13,7 @@ public class BaseObjectiveScript : MonoBehaviour {
 	// Use this for initialization
 	protected virtual void Start () {
 
-        description = "";
+        GetComponent<Text>().text = description;
         isFinished = false;
         doneObjective = false;
 
