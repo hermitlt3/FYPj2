@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
 	public Controller2D controller;
 	Vector2 directionalInput;
 
+	SpriteRenderer playerSpriteRenderer;
 	GameManager gM;
     bool playSound;
 
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour {
 		moveSpeed = GetComponent<Stat_MovementSpdScript> ().GetBaseMS ();
 		healthScript = GetComponent<Stat_HealthScript> ();
 
+		playerSpriteRenderer = GetComponent<SpriteRenderer> ();
 		gM = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager>();
         playSound = true;
 

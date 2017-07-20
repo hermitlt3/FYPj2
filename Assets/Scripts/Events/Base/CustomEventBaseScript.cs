@@ -5,7 +5,6 @@ using UnityEngine;
 public class CustomEventBaseScript : MonoBehaviour {
 
     protected bool startEvent = false;
-    public bool isDone = false;
 
     // Use this for initialization
     protected virtual void Start () {
