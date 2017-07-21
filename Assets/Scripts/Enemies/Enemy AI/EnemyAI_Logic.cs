@@ -44,6 +44,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 		case AI_STATES.AI_MOVE: 
 			if (!AI_Move.isMoving ()) {
 				currState = AI_STATES.AI_ATTACK;
+                AI_Attack.Reset();
 				AI_Attack.SetIsAttacking (true);
 			}
 			break;

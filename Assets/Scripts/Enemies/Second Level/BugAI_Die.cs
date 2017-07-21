@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MageAI_Die : EnemyAI_Die {
+public class BugAI_Die : EnemyAI_Die {
 
 	// Use this for initialization
 	override protected void Start () {
-		base.Start();
+        base.Start();
 	}
 
     // Update is called once per frame
@@ -14,11 +14,11 @@ public class MageAI_Die : EnemyAI_Die {
         base.Update();
 	}
 
-	protected override void Deactivate() {
-		base.Deactivate ();
+    protected override void Deactivate() {
+        base.Deactivate();
     }
 
-	protected override void ShouldDie() {
+    protected override void ShouldDie() {
         base.ShouldDie();
-	}
+    }
 }

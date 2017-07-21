@@ -20,7 +20,7 @@ public class MageAI_AttackBehaviour : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		attackDamage = GetComponent<Stat_AttackScript> ();
 		if (target) {
-			direction = target.transform.position - transform.position;
+			//direction = target.transform.position - transform.position;
 		}
 		transform.rotation = Quaternion.Euler (new Vector3 (0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
 	}

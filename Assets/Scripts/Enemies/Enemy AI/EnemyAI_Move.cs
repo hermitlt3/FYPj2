@@ -74,4 +74,9 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 			aggressionType = AGGRESSION_TYPE.AGGRESSIVE;
 		}
 	}
+
+    public Collider2D GetMovementBoundaries()
+    {
+        return areaBounds;
+    }
 }

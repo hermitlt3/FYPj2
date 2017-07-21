@@ -11,12 +11,12 @@ public class EnemyAI_Die : MonoBehaviour {
 
 	protected Stat_ExperienceScript expOutputScript;
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		expOutputScript = GetComponent<Stat_ExperienceScript> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		
 	}
 
@@ -24,7 +24,13 @@ public class EnemyAI_Die : MonoBehaviour {
 		if (!shouldDie) {
 			return;
 		}
-	}
+        CollectiblesGenerator.instance.GenerateCollectibles(transform.position, expOutputScript.GetExperience(), Random.Range(0, 20));
+        if (youOnlyLiveOnce)
+        {
+            ReloadCheckpointSystem.RemoveEnemyToReloadList(this.gameObject);
+        }
+        this.gameObject.SetActive(false);
+    }
 
 	protected virtual void ShouldDie() {
 		if (!GameObject.FindGameObjectWithTag ("Player").GetComponent<Stat_HealthScript> ().isAlive ()) {

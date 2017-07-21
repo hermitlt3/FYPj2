@@ -11,17 +11,10 @@ public class MageAI_Attack : EnemyAI_Attack {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
-		attackDamage = GetComponent<Stat_AttackScript> ().GetBaseAttackDamage ();
-		attackSpeed = 1f / GetComponent<Stat_AttackSpeedScript> ().GetAttackSpeed ();
-
-		attacking = false;
-		animationEnd = false;
 	}
 
 	// Update is called once per frame
 	protected override void Update () {
-		//UpdateAttackSpeedTimer ();
-
 		if (BoxDetectedPlayer () != null) {
 			attacking = true;
 
@@ -55,11 +48,7 @@ public class MageAI_Attack : EnemyAI_Attack {
         temp.GetComponent<AudioSource>().Play();
 
         MageAI_AttackBehaviour behav = temp.AddComponent<MageAI_AttackBehaviour> ();
-		if (RayDetectedPlayer() != null) {
-			behav.SetTarget (RayDetectedPlayer ().gameObject);
-		} else {
-			behav.SetDirection (new Vector2 ((sprite.flipX) ? -1 : 1, 0));
-		}
+        behav.SetDirection (new Vector2 ((sprite.flipX) ? -1 : 1, 0));
 		return true;
 	}
 		

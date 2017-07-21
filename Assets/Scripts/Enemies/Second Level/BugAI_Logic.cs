@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoulAI_Die : EnemyAI_Die {
+public class BugAI_Logic : EnemyAI_Logic {
 
 	// Use this for initialization
 	protected override void Start () {
@@ -13,12 +13,4 @@ public class SoulAI_Die : EnemyAI_Die {
 	protected override void Update () {
         base.Update();
 	}
-
-    protected override void Deactivate() { 
-        base.Deactivate();
-    }
-
-    protected override void ShouldDie() {
-        base.ShouldDie();
-    }
 }
