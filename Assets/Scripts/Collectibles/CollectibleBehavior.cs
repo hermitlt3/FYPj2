@@ -71,13 +71,14 @@ public class CollectibleBehavior : MonoBehaviour
 		if (stuckTime > 1f) {
 			thisCollider.enabled = false;
 			myRigidBody.gravityScale = 0f;
-			myRigidBody.velocity = myRigidBody.velocity.normalized * 5f;
+			myRigidBody.velocity = direction * 5f;
 		}
 
 		//////////////////////
 
 		if (!GetComponent<SpriteRenderer> ().isVisible) {
-			timeToDestroy = Mathf.Max (0, timeToDestroy - Time.deltaTime);
+			thisCollider.enabled = false;
+            timeToDestroy = Mathf.Max (0, timeToDestroy - Time.deltaTime);
 		} else {
 			timeToDestroy = timeToDestroyReset;
 		}

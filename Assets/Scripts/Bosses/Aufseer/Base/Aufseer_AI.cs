@@ -12,8 +12,13 @@ public class Aufseer_AI : Boss_AI {
 	private GameObject target;
 	private Animator animator;
 
-	// Use this for initialization
-	protected override void Start () {
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+    // Use this for initialization
+    // Use this for initialization
+    protected override void Start () {
 		base.Start ();
 		numberOfAttackPatterns = 3;
 		currentAttackPattern = -1;
@@ -23,7 +28,6 @@ public class Aufseer_AI : Boss_AI {
 		} 
 		selfTimer = 0f;
 		target = GameObject.FindGameObjectWithTag ("Player");
-		animator = GetComponent<Animator> ();
 
 		maxTimeBetweenIntervals = timeBetweenIntervals;
     }
@@ -84,6 +88,10 @@ public class Aufseer_AI : Boss_AI {
 	}
 
 	public override void Reset() {
+        if(!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
         animator.SetTrigger("Reset");
         animator.SetBool("Dead", false);
         for (int i = 0; i < transform.childCount; ++i)
