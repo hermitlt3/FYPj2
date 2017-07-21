@@ -69,7 +69,7 @@ public class EnemyAI_DetectPlayer : MonoBehaviour {
 		}
 	}
 
-	void GetsHit(GameObject player) {
+	protected virtual void GetsHit(GameObject player) {
 		float xDiff = player.transform.position.x - transform.position.x;
 		if (xDiff < 0)
 			sprite.flipX = true;

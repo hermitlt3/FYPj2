@@ -5,13 +5,24 @@ using UnityEngine;
 public class BugAI_Attack : EnemyAI_Attack {
 
     public float rollingSpeed = 5f;
+    public float jumpHeight = 10f;
+
+    public int numberOfHits = 3;
 
     bool rollAnimationStart = false;
-    float sidesOffset = 0.5f;
+
+    float offset = 0.5f;
+    float noCheckTime = 0.5f;
+    float noCheckTimer;
+
+    float checkStuckTime = 2f;
+    float checkStuckTimer;
+
+    int hit = 0;
 
     Collider2D boundaries;
     GameObject hardCodedTargetPlayer;
-
+    
     protected override void Awake() {
         base.Awake();
     }
@@ -21,20 +32,42 @@ public class BugAI_Attack : EnemyAI_Attack {
         base.Start();
         boundaries = GetComponent<EnemyAI_Move>().GetMovementBoundaries();
         hardCodedTargetPlayer = GameObject.FindGameObjectWithTag("Player").gameObject;
+
+        noCheckTimer = noCheckTime;
+        checkStuckTimer = checkStuckTime;
     }
 	
 	// Update is called once per frame
 	override protected void Update () {
         if (attacking)
         {
-            if (transform.position.x > boundaries.bounds.max.x - sidesOffset || transform.position.x < boundaries.bounds.min.x + sidesOffset)
+            if(GetComponent<Rigidbody2D>().velocity.x == 0)
             {
-                attacking = false;
+                checkStuckTimer = Mathf.Max(0, checkStuckTimer - Time.deltaTime);
+                if(checkStuckTimer <= 0f)
+                {
+                    checkStuckTimer = checkStuckTime;
+                    attacking = false;
+                    hit = 0;
+                    noCheckTimer = noCheckTime;
+                }
             }
-            if (hardCodedTargetPlayer.GetComponent<Collider2D>().bounds.Intersects(GetComponent<Collider2D>().bounds))
+
+            noCheckTimer = Mathf.Max(0, noCheckTimer - Time.deltaTime);
+            // On ground and reach the end
+            if (noCheckTimer <= 0f && (transform.position.x >= boundaries.bounds.max.x - offset || transform.position.x <= boundaries.bounds.min.x + offset))
             {
-                attacking = false;
                 rollAnimationStart = false;
+                if(GetComponent<Rigidbody2D>().velocity.y == 0)
+                {
+                    attacking = false;
+                    hit = 0;
+                    noCheckTimer = noCheckTime;
+                }
+            }
+            if (hardCodedTargetPlayer.GetComponent<Collider2D>().bounds.Intersects(GetComponent<Collider2D>().bounds) && hit < numberOfHits && rollAnimationStart)
+            {
+                hit++;
                 hardCodedTargetPlayer.GetComponent<Stat_HealthScript>().DecreaseHealth(attackDamage);
                 TextPopupManager.instance.ShowTextPopup(GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>(), hardCodedTargetPlayer.transform.position, "-" + attackDamage.ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
             }
@@ -60,6 +93,16 @@ public class BugAI_Attack : EnemyAI_Attack {
     public override void Reset()
     {
         rollAnimationStart = false;
+        hit = 0;
+        noCheckTimer = noCheckTime;
+    }
+
+    protected override void GetsHit(GameObject player)
+    {
+        if (rollAnimationStart)
+            return;
+
+        base.GetsHit(player);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -70,6 +113,6 @@ public class BugAI_Attack : EnemyAI_Attack {
     private void RollAnimationStart()
     {
         rollAnimationStart = true;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 10);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
     }
 }

@@ -50,6 +50,7 @@ public class ObjectPoolScript : MonoBehaviour {
 		}
 		if (willIncrease) {
 			GameObject obj = (GameObject)Instantiate (prefabs[index]);
+            obj.transform.parent = this.gameObject.transform;
 			pooledObjects[index].Add (obj);
 			return obj;
 		}

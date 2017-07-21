@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyAI_Die : MonoBehaviour {
 
+    public int healthGiveMin = 0;
+    public int healthGiveMax = 20;
 	[SerializeField]
 	protected bool youOnlyLiveOnce = false;
 
@@ -24,7 +26,7 @@ public class EnemyAI_Die : MonoBehaviour {
 		if (!shouldDie) {
 			return;
 		}
-        CollectiblesGenerator.instance.GenerateCollectibles(transform.position, expOutputScript.GetExperience(), Random.Range(0, 20));
+        CollectiblesGenerator.instance.GenerateCollectibles(transform.position, expOutputScript.GetExperience(), Random.Range(healthGiveMin, healthGiveMax));
         if (youOnlyLiveOnce)
         {
             ReloadCheckpointSystem.RemoveEnemyToReloadList(this.gameObject);

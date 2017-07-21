@@ -10,6 +10,7 @@ public class ResetEnemy : ResetObject {
 		GetComponent<EnemyAI_Move> ().Reset ();
 		GetComponent<Enemy_Anim> ().Reset ();
 		GetComponent<EnemyAI_Die> ().Reset ();
+        GetComponent<EnemyAI_Attack>().Reset();
 
 		GetComponent<Stat_HealthScript> ().IncreaseHealth (GetComponent<Stat_HealthScript> ().GetMaxHealth ());
 
