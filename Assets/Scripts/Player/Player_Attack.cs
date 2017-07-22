@@ -46,9 +46,9 @@ public class Player_Attack : MonoBehaviour {
 			if ((hit.gameObject.GetComponent<EnemyAI_Logic> () || hit.gameObject.GetComponent<Boss_AI>()) && hit.gameObject.GetComponent<Stat_HealthScript>().isAlive()) {
                 AudioManager.instance.PlaySound(GetComponents<AudioSource>()[2]);
                 if (gotCrit) {
-					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.CRITICAL);
+					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.CRITICAL_PLAYER);
 				} else {
-					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
+					TextPopupManager.instance.ShowTextPopup (playerCanvas, hit.transform.position, "-" + attackDamage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE_PLAYER);
 				}
 
                 GameObject effect = Instantiate<GameObject>(effectPrefab[Random.Range(0, effectPrefab.Length)]) as GameObject;

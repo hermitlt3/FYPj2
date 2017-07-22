@@ -52,7 +52,7 @@ public class MageAI_AttackBehaviour : MonoBehaviour {
 
 		if (other.collider.gameObject.CompareTag("Player")) {
 			other.collider.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage.GetBaseAttackDamage ());
-			TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.collider.transform.position, "-" +attackDamage.GetBaseAttackDamage ().ToString(), TextPopupManager.TEXT_TYPE.DAMAGE);
+			TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.collider.transform.position, "-" +attackDamage.GetBaseAttackDamage ().ToString(), TextPopupManager.TEXT_TYPE.DAMAGE_ENEMY);
 
 			this.gameObject.SetActive (false);
 			Destroy (this);

@@ -22,7 +22,7 @@ public class Aufseer_Attack2Behavior : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.CompareTag("Player") && !hasHit && toHit) {
 			other.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage.GetBaseAttackDamage ());
-			TextPopupManager.instance.ShowDamageTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.transform.position, attackDamage.GetBaseAttackDamage());
+			TextPopupManager.instance.ShowEnemyDamageTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.transform.position, attackDamage.GetBaseAttackDamage());
 			hasHit = true;
 		}
 	}
@@ -30,7 +30,7 @@ public class Aufseer_Attack2Behavior : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.CompareTag("Player") && !hasHit && toHit) {
 			other.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (attackDamage.GetBaseAttackDamage ());
-			TextPopupManager.instance.ShowDamageTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.transform.position, attackDamage.GetBaseAttackDamage());
+			TextPopupManager.instance.ShowEnemyDamageTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas>(), other.transform.position, attackDamage.GetBaseAttackDamage());
 			hasHit = true;
 		}
 	}

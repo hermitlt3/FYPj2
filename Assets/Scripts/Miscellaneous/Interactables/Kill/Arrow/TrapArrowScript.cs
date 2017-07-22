@@ -45,7 +45,7 @@ public class TrapArrowScript : MonoBehaviour {
 			if (other.gameObject.GetComponent<Stat_HealthScript> () && canKill) {
 				other.gameObject.GetComponent<Stat_HealthScript> ().DecreaseHealth (damage);
 
-				TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> (), other.transform.position, "-" + damage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE);
+				TextPopupManager.instance.ShowTextPopup (GameObject.FindGameObjectWithTag ("PlayerCanvas").GetComponent<Canvas> (), other.transform.position, "-" + damage.ToString (), TextPopupManager.TEXT_TYPE.DAMAGE_ENEMY);
 				Reset ();
 				this.gameObject.SetActive (false);
 			}
