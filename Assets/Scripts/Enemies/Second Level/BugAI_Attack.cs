@@ -6,17 +6,20 @@ public class BugAI_Attack : EnemyAI_Attack {
 
     public float rollingSpeed = 5f;
     public float jumpHeight = 10f;
+    public float customRollTime = 3f;
 
     public int numberOfHits = 3;
 
     bool rollAnimationStart = false;
 
-    float offset = 0.5f;
+    float offset = 1f;
     float noCheckTime = 0.5f;
     float noCheckTimer;
 
     float checkStuckTime = 2f;
     float checkStuckTimer;
+
+    float rollTimer;
 
     int hit = 0;
 
@@ -35,21 +38,40 @@ public class BugAI_Attack : EnemyAI_Attack {
 
         noCheckTimer = noCheckTime;
         checkStuckTimer = checkStuckTime;
+        rollTimer = customRollTime;
     }
 	
 	// Update is called once per frame
 	override protected void Update () {
         if (attacking)
         {
-            if(GetComponent<Rigidbody2D>().velocity.x == 0)
+            if (rollAnimationStart)
+            {
+                rollTimer = Mathf.Max(0, rollTimer - Time.deltaTime);
+                if (rollTimer <= 0f)
+                {
+                    InternalReset();
+                    rollAnimationStart = false;
+                }
+            }
+            else
+            {
+                if (BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x < 0)
+                {
+                    sprite.flipX = true;
+                }
+                else
+                {
+                    sprite.flipX = false;
+                }
+            }
+            if (GetComponent<Rigidbody2D>().velocity.x == 0)
             {
                 checkStuckTimer = Mathf.Max(0, checkStuckTimer - Time.deltaTime);
                 if(checkStuckTimer <= 0f)
                 {
                     checkStuckTimer = checkStuckTime;
-                    attacking = false;
-                    hit = 0;
-                    noCheckTimer = noCheckTime;
+                    InternalReset();
                 }
             }
 
@@ -60,9 +82,7 @@ public class BugAI_Attack : EnemyAI_Attack {
                 rollAnimationStart = false;
                 if(GetComponent<Rigidbody2D>().velocity.y == 0)
                 {
-                    attacking = false;
-                    hit = 0;
-                    noCheckTimer = noCheckTime;
+                    InternalReset();
                 }
             }
             if (hardCodedTargetPlayer.GetComponent<Collider2D>().bounds.Intersects(GetComponent<Collider2D>().bounds) && hit < numberOfHits && rollAnimationStart)
@@ -114,5 +134,13 @@ public class BugAI_Attack : EnemyAI_Attack {
     {
         rollAnimationStart = true;
         GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+    }
+
+    private void InternalReset()
+    {
+        attacking = false;
+        hit = 0;
+        noCheckTimer = noCheckTime;
+        rollTimer = customRollTime;
     }
 }
