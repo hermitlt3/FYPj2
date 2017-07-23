@@ -20,4 +20,16 @@ public class BugAI_Move : EnemyAI_Move {
     {
         base.Update();
     }
+
+    protected override void GetsHit(GameObject gameObject)
+    {
+        if (this.enabled)
+        {
+            base.GetsHit(gameObject);
+        }
+        if (aggressionType == AGGRESSION_TYPE.PASSIVE)
+        {
+            aggressionType = AGGRESSION_TYPE.AGGRESSIVE;
+        }
+    }
 }

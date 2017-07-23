@@ -11,6 +11,9 @@ public class BugAI_Attack : EnemyAI_Attack {
     public int numberOfHits = 3;
 
     bool rollAnimationStart = false;
+    bool onGround = false;
+    bool onLeftmostSide = false;
+    bool onRightmostSide = false;
 
     float offset = 1f;
     float noCheckTime = 0.5f;
@@ -37,7 +40,6 @@ public class BugAI_Attack : EnemyAI_Attack {
         hardCodedTargetPlayer = GameObject.FindGameObjectWithTag("Player").gameObject;
 
         noCheckTimer = noCheckTime;
-        checkStuckTimer = checkStuckTime;
         rollTimer = customRollTime;
     }
 	
@@ -56,35 +58,31 @@ public class BugAI_Attack : EnemyAI_Attack {
             }
             else
             {
-                if (BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x < 0)
+                if (BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x < 0f && !onLeftmostSide)
                 {
                     sprite.flipX = true;
                 }
-                else
+                else if (BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x >= 0f && !onRightmostSide)
                 {
                     sprite.flipX = false;
                 }
             }
-            if (GetComponent<Rigidbody2D>().velocity.x == 0)
-            {
-                checkStuckTimer = Mathf.Max(0, checkStuckTimer - Time.deltaTime);
-                if(checkStuckTimer <= 0f)
-                {
-                    checkStuckTimer = checkStuckTime;
-                    InternalReset();
-                }
-            }
 
             noCheckTimer = Mathf.Max(0, noCheckTimer - Time.deltaTime);
-            // On ground and reach the end
-            if (noCheckTimer <= 0f && (transform.position.x >= boundaries.bounds.max.x - offset || transform.position.x <= boundaries.bounds.min.x + offset))
+
+            if (transform.position.x > boundaries.bounds.max.x)
             {
-                rollAnimationStart = false;
-                if(GetComponent<Rigidbody2D>().velocity.y == 0)
-                {
-                    InternalReset();
-                }
+                onRightmostSide = true;
+                onLeftmostSide = false;
+                transform.position = new Vector3(boundaries.bounds.max.x, transform.position.y);
             }
+            if (transform.position.x < boundaries.bounds.min.x)
+            {
+                onRightmostSide = false;
+                onLeftmostSide = true;
+                transform.position = new Vector3(boundaries.bounds.min.x, transform.position.y);
+            }
+            
             if (hardCodedTargetPlayer.GetComponent<Collider2D>().bounds.Intersects(GetComponent<Collider2D>().bounds) && hit < numberOfHits && rollAnimationStart)
             {
                 hit++;
@@ -127,7 +125,13 @@ public class BugAI_Attack : EnemyAI_Attack {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (boundaries)
+        {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Terrain") && collision.gameObject == boundaries.gameObject)
+            {
+                onGround = true;
+            }
+        }
     }
 
     private void RollAnimationStart()

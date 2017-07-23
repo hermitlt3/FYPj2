@@ -69,7 +69,8 @@ public class EnemyAI_Move : EnemyAI_DetectPlayer {
 		aggressionType = originalAggression;
 	}
 
-	void GetsHit(GameObject gameObject) {
+	protected override void GetsHit(GameObject gameObject) {
+        base.GetsHit(gameObject);
 		if (aggressionType == AGGRESSION_TYPE.PASSIVE) {
 			aggressionType = AGGRESSION_TYPE.AGGRESSIVE;
 		}
