@@ -11,16 +11,11 @@ public class BugAI_Attack : EnemyAI_Attack {
     public int numberOfHits = 3;
 
     bool rollAnimationStart = false;
-    bool onGround = false;
     bool onLeftmostSide = false;
     bool onRightmostSide = false;
 
-    float offset = 1f;
     float noCheckTime = 0.5f;
     float noCheckTimer;
-
-    float checkStuckTime = 2f;
-    float checkStuckTimer;
 
     float rollTimer;
 
@@ -125,13 +120,7 @@ public class BugAI_Attack : EnemyAI_Attack {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (boundaries)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Terrain") && collision.gameObject == boundaries.gameObject)
-            {
-                onGround = true;
-            }
-        }
+
     }
 
     private void RollAnimationStart()
