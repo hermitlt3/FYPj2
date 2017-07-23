@@ -8,6 +8,7 @@ public class Slime_Attack1 : Boss_Attack
     public float sinkSpeed;
     public float moveSpeed = 5f;
     public float delayAttack = 2f;
+    public float damageMultiplier = 2f;
 
     bool hit = false;
     float animSpeed = 0.25f;
@@ -81,8 +82,9 @@ public class Slime_Attack1 : Boss_Attack
         if (GetComponents<Collider2D>()[1].bounds.Intersects(target.GetComponent<Collider2D>().bounds) && !hit)
         {
             hit = true;
-            target.GetComponent<Stat_HealthScript>().DecreaseHealth(GetComponent<Stat_AttackScript>().GetBaseAttackDamage());
-            TextPopupManager.instance.ShowEnemyDamageTextPopup(GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>(), target.transform.position, GetComponent<Stat_AttackScript>().GetBaseAttackDamage());
+            int damage = Mathf.RoundToInt(GetComponent<Stat_AttackScript>().GetBaseAttackDamage() * damageMultiplier);
+            target.GetComponent<Stat_HealthScript>().DecreaseHealth(damage);
+            TextPopupManager.instance.ShowEnemyDamageTextPopup(GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>(), target.transform.position, damage);
         }
     }
 
@@ -111,5 +113,6 @@ public class Slime_Attack1 : Boss_Attack
     void AttackTwoEnd()
     {
         GetComponents<Collider2D>()[1].enabled = false;
+        this.enabled = false;
     }
 }

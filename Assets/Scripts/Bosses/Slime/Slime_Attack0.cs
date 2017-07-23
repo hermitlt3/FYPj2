@@ -6,6 +6,7 @@ public class Slime_Attack0 : Boss_Attack {
 
     float animSpeed;
     public float slideSpeed;
+    public float damageMultiplier = 1f;
 
     Vector3 startPosition;
     Vector3 endPosition;
@@ -39,8 +40,9 @@ public class Slime_Attack0 : Boss_Attack {
             if (GetComponent<Collider2D>().bounds.Intersects(target.GetComponent<Collider2D>().bounds) && !hit)
             {
                 hit = true;
-                target.GetComponent<Stat_HealthScript>().DecreaseHealth(GetComponent<Stat_AttackScript>().GetBaseAttackDamage());
-                TextPopupManager.instance.ShowEnemyDamageTextPopup(GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>(), target.transform.position, GetComponent<Stat_AttackScript>().GetBaseAttackDamage());
+                int damage = Mathf.RoundToInt(GetComponent<Stat_AttackScript>().GetBaseAttackDamage() * damageMultiplier);
+                target.GetComponent<Stat_HealthScript>().DecreaseHealth(damage);
+                TextPopupManager.instance.ShowEnemyDamageTextPopup(GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>(), target.transform.position, damage);
             }
             if (Mathf.Abs(transform.position.x - endPosition.x) < 0.5f)
             {

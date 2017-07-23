@@ -45,43 +45,50 @@ public class Aufseer_AI : Boss_AI {
 
 	void AnimationUpdate() {
 		if (selfTimer >= timeBetweenIntervals) {
-			float randomSkill = Random.Range (0f, 1f);
-			float chosenSkill = 0f;
-			float minValue = 0f;
-			for (int i = 0; i < numberOfAttackPatterns; ++i) {
-				chosenSkill += skillsChance [i];
-				if (randomSkill >= minValue && randomSkill < chosenSkill) {
-					currentAttackPattern = i;
-					break;
-				}
-				minValue += skillsChance[i];
-			}
-			animator.SetInteger ("AttackStyle", currentAttackPattern);
+            if (!playerDependentAttacks)
+            {
+                float randomSkill = Random.Range(0f, 1f);
+                float chosenSkill = 0f;
+                float minValue = 0f;
+                for (int i = 0; i < numberOfAttackPatterns; ++i)
+                {
+                    chosenSkill += skillsChance[i];
+                    if (randomSkill >= minValue && randomSkill < chosenSkill)
+                    {
+                        currentAttackPattern = i;
+                        break;
+                    }
+                    minValue += skillsChance[i];
+                }
+                animator.SetInteger("AttackStyle", currentAttackPattern);
+            }
+            else
+            {
+
+            }
 			selfTimer = 0f;
 		}
 	}
 
-	void AttackUpdate() {
-		if (playerDependentAttacks) {
-
-		} else {
-			switch (currentAttackPattern) {
-			case 0:
-				Aufseer_Attack0 attackOne = this.gameObject.AddComponent<Aufseer_Attack0> ();
-				attackOne.SetTarget (target);
-				break;
-			case 1:
-				Aufseer_Attack1 attackTwo = this.gameObject.AddComponent<Aufseer_Attack1> ();
-				attackTwo.SetTarget (target);
-				break;
-			case 2:
-				Aufseer_Attack2 attackThree = this.gameObject.AddComponent<Aufseer_Attack2> ();
-				attackThree.SetTarget (target);
-				break;
-			}
-			currentAttackPattern = -1;
-		}
-	}
+    void AttackUpdate()
+    {
+        switch (currentAttackPattern)
+        {
+            case 0:
+                Aufseer_Attack0 attackOne = this.gameObject.AddComponent<Aufseer_Attack0>();
+                attackOne.SetTarget(target);
+                break;
+            case 1:
+                Aufseer_Attack1 attackTwo = this.gameObject.AddComponent<Aufseer_Attack1>();
+                attackTwo.SetTarget(target);
+                break;
+            case 2:
+                Aufseer_Attack2 attackThree = this.gameObject.AddComponent<Aufseer_Attack2>();
+                attackThree.SetTarget(target);
+                break;
+        }
+        currentAttackPattern = -1;
+    }
 
 	void TimerUpdate() {
 		selfTimer = Mathf.Min(selfTimer + Time.deltaTime, timeBetweenIntervals);
