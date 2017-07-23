@@ -22,7 +22,7 @@ public class Slime_AI : Boss_AI
     protected override void Start()
     {
         base.Start();
-        numberOfAttackPatterns = 3;
+        numberOfAttackPatterns = 2;
         currentAttackPattern = -1;
 
         if (skillsChance.Length != numberOfAttackPatterns)
@@ -39,6 +39,19 @@ public class Slime_AI : Boss_AI
     protected override void Update()
     {
         base.Update();
+
+        if (animator.GetInteger("AttackStyle") == -1)
+        {
+            if (transform.position.x - target.transform.position.x > 0f)
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
+
         if (!GetComponent<Stat_HealthScript>().isAlive())
         {
             animator.SetBool("Dead", true);
@@ -83,16 +96,16 @@ public class Slime_AI : Boss_AI
             switch (currentAttackPattern)
             {
                 case 0:
-                    Aufseer_Attack0 attackOne = this.gameObject.AddComponent<Aufseer_Attack0>();
+                    Slime_Attack0 attackOne = this.gameObject.GetComponent<Slime_Attack0>();
+                    attackOne.enabled = true;
                     attackOne.SetTarget(target);
+                    attackOne.Initiate();
                     break;
                 case 1:
-                    Aufseer_Attack1 attackTwo = this.gameObject.AddComponent<Aufseer_Attack1>();
+                    Slime_Attack1 attackTwo = this.gameObject.GetComponent<Slime_Attack1>();
+                    attackTwo.enabled = true;
                     attackTwo.SetTarget(target);
-                    break;
-                case 2:
-                    Aufseer_Attack2 attackThree = this.gameObject.AddComponent<Aufseer_Attack2>();
-                    attackThree.SetTarget(target);
+                    attackTwo.Initiate();
                     break;
             }
             currentAttackPattern = -1;
