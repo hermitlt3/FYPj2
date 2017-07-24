@@ -14,8 +14,16 @@ public class SoulAI_Die : EnemyAI_Die {
         base.Update();
 	}
 
-    protected override void Deactivate() { 
-        base.Deactivate();
+    protected override void Deactivate() {
+        if (!shouldDie)
+        {
+            return;
+        }
+        if (youOnlyLiveOnce)
+        {
+            ReloadCheckpointSystem.RemoveEnemyToReloadList(this.gameObject);
+        }
+        this.gameObject.SetActive(false);
     }
 
     protected override void ShouldDie() {

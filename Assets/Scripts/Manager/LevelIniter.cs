@@ -23,6 +23,7 @@ public class LevelIniter : MonoBehaviour {
         }
         player.transform.position = playerStartPosition;
         player.GetComponent<Player_Spawnpoint>().SetSpawnLocation(playerStartPosition);
+        player.GetComponent<Player_Input>().enabled = true;
 
         mainCamera.GetComponent<Camera2DFollow>().enabled = false;
         mainCamera.transform.position = new Vector3(playerStartPosition.x, playerStartPosition.y, mainCamera.transform.position.z);

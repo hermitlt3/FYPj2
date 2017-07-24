@@ -9,8 +9,6 @@ public class TutorialEndEvent : CustomEventBaseScript
     // These are really all the things affected by the cutscene
     public GameObject boss;
     public GameObject player;
-    public GameObject[] toBeDestroyed;
-    public GameObject[] toBeDeactivated;
     public GameObject mainCanvas;
     public GameObject blocked;
     public Text theText;
@@ -31,19 +29,9 @@ public class TutorialEndEvent : CustomEventBaseScript
     protected override void Update () {
 		if(boss.GetComponent<Boss_AI>().shouldDie && !startEvent)
         {
-            if (toBeDestroyed.Length > 0)
+            if(theText == null)
             {
-                foreach (GameObject go in toBeDestroyed)
-                {
-                    Destroy(go);
-                }
-            }
-            if (toBeDeactivated.Length > 0)
-            {
-                foreach (GameObject go in toBeDeactivated)
-                {
-                    go.SetActive(false);
-                }
+                theText = player.transform.GetChild(0).GetChild(0).GetComponent<Text>();
             }
             StartCoroutine(SceneTransitManager.instance.FadeInAndOut(0, false, true));
             blocked.SetActive(true);
@@ -102,6 +90,7 @@ public class TutorialEndEvent : CustomEventBaseScript
     void TransitScene()
     {
         player.GetComponent<Player_Input>().enabled = false;
+        player.GetComponentInChildren<Text>().enabled = false;
         StartCoroutine(SceneTransitManager.instance.ChangeScene(sceneName));
     }
 }
