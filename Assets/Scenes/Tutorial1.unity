@@ -7803,7 +7803,7 @@ Prefab:
     - target: {fileID: 114662942285668144, guid: 6c4ef3fd2c54a9d4ab8be6bee3fae6be,
         type: 2}
       propertyPath: m_MatchWidthOrHeight
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224389164862304742, guid: 6c4ef3fd2c54a9d4ab8be6bee3fae6be,
         type: 2}
@@ -7910,6 +7910,10 @@ Prefab:
         type: 2}
       propertyPath: m_Depth
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147488165940458, guid: 6c4ef3fd2c54a9d4ab8be6bee3fae6be, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 340
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114717996006752236, guid: 6c4ef3fd2c54a9d4ab8be6bee3fae6be, type: 2}
