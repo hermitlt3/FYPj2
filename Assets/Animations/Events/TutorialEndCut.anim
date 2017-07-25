@@ -276,16 +276,16 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 19.25
-    functionName: TransitScene
-    data: 
+  - time: 19.216667
+    functionName: SetText
+    data: What the..
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 19.333334
-    functionName: SetText
-    data: What the..
+  - time: 19.25
+    functionName: TransitScene
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
