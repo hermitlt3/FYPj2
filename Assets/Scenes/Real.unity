@@ -874,8 +874,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 50
+  MinDistance: 3.07
+  MaxDistance: 18
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -26447,6 +26447,16 @@ Prefab:
         type: 2}
       propertyPath: m_Size.y
       value: 3.4855652
+      objectReference: {fileID: 0}
+    - target: {fileID: 82910059861388508, guid: 1cd3f49b38daa3341863f3f2fb26b3ab,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 3.320001
+      objectReference: {fileID: 0}
+    - target: {fileID: 82910059861388508, guid: 1cd3f49b38daa3341863f3f2fb26b3ab,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1cd3f49b38daa3341863f3f2fb26b3ab, type: 2}
@@ -52886,8 +52896,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 6.4
+  MaxDistance: 11.62
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -54665,8 +54675,7 @@ Prefab:
       propertyPath: toUnlock
       value: 
       objectReference: {fileID: 1356697391}
-    m_RemovedComponents:
-    - {fileID: 82769329446558158, guid: 15ee73c2852128d4b8ef4753220597b0, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 15ee73c2852128d4b8ef4753220597b0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1390805652
@@ -58579,8 +58588,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 75
-  MaxDistance: 100
+  MinDistance: 1
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -58609,7 +58618,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0.8
+      value: 0.81685334
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -58633,7 +58642,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
+      value: 0.99578476
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -65632,8 +65641,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 350
+  MinDistance: 12
+  MaxDistance: 33.4
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 1
@@ -65662,7 +65671,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0.337
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -65843,8 +65852,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 300
+  MinDistance: 14.7
+  MaxDistance: 30.7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -68490,7 +68499,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1750400184}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 340.1, y: -14.099998, z: 0}
+  m_LocalPosition: {x: 340.1, y: -14.099998, z: -0.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 89062732}
