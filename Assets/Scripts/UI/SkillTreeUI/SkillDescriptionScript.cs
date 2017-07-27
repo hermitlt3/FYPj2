@@ -37,11 +37,11 @@ public class SkillDescriptionScript : MonoBehaviour {
 			(transform.rect.width * 1.5f  + transform.GetChild(0).GetComponent<RectTransform>().rect.width ) * flipX, 
 			-(transform.rect.height * 0.5f + transform.GetChild(0).GetComponent<RectTransform>().rect.height * flipY)  
 		);
-		this.transform.position = transform.position + targetPosition;
-		this.gameObject.SetActive (true);
-	}
+		gameObject.SetActive (true);
+		gameObject.transform.position = transform.position + targetPosition;
+    }
 
-	public void HideDescription() {
+    public void HideDescription() {
 		this.gameObject.SetActive (false);
 	}
 }
