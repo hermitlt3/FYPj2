@@ -91,10 +91,13 @@ public class CollectibleBehavior : MonoBehaviour
 
 	void FixedUpdate()
     {
-		if (myRigidBody.velocity.sqrMagnitude < maxSpeed * maxSpeed)
-			myRigidBody.velocity += direction * speedMultiplier;
+        if (myRigidBody.velocity.sqrMagnitude < maxSpeed * maxSpeed)
+            myRigidBody.velocity += direction * speedMultiplier;
         else
+        {
+            myRigidBody.velocity = direction * maxSpeed;
             Vector2.ClampMagnitude(myRigidBody.velocity, maxSpeed);
+        }
     }
 
 	public void Reset() 

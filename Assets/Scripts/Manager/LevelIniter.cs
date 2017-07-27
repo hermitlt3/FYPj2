@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class LevelIniter : MonoBehaviour {
 
@@ -9,7 +8,6 @@ public class LevelIniter : MonoBehaviour {
     public GameObject mainCamera;
     public GameObject player;
     public Sprite backgroundSprite;
-    public TimelineAsset playerTimeline;
 
 	// Use this for initialization
 	void Start () {

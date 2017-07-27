@@ -23311,14 +23311,14 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &797771896
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 797771895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -29157,12 +29157,12 @@ Prefab:
     - target: {fileID: 61937146395639030, guid: bbd5723bc00d6ed4eab6e8f0c06b9b03,
         type: 2}
       propertyPath: m_Offset.x
-      value: 0.089455366
+      value: 0.11331779
       objectReference: {fileID: 0}
     - target: {fileID: 61937146395639030, guid: bbd5723bc00d6ed4eab6e8f0c06b9b03,
         type: 2}
       propertyPath: m_Size.x
-      value: 0.98961234
+      value: 0.9418875
       objectReference: {fileID: 0}
     - target: {fileID: 61937146395639030, guid: bbd5723bc00d6ed4eab6e8f0c06b9b03,
         type: 2}
