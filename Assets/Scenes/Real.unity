@@ -3398,7 +3398,7 @@ Prefab:
     - target: {fileID: 114737335631577298, guid: 6fda75d46f6fbc74cb0520de3c0462ce,
         type: 2}
       propertyPath: playerStartPosition.x
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114737335631577298, guid: 6fda75d46f6fbc74cb0520de3c0462ce,
         type: 2}

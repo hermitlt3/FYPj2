@@ -21,7 +21,7 @@ public class HealthbarScript : BarScript {
 		healthScript = gO.GetComponent<Stat_HealthScript> ();
 		healthText = GetComponentInChildren<Text> ();
 
-		newHealthPercent = (float)(healthScript.GetCurrentHealth () * 100)/ (float)(healthScript.GetMaxHealth () + healthScript.bonusHealth) ;
+		newHealthPercent = (float)((healthScript.GetCurrentHealth () + healthScript.bonusHealth )* 100)/ (float)(healthScript.GetMaxHealth () + healthScript.bonusHealth) ;
 		oldHealthPercent = newHealthPercent;
 
 		healthText.text = newHealthPercent + "%";
