@@ -9,12 +9,16 @@ public class DoorToNextSceneScript : MonoBehaviour {
     Animator animator;
     bool startAnim;
     AudioSource sound;
+    bool soundPlayed;
 
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
+        sound = GetComponent<AudioSource>();
         startAnim = false;
-	}
+        soundPlayed = false;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,9 +26,10 @@ public class DoorToNextSceneScript : MonoBehaviour {
         {
             startAnim = true;
             animator.SetBool("Play", startAnim);
-            if (sound)
+            if (sound && !soundPlayed)
             {
                 sound.Play();
+                soundPlayed = true;
             }
         }
 	}

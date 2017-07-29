@@ -42,7 +42,7 @@ public class Slime_Attack2 : Boss_Attack {
             if (delayAttackTimer <= 0f)
             {
                 animSpeed = 1f;
-                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                GetComponent<Rigidbody2D>().gravityScale = 1f;
                 transform.position = targetPosition - new Vector3(0, 0.5f);
                 if (GetComponent<Collider2D>().bounds.Intersects(target.GetComponent<Collider2D>().bounds) && !hit)
                 {
@@ -59,7 +59,7 @@ public class Slime_Attack2 : Boss_Attack {
     {
         if(GetComponent<Rigidbody2D>().velocity.y < 0f || Mathf.Abs(transform.position.x - targetPosition.x) < 0.25f)
         {
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            GetComponent<Rigidbody2D>().gravityScale = 0.01f;
             GetComponent<Rigidbody2D>().velocity = new Vector3();
             toFall = true;
         }
