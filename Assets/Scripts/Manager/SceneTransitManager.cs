@@ -8,18 +8,25 @@ public class SceneTransitManager : MonoBehaviour {
 	public static SceneTransitManager instance;
     public TransitFade fading;
 
+    private List<GameObject> toBeDestroyed;
+
 	void Awake() {
-		if (instance && instance != this) {
-			Destroy (instance);
-			return;
-		}
-		instance = this;
-		DontDestroyOnLoad (this.gameObject);
+        toBeDestroyed = new List<GameObject>();
+        if (instance && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+		DontDestroyOnLoad (this);
 	}
 
 	// Use this for initialization
 	void Start () {
-		fading = transform.GetComponentInChildren<TransitFade>();	
+		fading = transform.GetComponentInChildren<TransitFade>();
 	}
 	
 	// Update is called once per frame
@@ -86,6 +93,20 @@ public class SceneTransitManager : MonoBehaviour {
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        print(toBeDestroyed.Count);
+        if (toBeDestroyed.Count > 0)
+        {
+            foreach (GameObject go in toBeDestroyed)
+            {
+                Destroy(go);
+            }
+        }
+        toBeDestroyed.Clear();
         fading.BeginFade(-1);
+    }
+
+    public void AddGameObjectToDestroy(GameObject go)
+    {
+        toBeDestroyed.Add(go);
     }
 }

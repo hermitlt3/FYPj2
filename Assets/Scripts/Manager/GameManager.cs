@@ -59,6 +59,15 @@ public class GameManager : MonoBehaviour {
         return false;
 	}
 
+    public void BackToMainMenu()
+    {
+        SceneTransitManager.instance.AddGameObjectToDestroy(Camera.main.gameObject);
+        SceneTransitManager.instance.AddGameObjectToDestroy(player);
+        SceneTransitManager.instance.AddGameObjectToDestroy(GameObject.FindGameObjectWithTag("Canvas").gameObject);
+        SceneTransitManager.instance.AddGameObjectToDestroy(this.gameObject);
+        StartCoroutine(SceneTransitManager.instance.ChangeScene("Main Menu"));
+    }
+
 	void CursorTextureChange() {
         Texture2D cursorClicked = Resources.Load("Cursors/CursorClick") as Texture2D;
         Texture2D cursor = Resources.Load("Cursors/Cursor") as Texture2D;
