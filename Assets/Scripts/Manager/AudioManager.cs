@@ -1,19 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour {
 	
 	public static AudioManager instance;
     public GameObject tempAudioPrefab;
+    public AudioMixer masterMixer;
 
-	void Awake() {
-		if (instance && instance != this) {
-			Destroy (instance);
-			return;
-		}
-		instance = this;
+    void Awake() {
+        if (instance && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
     }
 	// Use this for initialization
 	void Start () {
@@ -57,5 +63,41 @@ public class AudioManager : MonoBehaviour {
             return;
         }
         audioSource.PlayDelayed(delay);
+    }
+
+    public void MasterSetSound(float soundLevel)
+    {
+        masterMixer.SetFloat("Master", soundLevel);
+    }
+
+    public void BGMSetSound(float soundLevel)
+    {
+        masterMixer.SetFloat("BGM", soundLevel);
+    }
+
+    public void SFXSetSound(float soundLevel)
+    {
+        masterMixer.SetFloat("SFX", soundLevel);
+    }
+
+    public float GetMasterSound()
+    {
+        float masterVolume = 0f;
+        masterMixer.GetFloat("Master", out masterVolume);
+        return masterVolume;
+    }
+
+    public float GetBGMSound()
+    {
+        float bgmVolume = 0f;
+        masterMixer.GetFloat("BGM", out bgmVolume);
+        return bgmVolume;
+    }
+
+    public float GetSFXSound()
+    {
+        float sfxVolume = 0f;
+        masterMixer.GetFloat("SFX", out sfxVolume);
+        return sfxVolume;
     }
 }

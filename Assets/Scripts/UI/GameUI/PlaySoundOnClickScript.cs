@@ -23,6 +23,13 @@ public class PlaySoundOnClickScript : MonoBehaviour, IPointerDownHandler{
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        onCickSound.Play();
+        if (onCickSound != null)
+        {
+            onCickSound.Play();
+        }
+        else
+        {
+            GameObject go = new GameObject();
+        }
     }
 }

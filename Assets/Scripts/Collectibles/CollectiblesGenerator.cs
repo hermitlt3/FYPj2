@@ -19,13 +19,16 @@ public class CollectiblesGenerator : MonoBehaviour {
 //	private GameObject player;
 
 	void Awake() {
-		if (instance && instance != this) {
-			Destroy (instance);
-			return;
-		}
-
-		instance = this;
-	}
+        if (instance && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {

@@ -13,12 +13,16 @@ public class ObjectPoolScript : MonoBehaviour {
 	protected List<GameObject>[] pooledObjects;
 
 	void Awake() {
-		if (instance && instance != this) {
-			Destroy (instance);
-			return;
-		}
-		instance = this;
-	}
+        if (instance && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
 	// Use this for initialization
 	protected virtual void Start () {

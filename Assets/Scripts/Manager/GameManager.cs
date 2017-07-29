@@ -9,14 +9,17 @@ public class GameManager : MonoBehaviour {
 	public GameObject player;
 
 	void Awake() {
-		DontDestroyOnLoad (this.gameObject);
-
-		if (instance && instance != this) {
-			Destroy (instance);
-			return;
-		}
-		instance = this;
-	}
+        if (instance && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
 
 	// Use this for initialization
 	void Start () {
