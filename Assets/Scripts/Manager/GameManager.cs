@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
-
 	}
 
 	// Update is called once per frame
@@ -56,6 +54,14 @@ public class GameManager : MonoBehaviour {
 		// Trace. On.
 	}
 
+    public void LoadPlayer()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
+
 	public bool GoNextLevel(string sceneName) {
 
         StartCoroutine(SceneTransitManager.instance.ChangeScene(sceneName));
@@ -66,8 +72,11 @@ public class GameManager : MonoBehaviour {
     {
         SceneTransitManager.instance.AddGameObjectToDestroy(Camera.main.gameObject);
         SceneTransitManager.instance.AddGameObjectToDestroy(player);
-        SceneTransitManager.instance.AddGameObjectToDestroy(GameObject.FindGameObjectWithTag("Canvas").gameObject);
-        SceneTransitManager.instance.AddGameObjectToDestroy(this.gameObject);
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Canvas");
+        foreach (GameObject go in gos)
+        {
+            SceneTransitManager.instance.AddGameObjectToDestroy(go);
+        }
         StartCoroutine(SceneTransitManager.instance.ChangeScene("Main Menu"));
     }
 

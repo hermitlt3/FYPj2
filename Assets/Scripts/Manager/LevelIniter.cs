@@ -19,6 +19,7 @@ public class LevelIniter : MonoBehaviour {
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+        GameManager.instance.LoadPlayer();
         player.transform.position = playerStartPosition;
         player.GetComponent<Player_Spawnpoint>().SetSpawnLocation(playerStartPosition);
         player.GetComponent<Player_Input>().enabled = true;
