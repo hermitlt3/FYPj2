@@ -19,13 +19,16 @@ public class CollectiblesGenerator : MonoBehaviour {
 //	private GameObject player;
 
 	void Awake() {
-		if (instance && instance != this) {
-			Destroy (instance);
-			return;
-		}
-
-		instance = this;
-	}
+        if (instance && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -54,7 +57,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 		for (int i = Mathf.FloorToInt (-numOfExp / 2); i <= Mathf.FloorToInt (numOfExp / 2); ++i) {
 			GameObject collectible = ObjectPoolScript.instance.GetPooledObject (0);
 			collectible.SetActive (true);
-			Vector3 randomness = new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f), -0.1f);
+			Vector3 randomness = new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f), -5f);
 			collectible.transform.position = position + randomness;
 			collectible.GetComponent<CollectibleBehavior> ().Reset ();
 
@@ -77,7 +80,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 		for (int i = Mathf.FloorToInt (-numOfHealth / 2); i <= Mathf.FloorToInt (numOfHealth / 2); ++i) {
 			GameObject collectible = ObjectPoolScript.instance.GetPooledObject (1);
 			collectible.SetActive (true);
-			Vector3 randomness = new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f), -0.1f);
+			Vector3 randomness = new Vector3(Random.Range(-2f, 2f), Random.Range(0f, 1f), -5f);
 			collectible.transform.position = position + randomness;
 			//collectible.transform.position -= new Vector3 (0, 0, 0.5f);
 			collectible.GetComponent<CollectibleBehavior> ().Reset ();

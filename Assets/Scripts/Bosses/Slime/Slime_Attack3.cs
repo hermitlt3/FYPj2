@@ -36,6 +36,7 @@ public class Slime_Attack3 : Boss_Attack
             hit = true;
             GetComponent<Stat_HealthScript>().IncreaseHealth(healthRestore);
             TextPopupManager.instance.ShowTextPopup(GameObject.FindGameObjectWithTag("PlayerCanvas").GetComponent<Canvas>(), transform.position, healthRestore.ToString(), TextPopupManager.TEXT_TYPE.HEAL_ENEMY);
+            allyTarget.GetComponent<EnemyAI_Die>().enabled = true;
             allyTarget.SetActive(false);
 
             animSpeed = 1f;

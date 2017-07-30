@@ -22,6 +22,7 @@ public class TutorialEndEvent : CustomEventBaseScript
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+        mainCanvas = GameObject.FindGameObjectWithTag("Canvas");
         animator = GetComponent<Animator>();
 	}
 

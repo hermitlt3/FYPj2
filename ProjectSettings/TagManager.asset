@@ -9,6 +9,8 @@ TagManager:
   - PlayerCanvas
   - Boss Arenas
   - Game Area
+  - Canvas
+  - Audio Manager
   layers:
   - Default
   - TransparentFX

@@ -9,14 +9,17 @@ public class GameManager : MonoBehaviour {
 	public GameObject player;
 
 	void Awake() {
-		DontDestroyOnLoad (this.gameObject);
-
-		if (instance && instance != this) {
-			Destroy (instance);
-			return;
-		}
-		instance = this;
-	}
+        if (instance && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -58,6 +61,15 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(SceneTransitManager.instance.ChangeScene(sceneName));
         return false;
 	}
+
+    public void BackToMainMenu()
+    {
+        SceneTransitManager.instance.AddGameObjectToDestroy(Camera.main.gameObject);
+        SceneTransitManager.instance.AddGameObjectToDestroy(player);
+        SceneTransitManager.instance.AddGameObjectToDestroy(GameObject.FindGameObjectWithTag("Canvas").gameObject);
+        SceneTransitManager.instance.AddGameObjectToDestroy(this.gameObject);
+        StartCoroutine(SceneTransitManager.instance.ChangeScene("Main Menu"));
+    }
 
 	void CursorTextureChange() {
         Texture2D cursorClicked = Resources.Load("Cursors/CursorClick") as Texture2D;
