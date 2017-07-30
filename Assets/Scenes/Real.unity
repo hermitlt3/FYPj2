@@ -73306,7 +73306,7 @@ Prefab:
     - target: {fileID: 114000260346778172, guid: bbd5723bc00d6ed4eab6e8f0c06b9b03,
         type: 2}
       propertyPath: DestroyArea
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbd5723bc00d6ed4eab6e8f0c06b9b03, type: 2}

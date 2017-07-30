@@ -48,8 +48,12 @@ public class GameManager : MonoBehaviour {
 		Camera.main.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, Camera.main.transform.position.z);
 		Camera.main.GetComponent<Camera2DFollow> ().enabled = true;
 
-		// Boss. On.
-		GameObject.FindGameObjectWithTag("Boss Arenas").GetComponent<BossArenaScript>().Reset();
+        // Boss. On.
+        GameObject bossArena = GameObject.FindGameObjectWithTag("Boss Arenas");
+        if (bossArena)
+        {
+            bossArena.GetComponent<BossArenaScript>().Reset();
+        }
 
 		// Trace. On.
 	}
