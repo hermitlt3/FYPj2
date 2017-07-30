@@ -42,7 +42,7 @@ public class Slime_AI : Boss_AI
 
         if (animator.GetInteger("AttackStyle") == -1)
         {
-            if (transform.position.x - target.transform.position.x > 0f)
+            if (transform.position.x - target.transform.position.x > 0f && GetComponent<Stat_HealthScript>().isAlive())
             {
                 GetComponent<SpriteRenderer>().flipX = true;
             }
@@ -155,7 +155,7 @@ public class Slime_AI : Boss_AI
             return;
         }
 
-        CollectiblesGenerator.instance.GenerateCollectibles(transform.position, 100, 20);
+        CollectiblesGenerator.instance.GenerateCollectibles(transform.position, 500, 60, 20);
         Destroy(this.gameObject.GetComponentInChildren<Canvas>().gameObject);
     }
 

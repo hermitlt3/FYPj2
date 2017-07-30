@@ -40,16 +40,16 @@ public class CollectiblesGenerator : MonoBehaviour {
 		
 	}
 
-	public void GenerateCollectibles(Vector3 position, int expValue, int hpValue = 5) {
-		GenerateEXP (position, expValue);
-		GenerateHealth (position, hpValue);
+	public void GenerateCollectibles(Vector3 position, int expValue, int hpValue = 5, int divider = 2) {
+		GenerateEXP (position, expValue, divider);
+		GenerateHealth (position, hpValue, divider);
 	}
 
 	public void DeactivateAll() {
 		ObjectPoolScript.instance.DeactivateAll ();
 	}
 
-	public bool GenerateEXP(Vector3 position, int value) {
+	public bool GenerateEXP(Vector3 position, int value, int divider = 2) {
 		int numOfExp = Mathf.CeilToInt (value / divider);
 		if (numOfExp <= 0)
 			numOfExp = 1;
@@ -71,7 +71,7 @@ public class CollectiblesGenerator : MonoBehaviour {
 		return true;
 	}
 
-	public bool GenerateHealth(Vector3 position, int value) {
+	public bool GenerateHealth(Vector3 position, int value, int divider = 2) {
 		int numOfHealth = Mathf.CeilToInt (value / divider);
 		if (numOfHealth <= 0) {
 			numOfHealth = 1;

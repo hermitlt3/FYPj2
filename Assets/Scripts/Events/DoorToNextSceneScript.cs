@@ -26,11 +26,6 @@ public class DoorToNextSceneScript : MonoBehaviour {
         {
             startAnim = true;
             animator.SetBool("Play", startAnim);
-            if (sound && !soundPlayed)
-            {
-                sound.Play();
-                soundPlayed = true;
-            }
         }
 	}
 
@@ -38,6 +33,11 @@ public class DoorToNextSceneScript : MonoBehaviour {
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            if (sound && !soundPlayed)
+            {
+                sound.Play();
+                soundPlayed = true;
+            }
             GameManager.instance.player.GetComponent<Player_Input>().enabled = false;
             StartCoroutine(SceneTransitManager.instance.ChangeScene(nextLevelName));
         }

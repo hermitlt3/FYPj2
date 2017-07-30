@@ -93,7 +93,6 @@ public class SceneTransitManager : MonoBehaviour {
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        print(toBeDestroyed.Count);
         if (toBeDestroyed.Count > 0)
         {
             foreach (GameObject go in toBeDestroyed)
