@@ -31,7 +31,7 @@ public class HealthbarScript : BarScript {
 	// Update is called once per frame
 	protected override void Update () {
 		
-		newHealthPercent =  (float)(healthScript.GetCurrentHealth () * 100)/ (float)(healthScript.GetMaxHealth () + healthScript.bonusHealth);
+		newHealthPercent =  (float)(healthScript.GetCurrentHealth () * 100)/ (float)(healthScript.GetMaxHealth ());
 		//if (newHealthPercent - oldHealthPercent > Mathf.Epsilon) {
 			HealthBarAnimation (oldHealthPercent, newHealthPercent, 0.1f);
 		//}

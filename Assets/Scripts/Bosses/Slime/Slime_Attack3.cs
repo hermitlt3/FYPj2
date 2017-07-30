@@ -12,6 +12,7 @@ public class Slime_Attack3 : Boss_Attack
 
     GameObject allyTarget;
     bool hit = false;
+    bool gotFood = false;
     float animSpeed = 1f;
 
     // Use this for initialization
@@ -23,12 +24,27 @@ public class Slime_Attack3 : Boss_Attack
     // Update is called once per frame
     void Update()
     {
-
-        if (allyTarget)
+        if(!gotFood || (allyTarget && !allyTarget.GetComponent<Stat_HealthScript>().isAlive()))
         {
-           allyTarget.GetComponent<EnemyAI_Logic>().enabled = false;
-           allyTarget.GetComponent<EnemyAI_Move>().enabled = false;
-           allyTarget.GetComponent<EnemyAI_Attack>().enabled = false;
+            animSpeed = 1f;
+            noMoreHeals = true;
+            foreach (GameObject rb in restoreBugs)
+            {
+                if (rb.activeInHierarchy)
+                {
+                    noMoreHeals = false;
+                    break;
+                }
+            }
+            this.enabled = false;
+            return;
+        }
+
+        else if (allyTarget && allyTarget.GetComponent<Stat_HealthScript>().isAlive())
+        {
+            allyTarget.GetComponent<EnemyAI_Logic>().enabled = false;
+            allyTarget.GetComponent<EnemyAI_Move>().enabled = false;
+            allyTarget.GetComponent<EnemyAI_Attack>().enabled = false;
         }
 
         if (GetComponent<Collider2D>().bounds.Intersects(allyTarget.GetComponent<Collider2D>().bounds) && !hit)
@@ -66,12 +82,14 @@ public class Slime_Attack3 : Boss_Attack
 
     public void Initiate()
     {
+        gotFood = false;
         foreach(GameObject rb in restoreBugs)
         {
             if(rb.activeInHierarchy)
             {
                 GetComponent<SpriteRenderer>().flipX = (rb.transform.position.x - transform.position.x < 0f) ? true : false;
                 allyTarget = rb;
+                gotFood = true;
             }
         }
         hit = false;

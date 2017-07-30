@@ -134,18 +134,26 @@ public class Slime_AI : Boss_AI
 
     public override void Reset()
     {
-        if (!this.gameObject.activeInHierarchy)
+        if (!gameObject.activeInHierarchy)
         {
             return;
         }
         animator.SetTrigger("Reset");
         animator.SetBool("Dead", false);
-        for (int i = 0; i < transform.childCount; ++i)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
+       
         shouldDie = false;
         GetComponent<Stat_HealthScript>().SetCurrentHealth(GetComponent<Stat_HealthScript>().GetMaxHealth());
+
+        if (GetComponents<Collider2D>()[1].enabled)
+        {
+            GetComponents<Collider2D>()[1].enabled = false;
+        }
+        foreach (Boss_Attack ai in GetComponents<Boss_Attack>())
+        {
+            ai.enabled = false;
+        }
+        transform.position = new Vector3(transform.position.x, 24f);
+        selfTimer = 0f;
     }
 
     void ReleaseStuff()
