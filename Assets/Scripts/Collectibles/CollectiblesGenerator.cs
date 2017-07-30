@@ -6,10 +6,6 @@ public class CollectiblesGenerator : MonoBehaviour {
 
 	public static CollectiblesGenerator instance;
 
-	// The number of game objects instantiated = exact value / divider
-	[SerializeField]
-	private int divider = 2;
-
 	// Spawn velocity of the collectibles
 	[SerializeField]
 	private Vector2 velocityMagnitude = new Vector2 (10, 100);

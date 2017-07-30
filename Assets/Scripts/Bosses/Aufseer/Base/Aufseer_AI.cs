@@ -107,6 +107,7 @@ public class Aufseer_AI : Boss_AI {
         }
         shouldDie = false;
         GetComponent<Stat_HealthScript>().SetCurrentHealth(GetComponent<Stat_HealthScript>().GetMaxHealth());
+        selfTimer = 0f;
     }
 
     void ReleaseStuff () {

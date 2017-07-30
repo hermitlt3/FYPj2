@@ -29,7 +29,7 @@ public class PlaySoundOnClickScript : MonoBehaviour, IPointerDownHandler{
         }
         else
         {
-            GameObject go = new GameObject();
+            //GameObject go = new GameObject();
         }
     }
 }
