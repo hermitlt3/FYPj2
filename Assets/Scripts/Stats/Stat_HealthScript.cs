@@ -20,7 +20,7 @@ public class Stat_HealthScript : MonoBehaviour {
 
 	public void IncreaseHealth(int heal)
     {
-		currHealth = Mathf.Min (maxHealth, currHealth + heal);
+		currHealth = Mathf.Min (maxHealth + bonusHealth, currHealth + heal);
     }
 
 	public bool isAlive() 
@@ -38,7 +38,7 @@ public class Stat_HealthScript : MonoBehaviour {
 
 	public int GetMaxHealth()
 	{
-		return maxHealth;
+		return maxHealth + bonusHealth;
 	}
 
 	public void IncreaseMaxHealth(int value) 
