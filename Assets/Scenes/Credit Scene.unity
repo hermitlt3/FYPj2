@@ -995,7 +995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.299988, y: -3389}
+  m_AnchoredPosition: {x: 11.299988, y: -3563.0024}
   m_SizeDelta: {x: 2000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479932102
@@ -1069,8 +1069,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000091552734, y: -2606}
-  m_SizeDelta: {x: 1000, y: 200}
+  m_AnchoredPosition: {x: 0.000091552734, y: -2705}
+  m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524172123
 MonoBehaviour:
@@ -1106,7 +1106,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'OpenGameArt.org
 
-    Unity Assets'
+    Unity Assets
+
+    Maplestory
+
+    Old School Runescape'
 --- !u!222 &1524172124
 CanvasRenderer:
   m_ObjectHideFlags: 0
