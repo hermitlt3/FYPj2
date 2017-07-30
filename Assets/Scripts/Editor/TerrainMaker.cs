@@ -138,6 +138,10 @@ public class TerrainMaker : EditorWindow {
 			parent.AddComponent<ThroughTerrainScript> ();
 			parent.GetComponent<PolygonCollider2D> ().isTrigger = true;
 		}
+        if (sortingOrder != 0)
+            sortingOrder = 0;
+        else
+            sortingOrder = 1;
 		doShit = false;
 	}
 

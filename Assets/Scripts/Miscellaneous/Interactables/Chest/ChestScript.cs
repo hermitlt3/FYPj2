@@ -13,6 +13,7 @@ public class ChestScript : MonoBehaviour {
 	public DROPPEDITEM_TYPE itemType = DROPPEDITEM_TYPE.EXPERIENCE;
 	public int healthValue;
 	public int expValue;
+    public int divider = 2;
 
 	Stat_HealthScript health;
 	Animator thisAnimator;
@@ -55,13 +56,13 @@ public class ChestScript : MonoBehaviour {
 	void DoAction () {
 		switch (itemType) {
 		case DROPPEDITEM_TYPE.EXPERIENCE: 
-			CollectiblesGenerator.instance.GenerateEXP (transform.position, expValue);
+			CollectiblesGenerator.instance.GenerateEXP (transform.position, expValue, divider);
 			break;
 		case DROPPEDITEM_TYPE.HEALTH:
-			CollectiblesGenerator.instance.GenerateHealth (transform.position, healthValue);
+			CollectiblesGenerator.instance.GenerateHealth (transform.position, healthValue, divider);
 			break;
 		case DROPPEDITEM_TYPE.BOTH:
-			CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expValue, healthValue);
+			CollectiblesGenerator.instance.GenerateCollectibles (transform.position, expValue, healthValue, divider);
 			break;
 		}
 	}

@@ -1724,7 +1724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d3835a72b677847a2aa3e476623201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  divider: 5
   velocityMagnitude: {x: 5, y: 10}
 --- !u!1 &959278032
 GameObject:
@@ -3460,7 +3459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 5
 --- !u!4 &1576263568
 Transform:
