@@ -51404,12 +51404,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82220583729855572, guid: 33db5331697d556449dcb0d2f134196e,
-        type: 2}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 243312942174776458, guid: 34a202dce9fd64e4d9d0eebd8b315146,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33db5331697d556449dcb0d2f134196e, type: 2}
   m_IsPrefabParent: 0

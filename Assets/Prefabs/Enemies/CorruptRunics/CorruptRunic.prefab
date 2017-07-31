@@ -21,7 +21,9 @@ GameObject:
   - component: {fileID: 4200778838853526}
   - component: {fileID: 61795352335604054}
   - component: {fileID: 212019260364221000}
-  m_Layer: 11
+  - component: {fileID: 114550928604842694}
+  - component: {fileID: 114747867258655976}
+  m_Layer: 0
   m_Name: CorruptRunic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +99,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.57, y: 0.64}
   m_EdgeRadius: 0
+--- !u!114 &114550928604842694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1131998946177136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7f64e541e08fb4b9f85d4f3cd01444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  currHealth: 1
+  bonusHealth: 0
+--- !u!114 &114747867258655976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1131998946177136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246dbcc056a942942847ff0b84b9d2ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPoolNumber: 5
+  timePerHit: 3
+  projectileSpeed: 10
+  attackPrefab: {fileID: 1176620713856096, guid: c66ffa804fd9fb647b7d5273458985c7,
+    type: 2}
+  boss: {fileID: 0}
 --- !u!198 &198858660526570440
 ParticleSystem:
   m_ObjectHideFlags: 1
