@@ -50983,6 +50983,10 @@ Prefab:
       propertyPath: restoreBugs.Array.data[2]
       value: 
       objectReference: {fileID: 978748823}
+    - target: {fileID: 1701474815042778, guid: adbbfd2cf7d20564f8cf6c32854b8876, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbbfd2cf7d20564f8cf6c32854b8876, type: 2}
   m_IsPrefabParent: 0

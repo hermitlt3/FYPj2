@@ -39,6 +39,7 @@ public class DoorToNextSceneScript : MonoBehaviour {
                 soundPlayed = true;
             }
             GameManager.instance.player.GetComponent<Player_Input>().enabled = false;
+            ReloadCheckpointSystem.DestroyStageEnemies();
             StartCoroutine(SceneTransitManager.instance.ChangeScene(nextLevelName));
         }
     }
