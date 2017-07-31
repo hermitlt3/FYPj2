@@ -79,6 +79,18 @@ public class SceneTransitManager : MonoBehaviour {
         }
     }
 
+    public float FadeIn(float f_fadeMultiplier)
+    {
+        float fadeTime = fading.BeginFade(-1, f_fadeMultiplier);
+        return fadeTime;
+    }
+
+    public float FadeOut(float f_fadeMultiplier)
+    {
+        float fadeTime = fading.BeginFade(1, f_fadeMultiplier);
+        return fadeTime;
+    }
+
     void OnEnable()
     {
         //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
