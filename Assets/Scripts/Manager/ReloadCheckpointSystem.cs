@@ -25,4 +25,9 @@ public class ReloadCheckpointSystem {
 		}
 		enemiesKilled.Clear ();
 	}
+
+    public static void DestroyStageEnemies()
+    {
+        enemiesKilled.Clear();
+    }
 }

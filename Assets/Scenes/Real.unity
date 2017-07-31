@@ -66421,7 +66421,7 @@ GameObject:
   - component: {fileID: 1699025025}
   - component: {fileID: 1699025023}
   - component: {fileID: 1699025024}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: KillZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67552,7 +67552,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243204687754628580, guid: 34a202dce9fd64e4d9d0eebd8b315146,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 03ce4f819143ef8409c6a04c4e742aab, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b54ffba670675894699e29b8b9352ead, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.445
   m_Pitch: 1

@@ -90,6 +90,7 @@ public class TutorialEndEvent : CustomEventBaseScript
 
     void TransitScene()
     {
+        ReloadCheckpointSystem.DestroyStageEnemies();
         player.GetComponent<Player_Input>().enabled = false;
         player.GetComponentInChildren<Text>().enabled = false;
         StartCoroutine(SceneTransitManager.instance.ChangeScene(sceneName));

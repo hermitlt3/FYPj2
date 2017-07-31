@@ -42085,7 +42085,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243204687754628580, guid: 34a202dce9fd64e4d9d0eebd8b315146,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: b54ffba670675894699e29b8b9352ead, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 03ce4f819143ef8409c6a04c4e742aab, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.6
   m_Pitch: 1
@@ -50983,6 +50983,10 @@ Prefab:
       propertyPath: restoreBugs.Array.data[2]
       value: 
       objectReference: {fileID: 978748823}
+    - target: {fileID: 1701474815042778, guid: adbbfd2cf7d20564f8cf6c32854b8876, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbbfd2cf7d20564f8cf6c32854b8876, type: 2}
   m_IsPrefabParent: 0
