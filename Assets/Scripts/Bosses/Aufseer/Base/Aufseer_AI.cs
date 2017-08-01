@@ -95,7 +95,7 @@ public class Aufseer_AI : Boss_AI {
 	}
 
 	public override void Reset() {
-        if(!this.gameObject.activeInHierarchy)
+        if(!gameObject.activeInHierarchy)
         {
             return;
         }
@@ -108,6 +108,7 @@ public class Aufseer_AI : Boss_AI {
         shouldDie = false;
         GetComponent<Stat_HealthScript>().SetCurrentHealth(GetComponent<Stat_HealthScript>().GetMaxHealth());
         selfTimer = 0f;
+        base.Reset();
     }
 
     void ReleaseStuff () {

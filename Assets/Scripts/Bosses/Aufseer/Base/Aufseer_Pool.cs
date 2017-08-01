@@ -20,7 +20,7 @@ public class Aufseer_Pool : MonoBehaviour {
 
 			for (int j = 0; j < poolAmount; j++) {
 				GameObject obj = (GameObject)Instantiate (prefabs[i]);
-				obj.transform.parent = this.transform;
+				obj.transform.parent = transform;
 				obj.SetActive (false);
 				pooledObjects [i].Add (obj);
 			}

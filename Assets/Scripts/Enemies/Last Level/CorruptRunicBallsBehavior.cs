@@ -28,6 +28,7 @@ public class CorruptRunicBallsBehavior : MonoBehaviour {
     {
         if(collision.gameObject == target)
         {
+            collision.GetComponent<Nel_Counter>().orbsAbsorbed += 1;
             Destroy(this);
             gameObject.SetActive(false);
         }

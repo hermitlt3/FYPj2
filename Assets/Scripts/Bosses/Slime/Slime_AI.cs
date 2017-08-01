@@ -154,6 +154,7 @@ public class Slime_AI : Boss_AI
         }
         transform.position = new Vector3(transform.position.x, 24f);
         selfTimer = 0f;
+        base.Reset();
     }
 
     void ReleaseStuff()

@@ -9,19 +9,16 @@ public class LastStageBossInitScript : MonoBehaviour {
     public Vector3 playerSpawnPosition;
     public GameObject boss;
     public Light directionalLight;
-    public Collider2D collider;
+    public Collider2D bossArenaCollider;
 
     bool playFade;
     bool playAnimation;
     Animator animator;
     Text theText;
 
-    bool mechanimFadeIn;
-    bool mechanimFadeOut;
-
 	// Use this for initialization
 	void Start () {
-        playAnimation = playFade = mechanimFadeIn = mechanimFadeOut = false;
+        playAnimation = playFade = false;
         animator = GetComponent<Animator>();
 	}
 	
@@ -73,6 +70,8 @@ public class LastStageBossInitScript : MonoBehaviour {
         float fadeTime = SceneTransitManager.instance.FadeOut(0.6f);
         yield return new WaitForSeconds(fadeTime);
 
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera2DFollow>().enabled = false;
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3((boss.transform.position.x + playerSpawnPosition.x) * 0.5f, playerSpawnPosition.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
         GameManager.instance.player.transform.position = playerSpawnPosition;
         GameManager.instance.player.GetComponent<Player_Input>().enabled = false;
         GameManager.instance.player.GetComponent<SpriteRenderer>().flipX = true;
@@ -115,8 +114,10 @@ public class LastStageBossInitScript : MonoBehaviour {
 
     void Initialize()
     {
-        collider.gameObject.SetActive(true);
+        bossArenaCollider.gameObject.SetActive(true);
         GameManager.instance.player.GetComponent<Player_Input>().enabled = true;
         boss.GetComponent<Boss_AI>().enabled = true;
+        boss.GetComponent<Nel_Counter>().AddToDamage();
+        boss.layer = LayerMask.NameToLayer("Enemy");
     }
 }

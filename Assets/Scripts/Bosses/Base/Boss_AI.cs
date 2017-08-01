@@ -15,6 +15,7 @@ public class Boss_AI : MonoBehaviour {
 	public float timeDecreased = 0;					// The decreased time between attacks for every health % decrease
 	protected int currentAttackPattern = 0;			// Current attack of the boss
     public bool shouldDie;
+    public bool shouldReset = true;
 
     private Stat_HealthScript healthScript;
 
@@ -33,6 +34,6 @@ public class Boss_AI : MonoBehaviour {
 	}
 
 	public virtual void Reset() {
-
+        gameObject.SetActive(false);
 	}
 }

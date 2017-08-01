@@ -25,5 +25,6 @@ public class DarkSoul_AI : Boss_AI {
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
+        base.Reset();
     }
 }
