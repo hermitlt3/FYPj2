@@ -6,11 +6,14 @@ public class PortalToNextLevel : MonoBehaviour {
 
     public string nextLevelName;
     public bool lastLevel;
+    public bool loadedManually = false;
     Animator animator;
     bool startAnim;
     bool loaded;
     AudioSource sound;
     bool soundPlayed;
+    public Boss_AI boss;
+    public bool portalCheck = true;
 
     // Use this for initialization
     void Start()
@@ -25,13 +28,16 @@ public class PortalToNextLevel : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!startAnim)
+        if (!startAnim && boss.shouldDie)
         {
             startAnim = true;
-            animator.SetBool("Load", startAnim);
+            if (portalCheck)
+            {
+                animator.SetBool("Load", startAnim);
+            }
         }
 
-        if(loaded)
+        if(loaded && portalCheck)
         {
             animator.SetBool("Play", loaded);
         }
@@ -44,7 +50,7 @@ public class PortalToNextLevel : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && loaded)
+        if (collision.gameObject.CompareTag("Player") && (loaded || loadedManually))
         {
             if (lastLevel)
             {

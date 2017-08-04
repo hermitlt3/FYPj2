@@ -119,5 +119,6 @@ public class LastStageBossInitScript : MonoBehaviour {
         boss.GetComponent<Boss_AI>().enabled = true;
         boss.GetComponent<Nel_Counter>().AddToDamage();
         boss.layer = LayerMask.NameToLayer("Enemy");
+        Destroy(this);
     }
 }

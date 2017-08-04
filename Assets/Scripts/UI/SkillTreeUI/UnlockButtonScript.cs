@@ -18,6 +18,8 @@ public class UnlockButtonScript : MonoBehaviour {
 
 	public GameObject confirmPopup;
 
+    private GameObject previousSelection = null;
+
 	// Use this for initialization
 	void Start () {
 		// Gets toggle group
@@ -51,7 +53,22 @@ public class UnlockButtonScript : MonoBehaviour {
 				disButton.interactable = false;
 				unlockText.color = new Color (unlockText.color.r, unlockText.color.g, unlockText.color.b, 0.2f);
 			}
-		}
+
+            if (previousSelection && previousSelection != skillScript.transform.GetChild(0).GetChild(2).gameObject && skillScript.isUnlockable)
+            {
+                if(!previousSelection.transform.parent.parent.GetComponent<Base_SkillScript>().isUnlocked)
+                {
+                    previousSelection.SetActive(true);
+                }
+                skillScript.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+                previousSelection = skillScript.transform.GetChild(0).GetChild(2).gameObject;
+            }
+            else if (previousSelection == null)
+            {
+                previousSelection = skillScript.transform.GetChild(0).GetChild(2).gameObject;
+                previousSelection.SetActive(false);
+            }
+        }
 	}
 
 	public void UnlockIsClicked() {

@@ -36,4 +36,10 @@ public class Player_Input : MonoBehaviour {
             player.controller.collisions.faceDir = (GetComponent<SpriteRenderer>().flipX == true) ? 1 : -1;
         }
     }
+
+    public void StopMovement(int i = 0)
+    {
+        Vector2 directionalInput = new Vector2(i, Input.GetAxisRaw("Vertical"));
+        player.SetDirectionalInput(directionalInput);
+    }
 }

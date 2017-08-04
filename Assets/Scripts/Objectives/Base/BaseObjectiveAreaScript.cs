@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class BaseObjectiveAreaScript : MonoBehaviour {
 
     public GameObject player;
     public GameObject objPrefab;
+    public string customText = "";
 
     bool shownObjective;
 
@@ -27,7 +29,11 @@ public class BaseObjectiveAreaScript : MonoBehaviour {
             shownObjective = true;
             GameObject temp = Instantiate(objPrefab) as GameObject;
             temp.transform.SetParent(collision.gameObject.GetComponentInChildren<Canvas>().transform, false);
-            Destroy(this.gameObject);
+            if(customText != "")
+            {
+                temp.transform.gameObject.GetComponent<Text>().text = customText;
+            }
+            Destroy(gameObject);
         }
     }
 }

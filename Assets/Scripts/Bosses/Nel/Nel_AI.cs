@@ -19,9 +19,6 @@ public class Nel_AI : Boss_AI {
     public int minSpawn = 2;
     public int maxSpawn = 5;
 
-    bool killedPlayer = false;
-    int timesKilledPlayer = 0;
-
     public GameObject EndLevelInit;
     // Use this for initialization
     protected override void Start()
@@ -50,16 +47,16 @@ public class Nel_AI : Boss_AI {
                 transform.GetChild(i).gameObject.SetActive(false);
             }
             shouldDie = true;
+            EndLevelInit.SetActive(true);
         }
         else
         {
             selfTimer = Mathf.Min(selfTimer + Time.deltaTime, timeBetweenIntervals);
             AttackUpdate();
-            if (target.GetComponent<Stat_HealthScript>().isAlive() == false && killedPlayer == false)
-            {
-                timesKilledPlayer++;
-                killedPlayer = true;
-            }
+        }
+        if(shouldDie)
+        {
+            GetComponent<Animator>().enabled = false;
         }
     }
 
@@ -71,7 +68,6 @@ public class Nel_AI : Boss_AI {
             transform.GetChild(i).gameObject.SetActive(false);
         }
         selfTimer = 0;
-        killedPlayer = false;
     }
 
     void AttackUpdate()

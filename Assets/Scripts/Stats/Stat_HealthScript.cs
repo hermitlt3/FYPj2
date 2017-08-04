@@ -50,4 +50,13 @@ public class Stat_HealthScript : MonoBehaviour {
 	{
 		currHealth = Mathf.Max (0, value);
 	}
+
+    public void SetMaxHealth(int value, bool reset = false)
+    {
+        maxHealth = Mathf.Max(0, value);
+        if(reset)
+        {
+            currHealth = maxHealth;
+        }
+    }
 }

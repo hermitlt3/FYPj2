@@ -18,4 +18,9 @@ public class UnlockHardModeScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void HardModeActivateLennyFace()
+    {
+        GameManager.instance.mode = GameManager.GAMEMODE.HARD;
+    }
 }

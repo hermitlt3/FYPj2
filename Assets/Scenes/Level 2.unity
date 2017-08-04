@@ -17011,7 +17011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &602209993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17025,6 +17025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevelName: LastScene
   lastLevel: 0
+  boss: {fileID: 1633255911}
 --- !u!82 &602209994
 AudioSource:
   m_ObjectHideFlags: 0
@@ -50990,6 +50991,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: adbbfd2cf7d20564f8cf6c32854b8876, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1633255911 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114867233164459534, guid: adbbfd2cf7d20564f8cf6c32854b8876,
+    type: 2}
+  m_PrefabInternal: {fileID: 1633255910}
+  m_Script: {fileID: 11500000, guid: fcf56d1aee449b942a0df1c5a763d312, type: 3}
 --- !u!1 &1635295344
 GameObject:
   m_ObjectHideFlags: 0
