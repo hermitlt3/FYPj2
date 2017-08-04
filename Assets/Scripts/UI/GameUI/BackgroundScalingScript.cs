@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundScalingScript : MonoBehaviour {
 
     SpriteRenderer sr;
-
+    Camera leCamera;
     // Use this for initialization
     void Start () {
         sr = GetComponent<SpriteRenderer>();
@@ -13,7 +13,11 @@ public class BackgroundScalingScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float worldScreenHeight = Camera.main.orthographicSize * 2;
+        if(leCamera == null)
+        {
+            leCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        }
+        float worldScreenHeight = leCamera.orthographicSize * 2;
         float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
         transform.localScale = new Vector3(

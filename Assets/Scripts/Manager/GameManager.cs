@@ -7,11 +7,16 @@ public class GameManager : MonoBehaviour {
    
     public static GameManager instance;
 	public GameObject player;
+    public bool transitToCredits;
+    public Texture2D onClick;
+    public Texture2D onClickRelease;
+
+    public static int timesCompleted = 0;
 
 	void Awake() {
         if (instance && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
         else
@@ -23,7 +28,8 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	}
+        transitToCredits = false;
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -72,7 +78,7 @@ public class GameManager : MonoBehaviour {
         return false;
 	}
 
-    public void BackToMainMenu()
+    public void BackToScene(string sceneName = "Main Menu", float moreTime = 0f)
     {
         SceneTransitManager.instance.AddGameObjectToDestroy(Camera.main.gameObject);
         SceneTransitManager.instance.AddGameObjectToDestroy(player);
@@ -81,17 +87,15 @@ public class GameManager : MonoBehaviour {
         {
             SceneTransitManager.instance.AddGameObjectToDestroy(go);
         }
-        StartCoroutine(SceneTransitManager.instance.ChangeScene("Main Menu"));
+        StartCoroutine(SceneTransitManager.instance.ChangeScene(sceneName, moreTime));
+        SceneTransitManager.instance.fading.fadeSpeed = 0.8f;
     }
 
 	void CursorTextureChange() {
-        Texture2D cursorClicked = Resources.Load("Cursors/CursorClick") as Texture2D;
-        Texture2D cursor = Resources.Load("Cursors/Cursor") as Texture2D;
-
         if (Input.GetButton("Fire1")) {
-			Cursor.SetCursor (cursorClicked, new Vector2(cursorClicked.width, 0), CursorMode.Auto);
+			Cursor.SetCursor (onClick, new Vector2(onClick.width, 0), CursorMode.Auto);
 		} else {
-			Cursor.SetCursor (cursor, new Vector2(cursorClicked.width, 0), CursorMode.Auto);
+			Cursor.SetCursor (onClickRelease, new Vector2(onClickRelease.width, 0), CursorMode.Auto);
 		}
 	}
 }

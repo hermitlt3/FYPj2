@@ -1935,6 +1935,7 @@ GameObject:
   - component: {fileID: 1058423190}
   - component: {fileID: 1058423189}
   - component: {fileID: 1058423188}
+  - component: {fileID: 1058423191}
   m_Layer: 5
   m_Name: Hard Mode Button
   m_TagString: Untagged
@@ -2047,6 +2048,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1058423186}
+--- !u!114 &1058423191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1058423186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d136a79b4b8f1e4b8fc3512691e0959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1066409632
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,6 +3515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadedTexture: {fileID: 2800000, guid: 60130674da5eebd42b2e8215a4fb1f76, type: 3}
   fadeSpeed: 1
+  fadeMultiplier: 1
 --- !u!4 &1595579462
 Transform:
   m_ObjectHideFlags: 0
@@ -4535,6 +4548,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  transitToCredits: 0
+  onClick: {fileID: 2800000, guid: 35658486b36a762418c871560ac9aec1, type: 3}
+  onClickRelease: {fileID: 2800000, guid: 4c44ac1d1c436cc4fa08004f72d67e4e, type: 3}
 --- !u!4 &1919870715
 Transform:
   m_ObjectHideFlags: 0

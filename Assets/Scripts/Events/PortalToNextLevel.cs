@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PortalToNextLevel : MonoBehaviour {
 
-    public Boss_AI theBoss;
-    public string nextLevelName = "LastScene";
+    public string nextLevelName;
+    public bool lastLevel;
     Animator animator;
     bool startAnim;
     bool loaded;
@@ -20,13 +20,12 @@ public class PortalToNextLevel : MonoBehaviour {
         startAnim = false;
         loaded = false;
         soundPlayed = false;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!startAnim && theBoss.shouldDie)
+        if (!startAnim)
         {
             startAnim = true;
             animator.SetBool("Load", startAnim);
@@ -47,8 +46,17 @@ public class PortalToNextLevel : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Player") && loaded)
         {
-            GameManager.instance.player.GetComponent<Player_Input>().enabled = false;
-            StartCoroutine(SceneTransitManager.instance.ChangeScene(nextLevelName));
+            if (lastLevel)
+            {
+                GameManager.instance.transitToCredits = true;
+                GameManager.instance.BackToScene(nextLevelName);
+                lastLevel = false;
+            }
+            else
+            {
+                GameManager.instance.player.GetComponent<Player_Input>().enabled = false;
+                StartCoroutine(SceneTransitManager.instance.ChangeScene(nextLevelName));
+            }
             if (sound && !soundPlayed)
             {
                 sound.Play();

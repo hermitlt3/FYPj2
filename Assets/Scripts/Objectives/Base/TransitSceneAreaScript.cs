@@ -26,12 +26,16 @@ public class TransitSceneAreaScript : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player")) {
-            if(playSoundOnce) {
-                if (!hasSoundPlayed) {
+            if (playSoundOnce)
+            {
+                if (!hasSoundPlayed)
+                {
                     hasSoundPlayed = true;
                     AudioManager.instance.PlaySound(theSound, 0f);
                 }
-            } else {
+            }
+            else
+            {
                 AudioManager.instance.PlaySound(theSound, 0f);
             }
             StartCoroutine(SceneTransitManager.instance.ChangeScene(nextLevelName, 2f));

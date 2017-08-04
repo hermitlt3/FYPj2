@@ -8,7 +8,7 @@ public class OptionToMainMenuScript : MonoBehaviour, IPointerClickHandler {
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.instance.BackToMainMenu();
+        GameManager.instance.BackToScene();
     }
 
     // Use this for initialization

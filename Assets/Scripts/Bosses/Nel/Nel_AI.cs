@@ -22,6 +22,7 @@ public class Nel_AI : Boss_AI {
     bool killedPlayer = false;
     int timesKilledPlayer = 0;
 
+    public GameObject EndLevelInit;
     // Use this for initialization
     protected override void Start()
     {

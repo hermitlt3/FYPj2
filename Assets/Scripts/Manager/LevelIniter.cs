@@ -33,6 +33,6 @@ public class LevelIniter : MonoBehaviour {
             mainCamera.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = backgroundSprite;
         }
 
-        Destroy(this.gameObject);
+        Destroy(gameObject);
 	}
 }

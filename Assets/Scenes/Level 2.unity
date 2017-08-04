@@ -17023,8 +17023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61762ebaa8a3b4940b15141ff896ce08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theBoss: {fileID: 1647419280}
   nextLevelName: LastScene
+  lastLevel: 0
 --- !u!82 &602209994
 AudioSource:
   m_ObjectHideFlags: 0
@@ -41994,7 +41994,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: e7ce299db7278424a91159eb612cb705, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -51208,12 +51208,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1701474815042778, guid: adbbfd2cf7d20564f8cf6c32854b8876,
     type: 2}
   m_PrefabInternal: {fileID: 1633255910}
---- !u!114 &1647419280 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114867233164459534, guid: adbbfd2cf7d20564f8cf6c32854b8876,
-    type: 2}
-  m_PrefabInternal: {fileID: 1633255910}
-  m_Script: {fileID: 11500000, guid: fcf56d1aee449b942a0df1c5a763d312, type: 3}
 --- !u!1 &1647999328
 GameObject:
   m_ObjectHideFlags: 0
@@ -55292,6 +55286,16 @@ Prefab:
       propertyPath: areaOfAllowedMovement
       value: 
       objectReference: {fileID: 175612596}
+    - target: {fileID: 61000438474433692, guid: 4b57f4edc74998a4a9ceb08fce2ea85f,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000438474433692, guid: 4b57f4edc74998a4a9ceb08fce2ea85f,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.38
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b57f4edc74998a4a9ceb08fce2ea85f, type: 2}
   m_IsPrefabParent: 0
