@@ -94,8 +94,8 @@ MonoBehaviour:
   description: No escape, it's a boss fight!
   isFinished: 0
   doneObjective: 0
-  animSpeed: 0.5
-  displayFor: 2
+  animSpeed: 0.6
+  displayFor: 1.5
 --- !u!222 &222989069982650646
 CanvasRenderer:
   m_ObjectHideFlags: 1

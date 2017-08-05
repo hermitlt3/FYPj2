@@ -43,7 +43,7 @@ public class Slime_Attack2 : Boss_Attack {
             {
                 animSpeed = 1f;
                 GetComponent<Rigidbody2D>().gravityScale = 1f;
-                transform.position = targetPosition - new Vector3(0, 0.5f);
+                transform.position = new Vector3(targetPosition.x, 24.3f);// hardcoded y
                 if (GetComponent<Collider2D>().bounds.Intersects(target.GetComponent<Collider2D>().bounds) && !hit)
                 {
                     hit = true;

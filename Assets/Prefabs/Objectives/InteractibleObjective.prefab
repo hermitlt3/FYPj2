@@ -61,8 +61,8 @@ MonoBehaviour:
   description: '"Interactibles trigger events.\n(Look or listen for them)"'
   isFinished: 0
   doneObjective: 0
-  animSpeed: 0.5
-  displayFor: 2
+  animSpeed: 0.6
+  displayFor: 1.5
 --- !u!114 &114573156550782228
 MonoBehaviour:
   m_ObjectHideFlags: 1

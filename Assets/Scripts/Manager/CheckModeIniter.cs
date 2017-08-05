@@ -17,10 +17,7 @@ public class CheckModeIniter : MonoBehaviour {
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
-        if (!GameManager.instance.transitToCredits)
-        {
-            StartCoroutine(Warning());
-        }
+        
         else
         {
             Destroy(gameObject);
@@ -28,6 +25,10 @@ public class CheckModeIniter : MonoBehaviour {
         if (GameManager.instance.mode == GameManager.GAMEMODE.HARD)
         {
             player.GetComponent<Stat_HealthScript>().SetMaxHealth(hardModeHealth, true);
+            if (!GameManager.instance.transitToCredits)
+            {
+                StartCoroutine(Warning());
+            }
         }
         else
         {

@@ -96,6 +96,8 @@ MonoBehaviour:
   doneObjective: 0
   animSpeed: 0.5
   displayFor: 2
+  instantStart: 0
+  instantEnd: 0
 --- !u!222 &222688762328042804
 CanvasRenderer:
   m_ObjectHideFlags: 1

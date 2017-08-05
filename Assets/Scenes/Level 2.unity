@@ -17011,7 +17011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &602209993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17025,7 +17025,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevelName: LastScene
   lastLevel: 0
+  loadedManually: 0
   boss: {fileID: 1633255911}
+  portalCheck: 1
 --- !u!82 &602209994
 AudioSource:
   m_ObjectHideFlags: 0
@@ -30749,7 +30751,7 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -5.4281006, y: 6.1169147}
-      - {x: -23.293121, y: 19.697142}
+      - {x: -22.748337, y: 19.69927}
       - {x: 25.69, y: 19.810001}
       - {x: 25.79, y: -16.3}
 --- !u!4 &1044031880
@@ -56528,8 +56530,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -27.81517, y: -4.045763}
-      - {x: -28.30954, y: 7.1670628}
+    - - {x: -29.02417, y: -4.155674}
+      - {x: -29.078903, y: 7.112108}
       - {x: 29.503227, y: 7.390936}
       - {x: 29.579369, y: 7.388418}
       - {x: 29.695366, y: 7.379408}

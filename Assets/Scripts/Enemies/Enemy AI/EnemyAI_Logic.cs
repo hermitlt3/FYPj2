@@ -63,6 +63,7 @@ public class EnemyAI_Logic : MonoBehaviour {
 		if (!gameObject.GetComponent<Stat_HealthScript> ().isAlive ()) {
 			AI_Attack.SetIsAttacking (false);
 			AI_Move.SetIsMoving (false);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
 			currState = AI_STATES.AI_DIE;
 		}
 

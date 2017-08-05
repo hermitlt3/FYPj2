@@ -61,7 +61,7 @@ MonoBehaviour:
   description: A and D to move
   isFinished: 0
   doneObjective: 0
-  animSpeed: 0.5
+  animSpeed: 0.6
 --- !u!114 &114910415683395370
 MonoBehaviour:
   m_ObjectHideFlags: 1

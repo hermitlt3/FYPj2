@@ -75,6 +75,7 @@ public class TutorialOneEndScript : MonoBehaviour
         yield return new WaitForSeconds(2f);
         myText.gameObject.SetActive(false);
         myText.color = Color.white;
+        myText.text = "Wait";
         yield return new WaitForSeconds(1f);
     }
 

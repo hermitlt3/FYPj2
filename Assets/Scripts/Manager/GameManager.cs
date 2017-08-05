@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
     public Texture2D onClick;
     public Texture2D onClickRelease;
 
-    public static int timesCompleted = 1;
+    public static int timesCompleted = 0;
     public enum GAMEMODE
     {
         NORMAL,

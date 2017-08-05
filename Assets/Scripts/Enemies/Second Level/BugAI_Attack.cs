@@ -53,7 +53,9 @@ public class BugAI_Attack : EnemyAI_Attack {
             }
             else
             {
-                if (BoxDetectedPlayer().gameObject && BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x < 0f && !onLeftmostSide)
+                if (BoxDetectedPlayer() &&
+                    BoxDetectedPlayer().gameObject && 
+                    BoxDetectedPlayer().gameObject.transform.position.x - transform.position.x < 0f && !onLeftmostSide)
                 {
                     sprite.flipX = true;
                 }

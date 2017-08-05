@@ -94,7 +94,7 @@ MonoBehaviour:
   description: Spacebar to Jump
   isFinished: 0
   doneObjective: 0
-  animSpeed: 0.5
+  animSpeed: 0.6
 --- !u!222 &222451923811597516
 CanvasRenderer:
   m_ObjectHideFlags: 1

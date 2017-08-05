@@ -15800,6 +15800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   objPrefab: {fileID: 1505694992374070, guid: a666119d050070c41a8c8892e7679586, type: 2}
+  customText: 
 --- !u!61 &555912277
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24487,6 +24488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   objPrefab: {fileID: 1602100836412364, guid: a53b499953083c44684b72dca716d89f, type: 2}
+  customText: 
 --- !u!61 &899221200
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -43680,6 +43682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   objPrefab: {fileID: 1772835641401470, guid: a30379b0d20da874ea99a930ac32931b, type: 2}
+  customText: 
 --- !u!61 &1601390665
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -56918,6 +56921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   objPrefab: {fileID: 1857147331521994, guid: ee5f363a08f701247b99dcab3b7b6eb0, type: 2}
+  customText: 
 --- !u!61 &2109360109
 BoxCollider2D:
   m_ObjectHideFlags: 0
