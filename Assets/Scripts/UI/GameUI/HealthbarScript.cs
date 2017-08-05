@@ -32,19 +32,27 @@ public class HealthbarScript : BarScript {
 	protected override void Update () {
 		
 		newHealthPercent =  (float)(healthScript.GetCurrentHealth () * 100)/ (float)(healthScript.GetMaxHealth ());
-		//if (newHealthPercent - oldHealthPercent > Mathf.Epsilon) {
-			HealthBarAnimation (oldHealthPercent, newHealthPercent, 0.1f);
-		//}
+		HealthBarAnimation (oldHealthPercent, newHealthPercent, 0.1f);
+        if(newHealthPercent < 15f)
+        {
+            if (gO.CompareTag("Player"))
+            {
+                healthText.color = Color.green;
+            }
+            else
+            {
+                healthText.color = Color.red;
+            }
+        }
+        else
+        {
+            healthText.color = Color.black;
+        }
 		oldHealthPercent = newHealthPercent;
 	}
 
 	void HealthBarAnimation(float old, float replace, float time) {
 		healthText.text = newHealthPercent.ToString("F1") + "%";
-//		float difference = (replace - old) * 0.01f;
-//		if (barImage.fillAmount - difference > Mathf.Epsilon) {
-//			float dir = (difference < 0f) ? -1f : 1f;
-//			barImage.fillAmount += newHealthPercent * dir * Time.deltaTime;
-//		}
 		barImage.fillAmount = replace * 0.01f;
 	}
 }
