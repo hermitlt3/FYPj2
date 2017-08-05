@@ -108,5 +108,12 @@ public class TutorialOneEndScript : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         directionalLight.color = directionalLightOrigin;
         backgroundSprite.color = backgroundSpriteOrigin;
+
+        yield return new WaitForSeconds(0.1f);
+        directionalLight.color = lightTarget;
+        backgroundSprite.color = backgroundSpriteTarget;
+        yield return new WaitForSeconds(0.6f);
+        directionalLight.color = directionalLightOrigin;
+        backgroundSprite.color = backgroundSpriteOrigin;
     }
 }

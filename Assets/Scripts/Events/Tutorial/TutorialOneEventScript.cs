@@ -30,6 +30,14 @@ public class TutorialOneEventScript : MonoBehaviour {
 	void Update () {
 		if(startCutScene)
         {
+            if(GameManager.instance.player == null)
+            {
+                GameManager.instance.LoadPlayer();
+                if(GameManager.instance.player == null)
+                {
+                    GameManager.instance.player = GameObject.FindGameObjectWithTag("Player");
+                }
+            }
             StartCoroutine(StartCutScene());
             startCutScene = false;
         }

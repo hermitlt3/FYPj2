@@ -16459,6 +16459,41 @@ Prefab:
       propertyPath: m_AnchoredPosition.x
       value: -82
       objectReference: {fileID: 0}
+    - target: {fileID: 114684444084764972, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114784076680872108, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114895396446431734, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114421295608251258, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114347816331191666, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114330821784527822, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841192041497012, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e,
+        type: 2}
+      propertyPath: attackSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd3a2edcb80b6e74aa5123a8ced4aa4e, type: 2}
   m_IsPrefabParent: 0

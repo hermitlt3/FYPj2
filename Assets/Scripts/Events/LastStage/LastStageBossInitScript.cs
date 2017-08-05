@@ -74,6 +74,7 @@ public class LastStageBossInitScript : MonoBehaviour {
         GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3((boss.transform.position.x + playerSpawnPosition.x) * 0.5f, playerSpawnPosition.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
         GameManager.instance.player.transform.position = playerSpawnPosition;
         GameManager.instance.player.GetComponent<Player_Input>().enabled = false;
+        GameManager.instance.player.GetComponent<Player_Input>().StopMovement();
         GameManager.instance.player.GetComponent<SpriteRenderer>().flipX = true;
 
         fadeTime = SceneTransitManager.instance.FadeIn(0.6f);
@@ -87,6 +88,7 @@ public class LastStageBossInitScript : MonoBehaviour {
     {
         if (value == 1)
         {
+            theText.enabled = true;
             theText.gameObject.SetActive(true);
         }
         else

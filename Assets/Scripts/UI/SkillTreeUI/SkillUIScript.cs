@@ -29,7 +29,7 @@ public class SkillUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 			break;
 		case Base_SkillScript.SKILL_TYPE.ATTACK_SPEED:
 			levelText = "Speed level: " + theSkill.skillLevel;
-			descText = "Attack Speed increased by: " + theSkill.GetComponent<Stat_AttackSpeedScript> ().GetAttackSpeed () + "%";
+			descText = "Attack Speed increased by: " + theSkill.GetComponent<Stat_AttackSpeedScript> ().GetAttackSpeed () * 100 + "%";
 			description.GetComponent<SkillDescriptionScript> ().ChangeDescription (levelText, descText);
 
 			break;

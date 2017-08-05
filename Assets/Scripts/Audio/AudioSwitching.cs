@@ -6,6 +6,7 @@ public class AudioSwitching : MonoBehaviour {
 
     public GameObject boss;
     AudioSource[] audios;
+    public bool lastStage;
 
 	// Use this for initialization
 	void Start () {
@@ -14,15 +15,26 @@ public class AudioSwitching : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (boss.activeInHierarchy && boss.GetComponent<Stat_HealthScript>().isAlive())
+        if(!lastStage)
         {
-            audios[1].enabled = true;
-            audios[0].enabled = false;
+            if (boss.activeInHierarchy && boss.GetComponent<Stat_HealthScript>().isAlive())
+            {
+                audios[1].enabled = true;
+                audios[0].enabled = false;
+            }
+            else
+            {
+                audios[1].enabled = false;
+                audios[0].enabled = true;
+            }
         }
         else
         {
-            audios[1].enabled = false;
-            audios[0].enabled = true;
+            if (!boss.GetComponent<Stat_HealthScript>().isAlive())
+            {
+                audios[1].enabled = true;
+                audios[0].enabled = false;
+            }
         }
 	}
 }
