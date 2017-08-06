@@ -7,10 +7,15 @@ public class CheatCodes : MonoBehaviour {
     private string[] cheatCode;
     private int index;
 
+    private string[] uncheatCode;
+    private int unindex;
+
     void Start()
     {
         cheatCode = new string[] { "c","h","e","a","t" };
-        index = 0;
+        uncheatCode = new string[] { "u", "n", "c","h","e","a","t" };
+        index = unindex = 0;
+
     }
 
     void Update()
@@ -22,9 +27,23 @@ public class CheatCodes : MonoBehaviour {
                 GameManager.instance.player.GetComponent<Stat_MovementSpdScript>().SetBaseMS(20);
                 GameManager.instance.player.GetComponent<Stat_HealthScript>().SetMaxHealth(999);
                 GameManager.instance.player.GetComponent<Stat_HealthScript>().SetCurrentHealth(999);
-                Destroy(gameObject);
+                GameManager.instance.player.GetComponent<Stat_AttackScript>().SetAttackDamage(100);
+                index = 0;
             }
         }
+
+        else if (unindex == uncheatCode.Length)
+        {
+            if (GameManager.instance.player)
+            {
+                GameManager.instance.player.GetComponent<Stat_MovementSpdScript>().SetBaseMS(8);
+                GameManager.instance.player.GetComponent<Stat_HealthScript>().SetMaxHealth(100);
+                GameManager.instance.player.GetComponent<Stat_HealthScript>().SetCurrentHealth(Mathf.Min(GameManager.instance.player.GetComponent<Stat_HealthScript>().GetCurrentHealth(), 100));
+                GameManager.instance.player.GetComponent<Stat_AttackScript>().SetAttackDamage(8);
+                unindex = 0;
+            }
+        }
+
         else if (Input.anyKeyDown)
         {
             if (Input.GetKeyDown(cheatCode[index]))
@@ -34,6 +53,14 @@ public class CheatCodes : MonoBehaviour {
             else
             {
                 index = 0;
+            }
+            if (Input.GetKeyDown(uncheatCode[unindex]))
+            {
+                unindex++;
+            }
+            else
+            {
+                unindex = 0;
             }
         }
 
