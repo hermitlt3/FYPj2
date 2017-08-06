@@ -6186,6 +6186,46 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &198907472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 198907474}
+  - component: {fileID: 198907473}
+  m_Layer: 0
+  m_Name: Cheats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &198907473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 198907472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0566cc2e7de9fe3418131f542a91c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &198907474
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 198907472}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &205121950 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4353351781327866, guid: 34edfd32dbf5a814684541db39e856e6,
@@ -42078,6 +42118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 1647419275}
+  lastStage: 0
 --- !u!82 &1445910226
 AudioSource:
   m_ObjectHideFlags: 0
@@ -52611,7 +52652,12 @@ PolygonCollider2D:
     - - {x: -9.3498535, y: -26.378193}
       - {x: -9.328049, y: 13.46735}
       - {x: 9.663437, y: 13.076382}
-      - {x: 9.602753, y: -26.099602}
+      - {x: 10.078354, y: -7.2376976}
+      - {x: 10.165131, y: -12.363113}
+      - {x: 8.964783, y: -12.379761}
+      - {x: 9.188232, y: -14.996731}
+      - {x: 10.467773, y: -15.022457}
+      - {x: 10.440063, y: -26.279026}
 --- !u!4 &1690825844
 Transform:
   m_ObjectHideFlags: 0
@@ -56530,8 +56576,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -29.02417, y: -4.155674}
-      - {x: -29.078903, y: 7.112108}
+    - - {x: -27.43097, y: -4.2441845}
+      - {x: -29.014755, y: 7.0960712}
       - {x: 29.503227, y: 7.390936}
       - {x: 29.579369, y: 7.388418}
       - {x: 29.695366, y: 7.379408}

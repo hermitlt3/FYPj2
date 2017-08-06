@@ -5,13 +5,14 @@ using System.Collections;
 [RequireComponent (typeof (Controller2D))]
 public class Player : MonoBehaviour {
 
+    public static Player instance;
 	public float jumpHeight = 4;
 	public float timeToJumpApex = .4f;
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
 	Animator animator;
 
-	float moveSpeed;
+    Stat_MovementSpdScript moveScript;
 
 	Stat_HealthScript healthScript;
 
@@ -28,13 +29,24 @@ public class Player : MonoBehaviour {
     bool playSound;
 
 	void Awake() {
-		DontDestroyOnLoad (this.gameObject);
+
 	}
 
 	void Start() {
-		controller = GetComponent<Controller2D> ();
+        if (instance && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+
+        controller = GetComponent<Controller2D> ();
 		animator = GetComponent<Animator> ();
-		moveSpeed = GetComponent<Stat_MovementSpdScript> ().GetBaseMS ();
+        moveScript = GetComponent<Stat_MovementSpdScript> ();
 		healthScript = GetComponent<Stat_HealthScript> ();
 
 		gM = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager>();
@@ -96,7 +108,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void CalculateVelocity() {
-		float targetVelocityX = directionalInput.x * moveSpeed;
+		float targetVelocityX = directionalInput.x * moveScript.GetBaseMS();
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
 			(controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 		

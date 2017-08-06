@@ -15,12 +15,12 @@ public class Slime_AI : Boss_AI
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
     }
     // Use this for initialization
     // Use this for initialization
     protected override void Start()
     {
+        animator = GetComponent<Animator>();
         base.Start();
         numberOfAttackPatterns = 4;
         currentAttackPattern = -1;
@@ -152,7 +152,8 @@ public class Slime_AI : Boss_AI
         {
             ai.enabled = false;
         }
-        transform.position = new Vector3(transform.position.x, 24f);
+        transform.position = new Vector3(transform.position.x, 24.3f);
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         selfTimer = 0f;
         base.Reset();
     }

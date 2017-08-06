@@ -6,7 +6,7 @@ public class DontDestroyScript : MonoBehaviour {
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization

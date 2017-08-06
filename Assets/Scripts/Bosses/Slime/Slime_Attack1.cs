@@ -25,16 +25,17 @@ public class Slime_Attack1 : Boss_Attack
 
     private void Awake()
     {
-        // In case the target isnt set properly, then we manually do tis
-        if (target == null)
-        {
-            target = GameObject.FindGameObjectWithTag("Player");
-        }
+        
     }
 
     // Use this for initialization
     void Start()
     {
+        // In case the target isnt set properly, then we manually do tis
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
         // First, set dive Anim true and disable rigidbody dynamic to enable boss to go "underground"
         // Then,  pause the animation and do the logic to unleash the kraken
         // Then,  set dive Anim to false 

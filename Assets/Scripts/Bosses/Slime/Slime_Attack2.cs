@@ -17,17 +17,17 @@ public class Slime_Attack2 : Boss_Attack {
 
     private void Awake()
     {
-        // In case the target isnt set properly, then we manually do tis
-        if (target == null)
-        {
-            target = GameObject.FindGameObjectWithTag("Player");
-        }
+        
     }
 
     // Use this for initialization
     void Start()
     {
-
+        // In case the target isnt set properly, then we manually do tis
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     // Update is called once per frame

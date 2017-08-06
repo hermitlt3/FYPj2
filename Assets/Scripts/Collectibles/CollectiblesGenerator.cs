@@ -15,6 +15,12 @@ public class CollectiblesGenerator : MonoBehaviour {
 //	private GameObject player;
 
 	void Awake() {
+        
+    }
+
+	// Use this for initialization
+	void Start () {
+        //		player = GameObject.FindGameObjectWithTag ("Player");
         if (instance && instance != this)
         {
             Destroy(this.gameObject);
@@ -25,11 +31,6 @@ public class CollectiblesGenerator : MonoBehaviour {
             instance = this;
         }
     }
-
-	// Use this for initialization
-	void Start () {
-//		player = GameObject.FindGameObjectWithTag ("Player");
-	}
 	
 	// Update is called once per frame
 	void Update () {

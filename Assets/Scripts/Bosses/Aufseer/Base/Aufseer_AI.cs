@@ -14,13 +14,13 @@ public class Aufseer_AI : Boss_AI {
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
     }
     // Use this for initialization
     // Use this for initialization
     protected override void Start () {
 		base.Start ();
-		numberOfAttackPatterns = 3;
+        animator = GetComponent<Animator>();
+        numberOfAttackPatterns = 3;
 		currentAttackPattern = -1;
 
 		if (skillsChance.Length != numberOfAttackPatterns) {

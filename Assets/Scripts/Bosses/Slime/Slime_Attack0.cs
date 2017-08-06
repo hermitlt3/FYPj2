@@ -16,6 +16,11 @@ public class Slime_Attack0 : Boss_Attack {
 
     private void Awake()
     {
+       
+    }
+ 
+	// Use this for initialization
+	void Start () {
         if (target == null)
         {
             target = GameObject.FindGameObjectWithTag("Player");
@@ -25,11 +30,6 @@ public class Slime_Attack0 : Boss_Attack {
         startAnim = false;
         animSpeed = 1f;
         slideSpeed = 10f;
-    }
- 
-	// Use this for initialization
-	void Start () {
-
     }
 	
 	// Update is called once per frame

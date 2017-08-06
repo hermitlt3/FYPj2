@@ -55,7 +55,7 @@ public class PortalToNextLevel : MonoBehaviour {
             if (lastLevel)
             {
                 GameManager.instance.transitToCredits = true;
-                GameManager.instance.BackToScene(nextLevelName);
+                GameManager.instance.BackToScene(nextLevelName, 0, false);
                 lastLevel = false;
             }
             else

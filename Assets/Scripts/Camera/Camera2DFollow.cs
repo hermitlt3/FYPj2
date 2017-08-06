@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Camera2DFollow : MonoBehaviour
 {
+    public static Camera2DFollow instance;
   	public Transform target;
   	public float damping = 1;
   	public float lookAheadFactor = 3;
@@ -15,14 +16,20 @@ public class Camera2DFollow : MonoBehaviour
   	private Vector3 m_CurrentVelocity;
   	private Vector3 m_LookAheadPos;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
     // Use this for initialization
     void Start()
 	{
-		m_LastTargetPosition = target.position;
+        if (instance && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+        m_LastTargetPosition = target.position;
 		m_OffsetZ = (transform.position - target.position).z;
 		transform.parent = null;	
         if(target == null)

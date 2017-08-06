@@ -15,7 +15,10 @@ public class TutorialToCreditsScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(followCamera == null)
+        {
+            followCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera2DFollow>();
+        }
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)

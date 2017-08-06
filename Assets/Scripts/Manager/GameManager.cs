@@ -12,13 +12,15 @@ public class GameManager : MonoBehaviour {
     public Texture2D onClickRelease;
 
     public static int timesCompleted = 0;
+
     public enum GAMEMODE
     {
         NORMAL,
         HARD
     }
     public GAMEMODE mode = GAMEMODE.NORMAL;
-	void Awake() {
+
+    void Awake() {
         if (instance && instance != this)
         {
             Destroy(gameObject);
@@ -83,10 +85,13 @@ public class GameManager : MonoBehaviour {
         return false;
 	}
 
-    public void BackToScene(string sceneName = "Main Menu", float moreTime = 0f)
+    public void BackToScene(string sceneName = "Main Menu", float moreTime = 0f, bool fk = true)
     {
-        SceneTransitManager.instance.AddGameObjectToDestroy(Camera.main.gameObject);
-        SceneTransitManager.instance.AddGameObjectToDestroy(player);
+        if (fk)
+        {
+            SceneTransitManager.instance.AddGameObjectToDestroy(Camera.main.gameObject);
+            SceneTransitManager.instance.AddGameObjectToDestroy(player);
+        }
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Canvas");
         foreach (GameObject go in gos)
         {

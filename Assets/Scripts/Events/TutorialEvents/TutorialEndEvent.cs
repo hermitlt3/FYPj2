@@ -28,16 +28,19 @@ public class TutorialEndEvent : CustomEventBaseScript
 
     // Update is called once per frame
     protected override void Update () {
-		if(boss.GetComponent<Boss_AI>().shouldDie && !startEvent)
+		if(boss.GetComponent<Boss_AI>().shouldDie)
         {
-            if(theText == null)
-            {
-                theText = player.transform.GetChild(0).GetChild(0).GetComponent<Text>();
-            }
-            StartCoroutine(SceneTransitManager.instance.FadeInAndOut(0, false, true));
             blocked.SetActive(true);
-            animator.SetBool("Start", true);
-            startEvent = true;
+            if (!startEvent)
+            {
+                if (theText == null)
+                {
+                    theText = player.transform.GetChild(0).GetChild(0).GetComponent<Text>();
+                }
+                StartCoroutine(SceneTransitManager.instance.FadeInAndOut(0, false, true));
+                animator.SetBool("Start", true);
+                startEvent = true;
+            }
         }
     }
 
